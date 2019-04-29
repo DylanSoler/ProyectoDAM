@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RootNamespace>ApiRestFTM_Entidades</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Complejas\" />
+  </ItemGroup>
+
+</Project>

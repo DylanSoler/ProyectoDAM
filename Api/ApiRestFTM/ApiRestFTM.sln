@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiRestFTM-API", "ApiRestFTM-API\ApiRestFTM-API.csproj", "{273CF51F-5F9A-440C-8106-59A68D8E052C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BA73887C-E256-4462-A4E8-843F48E540AB} = {BA73887C-E256-4462-A4E8-843F48E540AB}
+		{52BA6E81-C4F2-4F40-A884-E0C174D937A9} = {52BA6E81-C4F2-4F40-A884-E0C174D937A9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiRestFTM-Entidades", "ApiRestFTM-Entidades\ApiRestFTM-Entidades.csproj", "{52BA6E81-C4F2-4F40-A884-E0C174D937A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiRestFTM-DAL", "ApiRestFTM-DAL\ApiRestFTM-DAL.csproj", "{BA73887C-E256-4462-A4E8-843F48E540AB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{52BA6E81-C4F2-4F40-A884-E0C174D937A9} = {52BA6E81-C4F2-4F40-A884-E0C174D937A9}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{273CF51F-5F9A-440C-8106-59A68D8E052C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{273CF51F-5F9A-440C-8106-59A68D8E052C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{273CF51F-5F9A-440C-8106-59A68D8E052C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{273CF51F-5F9A-440C-8106-59A68D8E052C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52BA6E81-C4F2-4F40-A884-E0C174D937A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52BA6E81-C4F2-4F40-A884-E0C174D937A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52BA6E81-C4F2-4F40-A884-E0C174D937A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52BA6E81-C4F2-4F40-A884-E0C174D937A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA73887C-E256-4462-A4E8-843F48E540AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA73887C-E256-4462-A4E8-843F48E540AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA73887C-E256-4462-A4E8-843F48E540AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA73887C-E256-4462-A4E8-843F48E540AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC1677A0-83A4-4641-89E1-576CF1F610DB}
+	EndGlobalSection
+EndGlobal

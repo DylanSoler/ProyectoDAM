@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <RootNamespace>ApiRestFTM_DAL</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Conexion\" />
+    <Folder Include="Listados\" />
+    <Folder Include="Manejadoras\" />
+  </ItemGroup>
+
+</Project>
