@@ -3,9 +3,9 @@
 
 ----------------------------------------------------------INSERCION--------------------------------------------------------------
 
-INSERT INTO Managers(Correo,PasswordManager, Nombre, Apellidos, Edad, FotoPerfil)
+INSERT INTO Managers(Correo,PasswordManager, Nombre, Apellidos, FotoPerfil, FechaNacimiento)
 				VALUES('dylan@gmail.com',CAST('5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8' AS BINARY)
-						,'Dylan','Soler Patino',26,'/fotazas/micareto.png')
+						,'Dylan','Soler Patino','/fotazas/micareto.png',NULL)
 				
 SELECT * FROM Managers
 

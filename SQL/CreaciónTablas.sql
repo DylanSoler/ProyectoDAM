@@ -8,8 +8,8 @@ CREATE TABLE Managers (
 	PassWordManager binary(64) not NULL,
 	Nombre nvarchar(30) NOT NULL,
 	Apellidos nvarchar(30) NOT NULL,
-	Edad tinyint NULL,
-	FotoPerfil nvarchar(30) NULL
+	FotoPerfil nvarchar(30) NULL,
+	FechaNacimiento smalldatetime
 )
 
 CREATE TABLE Notas (
