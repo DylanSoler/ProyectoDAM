@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,9 +11,9 @@ namespace ApiRestFTM_Entidades.Persistencia
         { }
 
         
-        public clsEntreno(int id_manager, int dia, String sesion1, String sesion2, String sesionExtra)
+        public clsEntreno(int idManager, int dia, String sesion1, String sesion2, String sesionExtra)
         {
-            this.id_manager = id_manager;
+            this.idManager = idManager;
             this.dia = dia;
             this.sesion1 = sesion1;
             this.sesion2 = sesion2;
@@ -23,7 +23,7 @@ namespace ApiRestFTM_Entidades.Persistencia
         #endregion
 
         #region Propiedades
-        public int id_manager { get; set; }
+        public int idManager { get; set; }
         public int dia { get; set; }
         public String sesion1 { get; set; }
         public String sesion2 { get; set; }
