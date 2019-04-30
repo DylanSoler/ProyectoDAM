@@ -11,10 +11,10 @@ namespace ApiRestFTM_Entidades.Persistencia
         { }
 
 
-        public clsNota(int id_nota, int id_manager, String titulo, String texto)
+        public clsNota(int idNota, int idManager, String titulo, String texto)
         {
-            this.id_nota = id_nota;
-            this.id_manager = id_manager;
+            this.idNota = idNota;
+            this.idManager = idManager;
             this.titulo = titulo;
             this.texto = texto;
         }
@@ -22,8 +22,8 @@ namespace ApiRestFTM_Entidades.Persistencia
         #endregion
 
         #region Propiedades
-        public int id_nota { get; set; }
-        public int id_manager { get; set; }
+        public int idNota { get; set; }
+        public int idManager { get; set; }
         public String titulo { get; set; }
         public String texto { get; set; }
         #endregion
