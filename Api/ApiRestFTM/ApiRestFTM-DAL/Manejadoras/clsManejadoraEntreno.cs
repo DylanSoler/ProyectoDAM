@@ -11,11 +11,11 @@ namespace ApiRestFTM_DAL.Manejadoras
     {
 
         /// <summary>
-        /// Metodo que obtiene un entreno segun id del Manager
+        /// Metodo que obtiene un entreno segun id del Manager y dia
         /// </summary>
         /// <param name="idManager">int</param>
         /// <returns>clsEntreno</returns>
-        public clsEntreno entrenoPorIdManager(int idManager)
+        public clsEntreno obtenerEntrenoPorIdManagerYdia(int idManager, int dia)
         {
             clsEntreno oEntreno = new clsEntreno();
 
@@ -27,8 +27,9 @@ namespace ApiRestFTM_DAL.Manejadoras
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "SELECT * FROM Entrenos WHERE ID_Manager = @idManager"; 
+                miComando.CommandText = "SELECT * FROM Entrenos WHERE ID_Manager = @idManager AND Dia=@dia"; 
                 miComando.Parameters.Add("@idManager",System.Data.SqlDbType.Int).Value = idManager;
+                miComando.Parameters.Add("@dia",System.Data.SqlDbType.Int).Value = dia;
                 miComando.Connection = miConexion;
                 miLector = miComando.ExecuteReader();
 
@@ -112,7 +113,7 @@ namespace ApiRestFTM_DAL.Manejadoras
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "UPDATE Entrenos SET Dia=@dia, Sesion1=@sesion1, Sesion2=@sesion2, SesionExtra=@sesionExtra WHERE ID_Manager=@idManager";
+                miComando.CommandText = "UPDATE Entrenos SET Sesion1=@sesion1, Sesion2=@sesion2, SesionExtra=@sesionExtra WHERE ID_Manager=@idManager AND Dia=@dia";
 
                 miComando.Parameters.Add("@idManager",System.Data.SqlDbType.Int).Value = oEntreno.idManager;
                 miComando.Parameters.Add("@dia", System.Data.SqlDbType.Int).Value = oEntreno.dia;
