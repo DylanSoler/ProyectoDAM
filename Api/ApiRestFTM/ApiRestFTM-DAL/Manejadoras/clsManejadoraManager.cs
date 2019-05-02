@@ -39,7 +39,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                     oManager = new clsManager();
                     oManager.id = (int)miLector["ID"];
                     oManager.correo = (string)miLector["Correo"];
-                    oManager.passwordManager = (string)miLector["PasswordManager"];
+                    oManager.passwordManager = (byte[])miLector["PasswordManager"];
                     oManager.nombre = (string)miLector["Nombre"];
                     oManager.apellidos = (string)miLector["Apellidos"];
                     oManager.fotoPerfil = (string)miLector["FotoPerfil"];
