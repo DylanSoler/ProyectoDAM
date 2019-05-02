@@ -13,11 +13,10 @@ namespace ApiRestFTM_DAL.Manejadoras
         /// <summary>
         /// Metodo que obtiene un manager segun id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">int</param>
         /// <returns>clsManager</returns>
         public clsManager managerPorId(int id)
         {
-
             clsManager oManager = new clsManager();
 
             SqlConnection miConexion = new SqlConnection();
@@ -45,7 +44,6 @@ namespace ApiRestFTM_DAL.Manejadoras
                     oManager.apellidos = (string)miLector["Apellidos"];
                     oManager.fotoPerfil = (string)miLector["FotoPerfil"];
                     oManager.fechaNacimiento = (DateTime)miLector["FechaNacimiento"];
-
                 }
             }
             catch (SqlException exSql)
@@ -58,10 +56,120 @@ namespace ApiRestFTM_DAL.Manejadoras
                 gestConexion.closeConnection(ref miConexion);
             }
 
-
-
             return oManager;
+        }
+        
+        
+        /// <summary>
+        /// Metodo que elimina un manager segun id
+        /// </summary>
+        /// <param name="id">int</param>
+        /// <returns>int</returns>
+        public int borrarManagerPorID(int id)
+        {
+            SqlConnection miConexion = new SqlConnection();
+            SqlCommand miComando = new SqlCommand();
+            int filas = 0;
+            clsMyConnection gestConexion = new clsMyConnection();
 
+            try
+            {
+                miConexion = gestConexion.getConnection();
+                miComando.CommandText = "DELETE FROM Managers WHERE ID = @id";
+                miComando.Parameters.Add("@id",System.Data.SqlDbType.Int).Value = id;
+                miComando.Connection = miConexion;
+                
+                filas = miComando.ExecuteNonQuery();
+
+            } catch (SqlException exSql){
+                throw exSql;
+            }
+            finally{
+                gestConexion.closeConnection(ref miConexion);
+            }
+
+            return filas;
+        }
+        
+        
+        /// <summary>
+        /// Metodo que inserta un manager
+        /// </summary>
+        /// <param name="oManager">clsManager</param>
+        /// <returns>int</returns>
+        public int insertarManager(clsManager oManager)
+        {
+            SqlConnection miConexion = new SqlConnection();
+            SqlCommand miComando = new SqlCommand();
+            int filas = 0;
+            clsMyConnection gestConexion = new clsMyConnection();
+
+            try
+            {
+                miConexion = gestConexion.getConnection();
+                miComando.CommandText = "INSERT INTO Managers (Correo,PasswordManager, Nombre, Apellidos, FotoPerfil, FechaNacimiento) VALUES(@correo,@passwManager,@nombre,@apellidos,@fotoPerfil,@fechaNacimiento)";
+
+                miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
+                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.binary).Value = oManager.passwordManager;
+                miComando.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = oManager.nombre;
+                miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.NVarChar).Value = oManager.apellidos;
+                miComando.Parameters.Add("@fotoPerfil", System.Data.SqlDbType.NVarChar).Value = oManager.fotoPerfil;
+                miComando.Parameters.Add("@fechaNac", System.Data.SqlDbType.SmallDateTime).Value = oManager.fechaNacimiento;
+
+                miComando.Connection = miConexion;
+                filas = miComando.ExecuteNonQuery();
+            }
+            catch (SqlException exSql)
+            {
+                throw exSql;
+            }
+            finally
+            {
+                gestConexion.closeConnection(ref miConexion);
+            }
+            
+            return filas;
+        }
+        
+        /// <summary>
+        /// Metodo que edita un manager existente
+        /// </summary>
+        /// <param name="oManager">clsManager</param>
+        /// <returns>int</returns>
+        public int editarManager(clsManager oManager)
+        {
+            SqlConnection miConexion = new SqlConnection();
+            SqlCommand miComando = new SqlCommand();
+            int filas = 0;
+            clsMyConnection gestConexion = new clsMyConnection();
+
+            try
+            {
+                miConexion = gestConexion.getConnection();
+                miComando.CommandText = "UPDATE Managers SET Correo=@correo, PasswordManager=@passwManager, Nombre=@nombre, Apellidos=@apellidos, FotoPerfil=@fotoPerfil, FechaNacimiento=@fechaNac WHERE ID=@id";
+
+                miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = oManager.id;
+                miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
+                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.binary).Value = oManager.passwordManager;
+                miComando.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = oManager.nombre;
+                miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.NVarChar).Value = oManager.apellidos;
+                miComando.Parameters.Add("@fotoPerfil", System.Data.SqlDbType.NVarChar).Value = oManager.fotoPerfil;
+                miComando.Parameters.Add("@fechaNac", System.Data.SqlDbType.SmallDateTime).Value = oManager.fechaNacimiento;
+
+                miComando.Connection = miConexion;
+                filas = miComando.ExecuteNonQuery();
+
+            }
+            catch (SqlException exSql)
+            {
+                throw exSql;
+            }
+            finally
+            {
+                gestConexion.closeConnection(ref miConexion);
+            }
+
+            return filas;
         }
 
     }
