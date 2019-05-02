@@ -1,0 +1,14 @@
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\bin\Debug\netcoreapp2.1\ApiRestFTM-DAL.deps.json
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\bin\Debug\netcoreapp2.1\ApiRestFTM-DAL.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\bin\Debug\netcoreapp2.1\ApiRestFTM-DAL.pdb
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\bin\Debug\netcoreapp2.1\ApiRestFTM-Entidades.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\bin\Debug\netcoreapp2.1\System.Data.SqlClient.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\bin\Debug\netcoreapp2.1\ApiRestFTM-Entidades.pdb
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\bin\Debug\netcoreapp2.1\System.Data.SqlClient.xml
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\obj\Debug\netcoreapp2.1\ApiRestFTM-DAL.csprojAssemblyReference.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\obj\Debug\netcoreapp2.1\ApiRestFTM-DAL.csproj.CoreCompileInputs.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\obj\Debug\netcoreapp2.1\ApiRestFTM-DAL.AssemblyInfoInputs.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\obj\Debug\netcoreapp2.1\ApiRestFTM-DAL.AssemblyInfo.cs
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\obj\Debug\netcoreapp2.1\ApiRestFTM-DAL.csproj.CopyComplete
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\obj\Debug\netcoreapp2.1\ApiRestFTM-DAL.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-DAL\obj\Debug\netcoreapp2.1\ApiRestFTM-DAL.pdb

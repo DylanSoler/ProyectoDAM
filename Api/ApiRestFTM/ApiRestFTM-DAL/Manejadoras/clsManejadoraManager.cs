@@ -110,7 +110,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                 miComando.CommandText = "INSERT INTO Managers (Correo,PasswordManager, Nombre, Apellidos, FotoPerfil, FechaNacimiento) VALUES(@correo,@passwManager,@nombre,@apellidos,@fotoPerfil,@fechaNacimiento)";
 
                 miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
-                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.binary).Value = oManager.passwordManager;
+                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
                 miComando.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = oManager.nombre;
                 miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.NVarChar).Value = oManager.apellidos;
                 miComando.Parameters.Add("@fotoPerfil", System.Data.SqlDbType.NVarChar).Value = oManager.fotoPerfil;
@@ -127,7 +127,7 @@ namespace ApiRestFTM_DAL.Manejadoras
             {
                 gestConexion.closeConnection(ref miConexion);
             }
-            
+           
             return filas;
         }
         
@@ -150,7 +150,7 @@ namespace ApiRestFTM_DAL.Manejadoras
 
                 miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = oManager.id;
                 miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
-                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.binary).Value = oManager.passwordManager;
+                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
                 miComando.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = oManager.nombre;
                 miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.NVarChar).Value = oManager.apellidos;
                 miComando.Parameters.Add("@fotoPerfil", System.Data.SqlDbType.NVarChar).Value = oManager.fotoPerfil;

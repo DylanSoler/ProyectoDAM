@@ -1,0 +1,9 @@
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\bin\Debug\netcoreapp2.1\ApiRestFTM-Entidades.deps.json
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\bin\Debug\netcoreapp2.1\ApiRestFTM-Entidades.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\bin\Debug\netcoreapp2.1\ApiRestFTM-Entidades.pdb
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\obj\Debug\netcoreapp2.1\ApiRestFTM-Entidades.csprojAssemblyReference.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\obj\Debug\netcoreapp2.1\ApiRestFTM-Entidades.csproj.CoreCompileInputs.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\obj\Debug\netcoreapp2.1\ApiRestFTM-Entidades.AssemblyInfoInputs.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\obj\Debug\netcoreapp2.1\ApiRestFTM-Entidades.AssemblyInfo.cs
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\obj\Debug\netcoreapp2.1\ApiRestFTM-Entidades.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-Entidades\obj\Debug\netcoreapp2.1\ApiRestFTM-Entidades.pdb

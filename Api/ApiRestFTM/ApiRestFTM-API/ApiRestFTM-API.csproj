@@ -11,6 +11,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApiRestFTM-DAL\ApiRestFTM-DAL.csproj" />
+    <ProjectReference Include="..\ApiRestFTM-Entidades\ApiRestFTM-Entidades.csproj" />
   </ItemGroup>
 
 </Project>

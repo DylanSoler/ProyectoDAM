@@ -1,0 +1,14 @@
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-API.deps.json
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-API.runtimeconfig.json
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-API.runtimeconfig.dev.json
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-API.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.csprojAssemblyReference.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.csproj.CoreCompileInputs.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.RazorAssemblyInfo.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.RazorAssemblyInfo.cs
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.AssemblyInfoInputs.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.AssemblyInfo.cs
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.RazorTargetAssemblyInfo.cache
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-API.pdb
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.pdb
