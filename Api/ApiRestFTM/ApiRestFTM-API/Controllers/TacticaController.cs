@@ -13,6 +13,22 @@ namespace ApiRestFTM_API.Controllers
     [ApiController]
     public class TacticaController : ControllerBase
     {
+        // GET Tactica
+        [HttpGet]
+        public IActionResult Get()
+        {
+            String accept = Request.Headers["Accept"].ToString();
+            clsListadoTacticas oListTactica = new clsListadoTacticas();
+            List<clsTactica> listado = new List<clsTactica>();
+            
+            if (accept != "application/json" && accept != "*/*")
+                return StatusCode(406); //Not Acceptable
+            else
+            {
+                listado = oListTactica.listadoCompletoTacticasDAL();
+                return Ok(listado);
+            }
+        }
         
     }
 }
