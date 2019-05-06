@@ -14,9 +14,8 @@ namespace ApiRestFTM_DAL.Listados
         /// Metodo que devuelve un listado completo de entrenos
         /// </summary>
         /// <returns>List de clsEntreno</returns>
-        public List<clsEntreno> listadoCompletoEntrenosDAL()
+        public List<clsEntreno> listadoCompletoEntrenos(int idManager)
         {
-
             List<clsEntreno> listado = new List<clsEntreno>();
 
             SqlConnection miConexion = new SqlConnection();
@@ -28,7 +27,8 @@ namespace ApiRestFTM_DAL.Listados
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "SELECT * FROM Entrenos";
+                miComando.CommandText = "SELECT * FROM Entrenos WHERE ID_Manager = @id"; 
+                miComando.Parameters.Add("@id",System.Data.SqlDbType.Int).Value = idManager;
                 miComando.Connection = miConexion;
                 miLector = miComando.ExecuteReader();
 
