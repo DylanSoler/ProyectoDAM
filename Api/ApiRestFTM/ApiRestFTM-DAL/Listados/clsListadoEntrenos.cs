@@ -11,8 +11,9 @@ namespace ApiRestFTM_DAL.Listados
     {
 
         /// <summary>
-        /// Metodo que devuelve un listado completo de entrenos
+        /// Metodo que devuelve un listado completo de entrenos, segun idManager
         /// </summary>
+        /// <param name="idManager">int</param>
         /// <returns>List de clsEntreno</returns>
         public List<clsEntreno> listadoCompletoEntrenos(int idManager)
         {
