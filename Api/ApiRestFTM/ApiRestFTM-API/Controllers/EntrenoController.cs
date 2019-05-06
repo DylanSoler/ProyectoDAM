@@ -26,11 +26,45 @@ namespace ApiRestFTM_API.Controllers
 
             oEntrenos = oListEntrenos.listadoCompletoEntrenos(id);
 
-			if (oEntrenos.Count == 0)
-				return NotFound(id); //404
-			else
-				return Ok(oEntrenos); //200
+	    if (oEntrenos.Count == 0)
+		return NotFound(id); //404
+	    else
+		return Ok(oEntrenos); //200
 	}
         
+	[HttpPost]
+	public ActionResult Post([FromBody] clsEntreno oEntrenoNuevo)
+	{
+            String contentType = Request.Headers["Content-Type"].ToString();
+	    clsManejadoraEntreno gestEntrenos = new clsManejadoraEntreno();
+	    
+            if (contentType != "application/json" && contentType != "*/*")
+                return StatusCode(415); //Unsupported Media Type
+
+            int filas = gestEntrenos.insertarEntreno(oEntrenoNuevo);
+
+	    if (filas == 1)
+		return Created(); //Created
+	    else
+		return StatusCode(400); //Bad Request
+        }
+
+	[HttpPut]
+	public ActionResult Put(clsEntreno oEntreno)
+	{
+            String contentType = Request.Headers["Content-Type"].ToString();
+	    clsManejadoraEntreno gestEntrenos = new clsManejadoraEntreno();
+	    
+            if (contentType != "application/json" && contentType != "*/*")
+                return StatusCode(415); //Unsupported Media Type
+
+            int filas = gestEntrenos.editarEntreno(oEntreno);
+
+            if (filas == 1)
+		return NoContent(); //204 No content
+	    else
+		return NotFound(oEntreno.idManager,oEntreno.dia); //404 No encontrado
+	}
+	
     }
 }
