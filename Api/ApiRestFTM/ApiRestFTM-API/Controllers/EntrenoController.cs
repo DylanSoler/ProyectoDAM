@@ -15,7 +15,7 @@ namespace ApiRestFTM_API.Controllers
     public class EntrenoController : ControllerBase
     {
         [HttpGet]
-	public ActionResult Get(int id)
+	public IActionResult Get(int id)
 	{
             String accept = Request.Headers["Accept"].ToString();
             clsListadoEntrenos oListEntrenos = new clsListadoEntrenos();
@@ -33,7 +33,7 @@ namespace ApiRestFTM_API.Controllers
 	}
         
 	[HttpPost]
-	public ActionResult Post([FromBody] clsEntreno oEntrenoNuevo)
+	public IActionResult Post([FromBody] clsEntreno oEntrenoNuevo)
 	{
             String contentType = Request.Headers["Content-Type"].ToString();
 	    clsManejadoraEntreno gestEntrenos = new clsManejadoraEntreno();
@@ -50,7 +50,7 @@ namespace ApiRestFTM_API.Controllers
         }
 
 	[HttpPut]
-	public ActionResult Put(clsEntreno oEntreno)
+	public IActionResult Put(clsEntreno oEntreno)
 	{
             String contentType = Request.Headers["Content-Type"].ToString();
 	    clsManejadoraEntreno gestEntrenos = new clsManejadoraEntreno();
