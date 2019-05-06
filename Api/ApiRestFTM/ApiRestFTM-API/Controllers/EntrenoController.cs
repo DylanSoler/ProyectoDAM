@@ -15,8 +15,8 @@ namespace ApiRestFTM_API.Controllers
     public class EntrenoController : ControllerBase
     {
         [HttpGet]
-		public ActionResult Get(int id)
-		{
+	public ActionResult Get(int id)
+	{
             String accept = Request.Headers["Accept"].ToString();
             clsListadoEntrenos oListEntrenos = new clsListadoEntrenos();
             List<clsEntreno> oEntrenos = new List<clsEntreno>();
@@ -30,7 +30,7 @@ namespace ApiRestFTM_API.Controllers
 				return NotFound(id); //404
 			else
 				return Ok(oEntrenos); //200
-		}
+	}
         
     }
 }
