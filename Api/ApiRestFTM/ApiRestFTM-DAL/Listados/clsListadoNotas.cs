@@ -11,12 +11,12 @@ namespace ApiRestFTM_DAL.Listados
     {
 
         /// <summary>
-        /// Metodo que devuelve un listado completo de notas
+        /// Metodo que devuelve un listado completo de notas, segun idManager
         /// </summary>
+        /// <param name="idManager">int</param>
         /// <returns>List de clsNota</returns>
-        public List<clsNota> listadoCompletoNotasDAL()
+        public List<clsNota> listadoCompletoNotas(int idManager)
         {
-
             List<clsNota> listado = new List<clsNota>();
 
             SqlConnection miConexion = new SqlConnection();
@@ -28,7 +28,8 @@ namespace ApiRestFTM_DAL.Listados
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "SELECT * FROM Notas";
+                miComando.CommandText = "SELECT * FROM Notas WHERE ID_Manager = @id"; 
+                miComando.Parameters.Add("@id",System.Data.SqlDbType.Int).Value = idManager;
                 miComando.Connection = miConexion;
                 miLector = miComando.ExecuteReader();
 
