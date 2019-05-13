@@ -63,10 +63,10 @@ namespace ApiRestFTM_API.Controllers
             {
                 int ret = manejadora.insertarManager(manager);
 
-                if (ret>0)
-                    return StatusCode(400); //Error inesperado
+                if (ret>0) 
+                   return Created(); //Created 
                 else
-                    return Created(); //Created    
+                   return StatusCode(400); //Error inesperado    
             }
         }
         
