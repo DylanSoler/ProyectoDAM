@@ -169,7 +169,7 @@
 											"top": 204,
 											"width": 228.91552734375,
 											"height": 13,
-											"text": "+passwordManager: String",
+											"text": "+passwordManager: byte[64]",
 											"horizontalAlignment": 0
 										},
 										{
@@ -339,7 +339,7 @@
 											"top": 347,
 											"width": 228.91552734375,
 											"height": 13,
-											"text": "+getPasswordManager(): String",
+											"text": "+getPasswordManager(): byte[64]",
 											"horizontalAlignment": 0
 										},
 										{
@@ -356,7 +356,7 @@
 											"top": 362,
 											"width": 228.91552734375,
 											"height": 13,
-											"text": "+setPasswordManager(value: String)",
+											"text": "+setPasswordManager(value: byte[64])",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3342,7 +3342,8 @@
 								"$ref": "AAAAAAFqaMRudkGrxZo="
 							},
 							"name": "passwordManager",
-							"type": "String"
+							"type": "byte",
+							"multiplicity": "64"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -3472,7 +3473,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFqbsx1NT8j+gk="
 									},
-									"type": "String",
+									"type": "byte",
+									"multiplicity": "64",
 									"direction": "return"
 								}
 							]
@@ -3492,7 +3494,8 @@
 										"$ref": "AAAAAAFqbsx1NT8lHUM="
 									},
 									"name": "value",
-									"type": "String"
+									"type": "byte",
+									"multiplicity": "64"
 								}
 							]
 						},
