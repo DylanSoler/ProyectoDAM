@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiRestFTM_API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ManagerController : ControllerBase
     {
