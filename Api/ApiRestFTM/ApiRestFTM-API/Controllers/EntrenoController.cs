@@ -42,13 +42,16 @@ namespace ApiRestFTM_API.Controllers
 	    
             if (contentType != "application/json" && contentType != "*/*")
                 return StatusCode(415); //Unsupported Media Type
-
-            int filas = gestEntrenos.insertarEntreno(oEntrenoNuevo);
-
-	    if (filas == 1)
-		return Created(); //Created
 	    else
-		return StatusCode(400); //Bad Request
+	    {
+		    int filas = gestEntrenos.insertarEntreno(oEntrenoNuevo);
+
+		    if (filas == 1)
+			return Created(); //Created
+		    else
+			return StatusCode(400); //Bad Request
+	    }
+	    
         }
 
 	[HttpPut]
@@ -59,13 +62,16 @@ namespace ApiRestFTM_API.Controllers
 	    
             if (contentType != "application/json" && contentType != "*/*")
                 return StatusCode(415); //Unsupported Media Type
-
-            int filas = gestEntrenos.editarEntreno(oEntreno);
-
-            if (filas == 1)
-		return NoContent(); //204 No content
 	    else
-		return NotFound(oEntreno.idManager,oEntreno.dia); //404 No encontrado
+	    {
+		    int filas = gestEntrenos.editarEntreno(oEntreno);
+
+		    if (filas == 1)
+			return NoContent(); //204 No content
+		    else
+			return NotFound(oEntreno.idManager,oEntreno.dia); //404 No encontrado
+	    }
+	    
 	}
 	
     }
