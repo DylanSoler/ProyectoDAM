@@ -23,13 +23,15 @@ namespace ApiRestFTM_API.Controllers
             
             if (accept != "application/json" && accept != "*/*")
                 return StatusCode(406); //Not Acceptable
-
-            oEntrenos = oListEntrenos.listadoCompletoEntrenos(id);
-
-	    if (oEntrenos.Count == 0)
-		return NotFound(id); //404
 	    else
-		return Ok(oEntrenos); //200
+	    {
+		    oEntrenos = oListEntrenos.listadoCompletoEntrenos(id);
+
+		    if (oEntrenos.Count == 0)
+			return NotFound(id); //404
+		    else
+			return Ok(oEntrenos); //200
+	    }
 	}
         
 	[HttpPost]
