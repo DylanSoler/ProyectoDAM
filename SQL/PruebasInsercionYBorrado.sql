@@ -13,13 +13,13 @@ SELECT * FROM Managers
 ---------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO Entrenos(ID_Manager,Dia,Sesion1,Sesion2,SesionExtra)
-				VALUES	(5,'Lunes','Fisico','Recuperacion','Descanso'),
-						(5,'Martes','Defensivo','Tactico','Descanso'),
-						(5,'Miercoles','Ofensivo','Tecnico','Descanso'),
-						(5,'Jueves','Balon parado','Control','Descanso'),
-						(5,'Viernes','Tacticas prepartido','Recuperacion','Descanso'),
-						(5,'Sabado','','',''),
-						(5,'Domingo','','','')
+				VALUES	(5,1,'Fisico','Recuperacion','Descanso'),
+						(5,2,'Defensivo','Tactico','Descanso'),
+						(5,3,'Ofensivo','Tecnico','Descanso'),
+						(5,4,'Balon parado','Control','Descanso'),
+						(5,5,'Tacticas prepartido','Recuperacion','Descanso'),
+						(5,6,'','',''),
+						(5,7,'','','')
 						
 SELECT * FROM Entrenos
 

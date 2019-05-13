@@ -14,7 +14,8 @@ namespace ApiRestFTM_API.Controllers
     [ApiController]
     public class EntrenoController : ControllerBase
     {
-        [HttpGet]
+
+    [HttpGet]
 	public IActionResult Get(int id)
 	{
             String accept = Request.Headers["Accept"].ToString();
@@ -28,9 +29,9 @@ namespace ApiRestFTM_API.Controllers
 		    oEntrenos = oListEntrenos.listadoCompletoEntrenos(id);
 
 		    if (oEntrenos.Count == 0)
-			return NotFound(id); //404
+			    return NotFound(id); //404
 		    else
-			return Ok(oEntrenos); //200
+			    return Ok(oEntrenos); //200
 	    }
 	}
         
@@ -47,9 +48,9 @@ namespace ApiRestFTM_API.Controllers
 		    int filas = gestEntrenos.insertarEntreno(oEntrenoNuevo);
 
 		    if (filas == 1)
-			return Created(); //Created
+			    return StatusCode(201);
 		    else
-			return StatusCode(400); //Bad Request
+			    return StatusCode(400); //Bad Request
 	    }
 	    
         }
@@ -67,9 +68,9 @@ namespace ApiRestFTM_API.Controllers
 		    int filas = gestEntrenos.editarEntreno(oEntreno);
 
 		    if (filas == 1)
-			return NoContent(); //204 No content
+			    return NoContent(); //204 No content
 		    else
-			return NotFound(oEntreno.idManager,oEntreno.dia); //404 No encontrado
+			    return NotFound(oEntreno.idManager); //404 No encontrado
 	    }
 	    
 	}

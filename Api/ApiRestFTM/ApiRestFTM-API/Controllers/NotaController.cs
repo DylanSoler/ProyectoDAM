@@ -26,9 +26,9 @@ namespace ApiRestFTM_API.Controllers
                 return StatusCode(406); //Not Acceptable
             else
             {
-                oNotas = oListNotas.listadoCompletoEntrenos(id);
+                oNotas = oListNotas.listadoCompletoNotas(id);
 
-                if (oEntrenos.Count == 0)
+                if (oNotas.Count == 0)
                     return NotFound(id); //404
                 else
                     return Ok(oNotas); //200
@@ -41,7 +41,7 @@ namespace ApiRestFTM_API.Controllers
 		public ActionResult Get(int id, int idNota)
 		{
             String accept = Request.Headers["Accept"].ToString();
-            clsNota oNota = new clsNota();
+            clsNota oNota = null;
             clsManejadoraNota gestNotas = new clsManejadoraNota();
             
             if (accept != "application/json" && accept != "*/*")
@@ -49,10 +49,10 @@ namespace ApiRestFTM_API.Controllers
 
             oNota = gestNotas.obtenerNotaPorIdManager(id, idNota);
 			
-			if (result != null)
-				return Ok(result); //200
+			if (oNota != null)
+				return Ok(oNota); //200
 			else
-				return NotFound(id, idNota); //404
+				return NotFound(idNota); //404
 		}
         
         
@@ -72,7 +72,7 @@ namespace ApiRestFTM_API.Controllers
                 if (ret>0)
                     return StatusCode(204); //No Content(eliminado con exito)
                 else
-                    return NotFound(oNota.idManager, oNota.idNota); //No encontrado
+                    return NotFound(oNota.idNota); //No encontrado
             }
         }
         
@@ -91,7 +91,7 @@ namespace ApiRestFTM_API.Controllers
                 int ret = gestNotas.insertarNota(oNota);
 
                 if (ret>0)
-                    return Created(); //Created
+                    return StatusCode(201); //Created
                 else
                     return StatusCode(400); //Error inesperado
             }
@@ -121,7 +121,7 @@ namespace ApiRestFTM_API.Controllers
 			if (ret>0)
                 return StatusCode(204); //No Content(eliminado con exito)
             else
-                return NotFound(id); //404 No encontrado
+                return NotFound(idNota); //404 No encontrado
 		}
     }
 }

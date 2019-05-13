@@ -48,7 +48,7 @@ namespace ApiRestFTM_API.Controllers
                     int filas = gestFormacion.insertarFormacionTactica(oFormacionNueva);
 
                     if (filas == 1)
-                        return Created(); //Created
+                        return StatusCode(201); //Created
                     else
                         return StatusCode(400); //Bad Request
                 }

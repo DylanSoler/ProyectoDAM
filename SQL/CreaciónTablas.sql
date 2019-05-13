@@ -25,7 +25,7 @@ CREATE TABLE Notas (
 
 CREATE TABLE Entrenos (
 	ID_Manager int NOT NULL,
-	Dia nvarchar(9) NOT NULL,
+	Dia tinyint NOT NULL,
 	Sesion1 nvarchar(50) NULL,
 	Sesion2 nvarchar(50) NULL,
 	SesionExtra nvarchar(50) NULL,

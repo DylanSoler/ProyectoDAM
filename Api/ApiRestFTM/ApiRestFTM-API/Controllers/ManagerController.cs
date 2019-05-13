@@ -42,7 +42,7 @@ namespace ApiRestFTM_API.Controllers
         public IActionResult Delete(int id)
         {
             clsManejadoraManager manejadora = new clsManejadoraManager();
-            int ret = manejadora.borrarManagerPorId(id);
+            int ret = manejadora.borrarManagerPorID(id);
             
             if (ret>0)
                 return StatusCode(204); //No Content(eliminado con exito)
@@ -64,7 +64,7 @@ namespace ApiRestFTM_API.Controllers
                 int ret = manejadora.insertarManager(manager);
 
                 if (ret>0) 
-                   return Created(); //Created 
+                   return StatusCode(201); //Created 
                 else
                    return StatusCode(400); //Error inesperado    
             }
@@ -81,7 +81,7 @@ namespace ApiRestFTM_API.Controllers
                 return StatusCode(415); //Unsupported Media Type (Formato no legible)
             else
             {
-                int ret = manejadora.actualizarManager(manager);
+                int ret = manejadora.editarManager(manager);
 
                 if (ret>0)
                     return StatusCode(204); //No Content(eliminado con exito)

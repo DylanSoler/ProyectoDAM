@@ -35,7 +35,7 @@ namespace ApiRestFTM_DAL.Listados
                     while (miLector.Read())
                     {
                         oTactica = new clsTactica();
-                        oTactica.idTactica = (int)miLector["ID_Tactica"];
+                        oTactica.idTactica = (byte)miLector["ID_Tactica"];
                         oTactica.sistema = (string)miLector["Sistema"];
                         listado.Add(oTactica);
                     }

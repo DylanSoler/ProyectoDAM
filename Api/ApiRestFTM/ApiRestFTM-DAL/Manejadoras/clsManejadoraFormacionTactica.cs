@@ -17,7 +17,7 @@ namespace ApiRestFTM_DAL.Manejadoras
         /// <returns>clsFormacionTactica</returns>
         public clsFormacionTactica formacionTacticaPorIdManager(int idManager)
         {
-            clsFormacionTactica oFormacion = new clsFormacionTactica();
+            clsFormacionTactica oFormacion = null;
 
             SqlConnection miConexion = new SqlConnection();
             SqlCommand miComando = new SqlCommand();
@@ -38,7 +38,7 @@ namespace ApiRestFTM_DAL.Manejadoras
 
                     oFormacion = new clsFormacionTactica();
                     oFormacion.idManager = (int)miLector["ID_Manager"];
-                    oFormacion.idTactica = (int)miLector["ID_Tactica"];
+                    oFormacion.idTactica = (byte)miLector["ID_Tactica"];
                     oFormacion.mentalidad = (string)miLector["Mentalidad"];
                     oFormacion.descripcion = (string)miLector["Descripcion"];
                 }

@@ -12,3 +12,8 @@ F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRe
 F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-API.pdb
 F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.dll
 F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.pdb
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-DAL.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-Entidades.dll
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-DAL.pdb
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\bin\Debug\netcoreapp2.1\ApiRestFTM-Entidades.pdb
+F:\repos\ProyectoDAM\Api\ApiRestFTM\ApiRestFTM-API\obj\Debug\netcoreapp2.1\ApiRestFTM-API.csproj.CopyComplete

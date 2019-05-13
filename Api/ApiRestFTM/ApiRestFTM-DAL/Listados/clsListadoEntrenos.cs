@@ -39,7 +39,7 @@ namespace ApiRestFTM_DAL.Listados
                     {
                         oEntreno = new clsEntreno();
                         oEntreno.idManager = (int)miLector["ID_manager"];
-                        oEntreno.dia = (int)miLector["Dia"];
+                        oEntreno.dia = (byte)miLector["Dia"];
                         oEntreno.sesion1 = (string)miLector["Sesion1"];
                         oEntreno.sesion2 = (string)miLector["Sesion2"];
                         oEntreno.sesionExtra = (string)miLector["SesionExtra"];

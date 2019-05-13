@@ -17,7 +17,7 @@ namespace ApiRestFTM_DAL.Manejadoras
         /// <returns>clsManager</returns>
         public clsManager managerPorId(int id)
         {
-            clsManager oManager = new clsManager();
+            clsManager oManager = null;
 
             SqlConnection miConexion = new SqlConnection();
             SqlCommand miComando = new SqlCommand();
@@ -43,7 +43,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                     oManager.nombre = (string)miLector["Nombre"];
                     oManager.apellidos = (string)miLector["Apellidos"];
                     oManager.fotoPerfil = (string)miLector["FotoPerfil"];
-                    oManager.fechaNacimiento = (DateTime)miLector["FechaNacimiento"];
+                    oManager.fechaNacimiento = miLector["FechaNacimiento"] is DBNull ? new DateTime(): (DateTime)miLector["FechaNacimiento"];
                 }
             }
             catch (SqlException exSql)
@@ -107,7 +107,7 @@ namespace ApiRestFTM_DAL.Manejadoras
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "INSERT INTO Managers (Correo,PasswordManager, Nombre, Apellidos, FotoPerfil, FechaNacimiento) VALUES(@correo,@passwManager,@nombre,@apellidos,@fotoPerfil,@fechaNacimiento)";
+                miComando.CommandText = "INSERT INTO Managers (Correo,PasswordManager, Nombre, Apellidos, FotoPerfil, FechaNacimiento) VALUES(@correo,@passwManager,@nombre,@apellidos,@fotoPerfil,@fechaNac)";
 
                 miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
                 miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
