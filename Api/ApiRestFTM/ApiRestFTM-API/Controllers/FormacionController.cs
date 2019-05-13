@@ -68,9 +68,9 @@ namespace ApiRestFTM_API.Controllers
                 int filas = gestFormacion.editarFormacionTactica(oFormacion);
 
                 if (filas == 1)
-                return NoContent(); //204 No content
+                    return NoContent(); //204 No content
                 else
-                return NotFound(oEntreno.idManager,oEntreno.dia); //404 No encontrado
+                    return NotFound(oFormacion.idManager); //404 No encontrado
             } 
         }
     
