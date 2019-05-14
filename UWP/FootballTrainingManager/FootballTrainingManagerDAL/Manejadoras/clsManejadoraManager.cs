@@ -15,6 +15,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// <summary>
         /// Metodo que devuelve un manager segun id
         /// </summary>
+        /// <param name="id">id del manager</param>
         /// <returns>clsManager</returns>
         public async Task<clsManager> obtenerManagerPorIDDAL(int id)
         {
