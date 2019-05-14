@@ -12,7 +12,7 @@ namespace FootballTrainingManagerDAL.Listados
     public class clsListadoNotas
     {
         
-       /// <summary>
+        /// <summary>
         /// Metodo que devuelve el listado completo de notas
         /// </summary>
         /// <returns>List de clsNota</returns>
