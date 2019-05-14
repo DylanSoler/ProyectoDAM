@@ -9,7 +9,32 @@ using FootballTrainingManagerEntidades.Persistencia;
 
 namespace FootballTrainingManagerDAL.Listados
 {
-    class clsListadoTacticas
+    public class clsListadoTacticas
     {
+        
+        /// <summary>
+        /// Metodo que devuelve el listado completo de tacticas
+        /// </summary>
+        /// <returns>List de clsTactica</returns>
+        public async Task<List<clsTactica>> listadoCompletoTacticasDAL()
+        {
+            clsUriBase uribase = new clsUriBase();
+            String ruta = uribase.getUriBaseApi();
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            List<clsTactica> listado = new List<clsTactica>();
+
+            //try catch, throw ex 
+            HttpResponseMessage response = await client.GetAsync($"{ruta}/Tactica");
+
+            if (response.IsSuccessStatusCode){
+                string lista = await response.Content.ReadAsStringAsync();
+                listado = JsonConvert.DeserializeObject<List<clsTactica>>(lista);
+            }
+            
+            return listado;
+        }
+        
     }
 }
