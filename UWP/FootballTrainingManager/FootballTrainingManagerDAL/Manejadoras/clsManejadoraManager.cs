@@ -79,7 +79,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String ruta = uribase.getUriBaseApi();
             String datos;
             HttpContent contenido;
-            Uri miUri = new Uri($"{ruta}manager);
+            Uri miUri = new Uri($"{ruta}manager");
             boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
@@ -110,7 +110,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String ruta = uribase.getUriBaseApi();
             String datos;
             HttpContent contenido;
-            Uri miUri = new Uri($"{ruta}manager);
+            Uri miUri = new Uri($"{ruta}manager");
             boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
