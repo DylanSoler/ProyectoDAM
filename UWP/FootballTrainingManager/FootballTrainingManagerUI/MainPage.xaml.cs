@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Resources.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,7 +26,22 @@ namespace FootballTrainingManagerUI
     {
         public MainPage()
         {
+            //ResourceContext.SetGlobalQualifierValue("Language", "es");
+            //ApplicationLanguages.PrimaryLanguageOverride = "es";
             this.InitializeComponent();
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ApplicationLanguages.PrimaryLanguageOverride = "en";
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(BlankPage1));
         }
     }
 }

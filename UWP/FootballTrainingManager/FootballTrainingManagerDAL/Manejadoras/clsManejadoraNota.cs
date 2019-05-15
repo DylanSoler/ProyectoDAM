@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
 using FootballTrainingManagerEntidades.Persistencia;
+using FootballTrainingManagerDAL.Conexion;
 
 namespace FootballTrainingManagerDAL.Manejadoras
 {
@@ -48,7 +49,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="nota">nota a actualizar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> actualizarNotaDAL(clsNota nota)
+        public async Task<Boolean> actualizarNotaDAL(clsNota nota)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
@@ -56,7 +57,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String datos;
             HttpContent contenido;
             Uri miUri = new Uri($"{ruta}manager/{nota.idManager}/nota");
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
@@ -79,7 +80,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="nota">nota a insertar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> insertarNotaDAL(clsNota nota)
+        public async Task<Boolean> insertarNotaDAL(clsNota nota)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
@@ -87,7 +88,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String datos;
             HttpContent contenido;
             Uri miUri = new Uri($"{ruta}manager/{nota.idManager}/nota");
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
@@ -111,12 +112,12 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// <param name="idManager">id del manager</param>
         /// <param name="idNota">id de la nota</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> eliminarNotaDAL(int idManager, int idNota)
+        public async Task<Boolean> eliminarNotaDAL(int idManager, int idNota)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
             String ruta = uribase.getUriBaseApi();
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
@@ -137,12 +138,12 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="idManager">id del manager</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> eliminarTodasLasNotasDAL(int idManager)
+        public async Task<Boolean> eliminarTodasLasNotasDAL(int idManager)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
             String ruta = uribase.getUriBaseApi();
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 

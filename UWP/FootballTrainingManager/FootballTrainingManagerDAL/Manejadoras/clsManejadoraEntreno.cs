@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
 using FootballTrainingManagerEntidades.Persistencia;
+using FootballTrainingManagerDAL.Conexion;
 
 namespace FootballTrainingManagerDAL.Manejadoras
 {
@@ -47,7 +48,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="entreno">entreno a actualizar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> actualizarEntrenoDAL(clsEntreno entreno)
+        public async Task<Boolean> actualizarEntrenoDAL(clsEntreno entreno)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
@@ -55,7 +56,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String datos;
             HttpContent contenido;
             Uri miUri = new Uri($"{ruta}manager/{entreno.idManager}/entreno");
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
@@ -78,7 +79,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="entreno">entreno a insertar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> insertarEntrenoDAL(clsEntreno entreno)
+        public async Task<Boolean> insertarEntrenoDAL(clsEntreno entreno)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
@@ -86,7 +87,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String datos;
             HttpContent contenido;
             Uri miUri = new Uri($"{ruta}manager/{entreno.idManager}/entreno");
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 

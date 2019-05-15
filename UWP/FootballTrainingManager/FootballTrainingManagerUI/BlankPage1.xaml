@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="FootballTrainingManagerUI.MainPage"
+    x:Class="FootballTrainingManagerUI.BlankPage1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FootballTrainingManagerUI"
@@ -8,11 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
+    <Grid>
 
-        <TextBlock x:Uid="Prueba" FontSize="40"></TextBlock>
-        <Button Click="Button_Click" Content="English"></Button>
-        <Button Content="siguiente" Click="Button_Click2"></Button>
+        <TextBlock x:Uid="Prueba2" FontSize="40"></TextBlock>
+        <Button Content="back" Click="Button_Click"></Button>
 
-    </StackPanel>
+    </Grid>
 </Page>

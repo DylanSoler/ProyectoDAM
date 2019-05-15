@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
 using FootballTrainingManagerEntidades.Persistencia;
+using FootballTrainingManagerDAL.Conexion;
 
 namespace FootballTrainingManagerDAL.Manejadoras
 {
@@ -36,7 +37,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
 
             if (response.IsSuccessStatusCode){
                 string mng = await response.Content.ReadAsStringAsync();
-                manager = JsonConvert.DeserializeObject<clsManager>(pers);
+                manager = JsonConvert.DeserializeObject<clsManager>(mng);
             }
 
             return manager;
@@ -47,12 +48,12 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="id">id del manager</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> eliminarManagerDAL(int id)
+        public async Task<Boolean> eliminarManagerDAL(int id)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
             String ruta = uribase.getUriBaseApi();
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
@@ -73,7 +74,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="manager">manager a actualizar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> actualizarManagerDAL(clsManager manager)
+        public async Task<Boolean> actualizarManagerDAL(clsManager manager)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
@@ -81,12 +82,12 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String datos;
             HttpContent contenido;
             Uri miUri = new Uri($"{ruta}manager");
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
             try{
-                datos = JsonConvert.SerializeObject(persona);
+                datos = JsonConvert.SerializeObject(manager);
                 contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
                 response = await client.PutAsync(miUri, contenido);
             } catch (Exception ex) {
@@ -104,7 +105,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="manager">manager a insertar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<boolean> insertarManagerDAL(clsManager manager)
+        public async Task<Boolean> insertarManagerDAL(clsManager manager)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
@@ -112,12 +113,12 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String datos;
             HttpContent contenido;
             Uri miUri = new Uri($"{ruta}manager");
-            boolean ret = false;
+            Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
             try{
-                datos = JsonConvert.SerializeObject(persona);
+                datos = JsonConvert.SerializeObject(manager);
                 contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
                 response = await client.PostAsync(miUri, contenido);
             } catch (Exception ex) {
