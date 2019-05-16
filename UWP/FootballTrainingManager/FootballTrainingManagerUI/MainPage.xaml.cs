@@ -36,8 +36,11 @@ namespace FootballTrainingManagerUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ApplicationLanguages.PrimaryLanguageOverride = "en";
+            //await Task.Delay(100); solucion a
             this.Frame.Navigate(typeof(MainPage));
             //Frame.Navigate(this.GetType());
+            //Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView().Reset(); solucion b
+            //Windows.ApplicationModel.Resources.Core.ResourceContext.GetForViewIndependentUse().Reset();
         }
 
         private void Button_Click2(object sender, RoutedEventArgs e)
