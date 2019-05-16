@@ -37,6 +37,7 @@ namespace FootballTrainingManagerUI
         {
             ApplicationLanguages.PrimaryLanguageOverride = "en";
             this.Frame.Navigate(typeof(MainPage));
+            //Frame.Navigate(this.GetType());
         }
 
         private void Button_Click2(object sender, RoutedEventArgs e)
