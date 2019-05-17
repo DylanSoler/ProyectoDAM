@@ -45,13 +45,10 @@ namespace ApiRestFTM_DAL.Manejadoras
                     oManager.fotoPerfil = (string)miLector["FotoPerfil"];
                     oManager.fechaNacimiento = miLector["FechaNacimiento"] is DBNull ? new DateTime(): (DateTime)miLector["FechaNacimiento"];
                 }
-            }
-            catch (SqlException exSql)
-            {
+            } catch (SqlException exSql){
                 throw exSql;
             }
-            finally
-            {
+            finally {
                 miLector.Close();
                 gestConexion.closeConnection(ref miConexion);
             }
@@ -118,13 +115,9 @@ namespace ApiRestFTM_DAL.Manejadoras
 
                 miComando.Connection = miConexion;
                 filas = miComando.ExecuteNonQuery();
-            }
-            catch (SqlException exSql)
-            {
+            } catch (SqlException exSql) {
                 throw exSql;
-            }
-            finally
-            {
+            } finally {
                 gestConexion.closeConnection(ref miConexion);
             }
            
@@ -146,11 +139,11 @@ namespace ApiRestFTM_DAL.Manejadoras
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "UPDATE Managers SET Correo=@correo, PasswordManager=@passwManager, Nombre=@nombre, Apellidos=@apellidos, FotoPerfil=@fotoPerfil, FechaNacimiento=@fechaNac WHERE ID=@id";
+                miComando.CommandText = "UPDATE Managers SET Correo=@correo, Nombre=@nombre, Apellidos=@apellidos, FotoPerfil=@fotoPerfil, FechaNacimiento=@fechaNac WHERE ID=@id";
 
                 miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = oManager.id;
                 miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
-                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
+                //miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
                 miComando.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = oManager.nombre;
                 miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.NVarChar).Value = oManager.apellidos;
                 miComando.Parameters.Add("@fotoPerfil", System.Data.SqlDbType.NVarChar).Value = oManager.fotoPerfil;
@@ -158,14 +151,41 @@ namespace ApiRestFTM_DAL.Manejadoras
 
                 miComando.Connection = miConexion;
                 filas = miComando.ExecuteNonQuery();
-
-            }
-            catch (SqlException exSql)
-            {
+            } catch (SqlException exSql) {
                 throw exSql;
+            } finally {
+                gestConexion.closeConnection(ref miConexion);
             }
-            finally
+
+            return filas;
+        }
+        
+        /// <summary>
+        /// Metodo que actualiza la contrasenia de un manager segun id
+        /// </summary>
+        /// <param name="idManager">int</param>
+        /// <param name="passw">byte[]</param>
+        /// <returns>int</returns>
+        public int editarPasswordManager(int idManager, byte[] passw)
+        {
+            SqlConnection miConexion = new SqlConnection();
+            SqlCommand miComando = new SqlCommand();
+            int filas = 0;
+            clsMyConnection gestConexion = new clsMyConnection();
+
+            try
             {
+                miConexion = gestConexion.getConnection();
+                miComando.CommandText = "UPDATE Managers SET PasswordManager=@passwManager WHERE ID=@id";
+
+                miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = idManager;
+                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
+
+                miComando.Connection = miConexion;
+                filas = miComando.ExecuteNonQuery();
+            } catch (SqlException exSql) {
+                throw exSql;
+            } finally {
                 gestConexion.closeConnection(ref miConexion);
             }
 
