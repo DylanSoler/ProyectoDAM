@@ -27,7 +27,7 @@ namespace ApiRestFTM_DAL.Manejadoras
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "SELECT * FROM ManagersTacticas WHERE ID_Manager = @idManager"; 
+                miComando.CommandText = "SELECT MT.*, T.Sistema FROM ManagersTacticas AS MT INNER JOIN Tacticas AS T ON MT.ID_Tactica=T.ID_Tactica WHERE ID_Manager = @idManager"; 
                 miComando.Parameters.Add("@idManager",System.Data.SqlDbType.Int).Value = idManager;
                 miComando.Connection = miConexion;
                 miLector = miComando.ExecuteReader();
@@ -41,6 +41,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                     oFormacion.idTactica = (byte)miLector["ID_Tactica"];
                     oFormacion.mentalidad = (string)miLector["Mentalidad"];
                     oFormacion.descripcion = (string)miLector["Descripcion"];
+                    oFormacion.sistemaTactico = (string)miLector["Sistema"];
                 }
             }
             catch (SqlException exSql)
