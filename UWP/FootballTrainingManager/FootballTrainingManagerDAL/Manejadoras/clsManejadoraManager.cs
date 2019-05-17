@@ -101,7 +101,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         }
         
         /// <summary>
-        /// Metodo que actualiza un manager
+        /// Metodo que inserta un manager
         /// </summary>
         /// <param name="manager">manager a insertar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
@@ -120,6 +120,38 @@ namespace FootballTrainingManagerDAL.Manejadoras
             try{
                 datos = JsonConvert.SerializeObject(manager);
                 contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
+                response = await client.PostAsync(miUri, contenido);
+            } catch (Exception ex) {
+                
+            }
+
+            if (response.IsSuccessStatusCode)
+                ret = true;
+
+            return ret;
+        }
+        
+        /// <summary>
+        /// Metodo que actualiza la contrasenia de un manager
+        /// </summary>
+        /// <param name="idManager">ID manager a actualizar</param>
+        /// <param name="passw">nueva password</param>
+        /// <returns>boolean true si todo va bien, false si no</returns>
+        public async Task<Boolean> actualizarPasswordManagerDAL(int idManager, byte[] passw)
+        {
+            HttpClient client = new HttpClient();
+            clsUriBase uribase = new clsUriBase();
+            String ruta = uribase.getUriBaseApi();
+            String datos;
+            HttpContent contenido;
+            Uri miUri = new Uri($"{ruta}manager/{id}");
+            Boolean ret = false;
+
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try{
+                //datos = JsonConvert.SerializeObject(manager);
+                contenido = new StringContent(passw, System.Text.Encoding.UTF8, "application/json");
                 response = await client.PostAsync(miUri, contenido);
             } catch (Exception ex) {
                 
