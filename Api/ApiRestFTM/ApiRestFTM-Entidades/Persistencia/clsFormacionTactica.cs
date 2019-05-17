@@ -11,12 +11,13 @@ namespace ApiRestFTM_Entidades.Persistencia
         { }
 
 
-        public clsFormacionTactica(int idManager, int idTactica, String mentalidad, String descripcion)
+        public clsFormacionTactica(int idManager, int idTactica, String mentalidad, String descripcion, String sistemaTactico)
         {
             this.idManager = idManager;
             this.idTactica = idTactica;
             this.mentalidad = mentalidad;
             this.descripcion = descripcion;
+            this.sistemaTactico = sistemaTactico;
         }
 
         #endregion
@@ -26,6 +27,7 @@ namespace ApiRestFTM_Entidades.Persistencia
         public int idTactica { get; set; }
         public String mentalidad { get; set; }
         public String descripcion { get; set; }
+        public String sistemaTactico { get; set; }
         #endregion
     }
 }
