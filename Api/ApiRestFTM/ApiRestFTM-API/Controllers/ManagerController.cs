@@ -84,9 +84,29 @@ namespace ApiRestFTM_API.Controllers
                 int ret = manejadora.editarManager(manager);
 
                 if (ret>0)
-                    return StatusCode(204); //No Content(eliminado con exito)
+                    return StatusCode(204); //No Content(editado con exito)
                 else
                     return NotFound(manager.id); //No encontrado
+            }
+        }
+        
+        //POST Manager/{id}
+        [HttpPost("{id}")]
+        public IActionResult Post(int id, [FromBody] byte[] passw)
+        {
+            String contentType = Request.Headers["Content-Type"].ToString();
+            clsManejadoraManager manejadora = new clsManejadoraManager();
+           
+            if (contentType != "application/json" && contentType != "*/*")
+                return StatusCode(415); //Unsupported Media Type (Formato no legible)
+            else
+            {
+                int ret = manejadora.editarPasswordManager(ID, passw);
+
+                if (ret>0) 
+                   return StatusCode(204); //No Content(editado con exito)
+                else
+                   return NotFound(id); //No encontrado   
             }
         }
         
