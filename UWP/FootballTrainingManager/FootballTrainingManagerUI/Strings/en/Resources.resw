@@ -126,4 +126,10 @@
   <data name="strPassword.Text" xml:space="preserve">
     <value>password</value>
   </data>
+  <data name="strRecuperarPassw.Content" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="strRegistrarte.Content" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
 </root>

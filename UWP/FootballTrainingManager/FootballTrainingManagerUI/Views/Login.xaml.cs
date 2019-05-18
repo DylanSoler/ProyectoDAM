@@ -27,5 +27,7 @@ namespace FootballTrainingManagerUI
             this.InitializeComponent();
         }
 
+
+
     }
 }
