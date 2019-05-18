@@ -101,7 +101,7 @@ namespace ApiRestFTM_API.Controllers
                 return StatusCode(415); //Unsupported Media Type (Formato no legible)
             else
             {
-                int ret = manejadora.editarPasswordManager(ID, passw);
+                int ret = manejadora.editarPasswordManager(id, passw);
 
                 if (ret>0) 
                    return StatusCode(204); //No Content(editado con exito)

@@ -144,14 +144,14 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String ruta = uribase.getUriBaseApi();
             String datos;
             HttpContent contenido;
-            Uri miUri = new Uri($"{ruta}manager/{id}");
+            Uri miUri = new Uri($"{ruta}manager/{idManager}");
             Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
             try{
-                //datos = JsonConvert.SerializeObject(manager);
-                contenido = new StringContent(passw, System.Text.Encoding.UTF8, "application/json");
+                datos = JsonConvert.SerializeObject(passw);
+                contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
                 response = await client.PostAsync(miUri, contenido);
             } catch (Exception ex) {
                 

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using FootballTrainingManagerEntidades.Persistencia;
 using FootballTrainingManagerDAL.Conexion;
+using FootballTrainingManagerEntidades.Complejas;
 
 namespace FootballTrainingManagerDAL.Manejadoras
 {

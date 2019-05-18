@@ -179,7 +179,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                 miComando.CommandText = "UPDATE Managers SET PasswordManager=@passwManager WHERE ID=@id";
 
                 miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = idManager;
-                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
+                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = passw;
 
                 miComando.Connection = miConexion;
                 filas = miComando.ExecuteNonQuery();

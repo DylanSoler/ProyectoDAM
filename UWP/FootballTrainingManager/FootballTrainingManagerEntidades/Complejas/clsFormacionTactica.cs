@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FootballTrainingManagerEntidades.Persistencia
+namespace FootballTrainingManagerEntidades.Complejas
 {
     public class clsFormacionTactica
     {
@@ -27,7 +27,7 @@ namespace FootballTrainingManagerEntidades.Persistencia
         public int idTactica { get; set; }
         public String mentalidad { get; set; }
         public String descripcion { get; set; }
-        public String sistemaTactico { get; set; };
+        public String sistemaTactico { get; set; }
         #endregion
     }
 }

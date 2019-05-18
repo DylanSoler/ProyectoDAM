@@ -121,7 +121,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Persistencia\clsEntreno.cs" />
-    <Compile Include="Persistencia\clsFormacionTactica.cs" />
+    <Compile Include="Complejas\clsFormacionTactica.cs" />
     <Compile Include="Persistencia\clsManager.cs" />
     <Compile Include="Persistencia\clsNota.cs" />
     <Compile Include="Persistencia\clsTactica.cs" />
