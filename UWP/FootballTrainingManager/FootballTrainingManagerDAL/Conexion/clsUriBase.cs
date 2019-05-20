@@ -9,7 +9,7 @@ namespace FootballTrainingManagerDAL.Conexion
     public class clsUriBase
     {
 
-        private static String _UriBaseApi = "https://apirestpersonasdylan.azurewebsites.net/";
+        private static String _UriBaseApi = "https://apirestftm.azurewebsites.net/";
 
         /// <summary>
         /// Devuelve un String con la URI de la api

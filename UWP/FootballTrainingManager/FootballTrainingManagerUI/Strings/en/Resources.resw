@@ -123,6 +123,12 @@
   <data name="strCorreo.Text" xml:space="preserve">
     <value>email</value>
   </data>
+  <data name="strErrorLogin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strErrorLoginFormat" xml:space="preserve">
+    <value>Enter a valid email and password please</value>
+  </data>
   <data name="strPassword.Text" xml:space="preserve">
     <value>password</value>
   </data>

@@ -5,8 +5,4 @@
     <RootNamespace>ApiRestFTM_Entidades</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Complejas\" />
-  </ItemGroup>
-
 </Project>

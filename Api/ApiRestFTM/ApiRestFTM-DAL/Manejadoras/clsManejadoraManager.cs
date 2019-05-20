@@ -192,5 +192,50 @@ namespace ApiRestFTM_DAL.Manejadoras
             return filas;
         }
 
+        public clsManager managerPorCorreo(String correo)
+        {
+            clsManager oManager = null;
+
+            SqlConnection miConexion = new SqlConnection();
+            SqlCommand miComando = new SqlCommand();
+            SqlDataReader miLector = null;
+            clsMyConnection gestConexion = new clsMyConnection();
+
+            try
+            {
+                miConexion = gestConexion.getConnection();
+                miComando.CommandText = "SELECT * FROM managers WHERE Correo = @correo";
+                miComando.Parameters.Add("@correo", System.Data.SqlDbType.NVarChar).Value = correo;
+                miComando.Connection = miConexion;
+                miLector = miComando.ExecuteReader();
+
+                if (miLector.HasRows)
+                {
+                    miLector.Read();
+
+                    oManager = new clsManager();
+                    oManager.id = (int)miLector["ID"];
+                    oManager.correo = (string)miLector["Correo"];
+                    oManager.passwordManager = (byte[])miLector["PasswordManager"];
+                    oManager.nombre = (string)miLector["Nombre"];
+                    oManager.apellidos = (string)miLector["Apellidos"];
+                    oManager.fotoPerfil = (string)miLector["FotoPerfil"];
+                    oManager.fechaNacimiento = miLector["FechaNacimiento"] is DBNull ? new DateTime() : (DateTime)miLector["FechaNacimiento"];
+                }
+            }
+            catch (SqlException exSql)
+            {
+                throw exSql;
+            }
+            finally
+            {
+                miLector.Close();
+                gestConexion.closeConnection(ref miConexion);
+            }
+
+            return oManager;
+        }
+
+
     }
 }

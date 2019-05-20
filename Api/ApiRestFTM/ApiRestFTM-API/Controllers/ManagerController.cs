@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiRestFTM_DAL.Manejadoras;
 using ApiRestFTM_Entidades.Persistencia;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -69,7 +68,38 @@ namespace ApiRestFTM_API.Controllers
                    return StatusCode(400); //Error inesperado    
             }
         }
-        
+
+        //POST Manager/correo
+        [HttpPost("correo")]
+        public IActionResult Post([FromBody] String correo)
+        {
+
+            String contentType = Request.Headers["Content-Type"].ToString();
+            String accept = Request.Headers["Accept"].ToString();
+            clsManejadoraManager manejadora = new clsManejadoraManager();
+            clsManager manager = null;
+
+
+            if (contentType != "application/json" && contentType != "*/*")
+                return StatusCode(415); //Unsupported Media Type (Formato no legible)
+            else
+            {
+                if (accept != "application/json" && accept != "*/*")
+                    return StatusCode(406); //Not Acceptable
+                else
+                {
+                    manager = manejadora.managerPorCorreo(correo);
+
+                    if (manager != null)
+                        return Ok(manager);
+                    else
+                        return NotFound(correo); //No encontrado
+                }
+            }
+
+        }
+
+
         // PUT Manager/
         [HttpPut]
         public IActionResult Put(clsManager manager)

@@ -30,7 +30,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             HttpResponseMessage response = new HttpResponseMessage();
 
             try {
-                response = await client.GetAsync($"{ruta}Manager/{id}");
+                response = await client.GetAsync($"{ruta}manager/{id}");
             } catch (Exception ex) {
                 
             }
@@ -161,6 +161,42 @@ namespace FootballTrainingManagerDAL.Manejadoras
                 ret = true;
 
             return ret;
+        }
+
+        /// <summary>
+        /// Metodo que devuelve un manager segun su correo
+        /// </summary>
+        /// <param name="correo">email del manager a consultar</param>
+        /// <returns>clsManager</returns>
+        public async Task<clsManager> obtenerManagerPorEmail(String correo)
+        {
+            clsUriBase uribase = new clsUriBase();
+            String ruta = uribase.getUriBaseApi();
+            Uri miUri = new Uri($"{ruta}manager/correo");
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            HttpContent contenido;
+            String datos;
+
+            clsManager manager = new clsManager();
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try {
+                datos = JsonConvert.SerializeObject(correo);
+                contenido = new StringContent(correo, System.Text.Encoding.UTF8, "application/json");
+                response = await client.PostAsync(miUri, contenido);
+            } catch (Exception ex) {
+                
+            }
+
+            if (response.IsSuccessStatusCode) {
+                string mng = await response.Content.ReadAsStringAsync();
+                manager = JsonConvert.DeserializeObject<clsManager>(mng);
+            }
+
+            return manager;
         }
                                 
     }

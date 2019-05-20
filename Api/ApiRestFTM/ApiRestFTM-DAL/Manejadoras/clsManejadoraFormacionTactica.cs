@@ -1,5 +1,5 @@
 using ApiRestFTM_DAL.Conexion;
-using ApiRestFTM_Entidades.Persistencia;
+using ApiRestFTM_Entidades.Complejas;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
