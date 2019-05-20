@@ -29,7 +29,7 @@
                 <HyperlinkButton Margin="0,20,0,0" x:Uid="strRegistrarte" Click="registrarClick" Foreground="White"></HyperlinkButton>
                 <HyperlinkButton Margin="120,20,0,0" x:Uid="strRecuperarPassw" Click="recuperarPasswClick" Foreground="White"></HyperlinkButton>
             </StackPanel>
-            <TextBlock Name="txbErrorLogin" Foreground="Red"></TextBlock>
+            <TextBlock Name="txbErrorLogin" Foreground="#ff8a80"></TextBlock>
             
         </StackPanel>
 

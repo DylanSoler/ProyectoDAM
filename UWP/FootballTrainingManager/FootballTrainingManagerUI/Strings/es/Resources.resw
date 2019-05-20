@@ -123,8 +123,8 @@
   <data name="strCorreo.Text" xml:space="preserve">
     <value>correo</value>
   </data>
-  <data name="strErrorLogin" xml:space="preserve">
-    <value />
+  <data name="strErrorLoginCorreo" xml:space="preserve">
+    <value>Este correo no está registrado, por favor, registresé.</value>
   </data>
   <data name="strErrorLoginFormat" xml:space="preserve">
     <value>Introduce un correo válido y una contraseña por favor.</value>

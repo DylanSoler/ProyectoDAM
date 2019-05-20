@@ -46,37 +46,35 @@ namespace FootballTrainingManagerUI
         private async void btnEntrarClick(object sender, RoutedEventArgs e)
         {
             clsManejadoraManager manejadora = new clsManejadoraManager();
-            clsManager mng = new clsManager();
-            //List<clsTactica> tacts = new List<clsTactica>();
-            //clsListadoTacticas listados = new clsListadoTacticas();
 
-            /*String formato = "^[^@]+@[^@]+\\.[a-zA-Z]{2,}$";
+            String formato = "^[^@]+@[^@]+\\.[a-zA-Z]{2,}$";
 
             String correo = txbCorreo.Text;
             String psw = pwbPassword.Password;
 
             var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
             String errorFormatResw = resourceLoader.GetString("strErrorLoginFormat");
-            String errorLoginResw = resourceLoader.GetString("strErrorLogin");
+            String errorLoginCorreoResw = resourceLoader.GetString("strErrorLoginCorreo");
 
             if (!String.IsNullOrEmpty(correo) && Regex.IsMatch(correo, formato) && !String.IsNullOrEmpty(psw))
             {
                 this.txbErrorLogin.Text = "";
-                clsManager mng = new clsManager();
+                clsManager mng = null;
                 mng = await manejadora.obtenerManagerPorEmail(correo);
 
                 if (mng != null) {
+                    //TODO comprobar contrasenia
+                    //si es correcta
                     this.Frame.Navigate(typeof(MainPage));
+                    //sino
+                    //mensaje errorPassw
                 } else {
-                    this.txbErrorLogin.Text = errorLoginResw;
+                    this.txbErrorLogin.Text = errorLoginCorreoResw;
                 }
             }
             else
-                this.txbErrorLogin.Text = errorFormatResw;*/
+                this.txbErrorLogin.Text = errorFormatResw;
 
-            mng = await manejadora.obtenerManagerPorIDDAL(5);
-            //tacts = await listados.listadoCompletoTacticasDAL();
-            var a = 1;
         }
     }
 }
