@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -55,6 +57,7 @@ namespace FootballTrainingManagerUI
             var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
             String errorFormatResw = resourceLoader.GetString("strErrorLoginFormat");
             String errorLoginCorreoResw = resourceLoader.GetString("strErrorLoginCorreo");
+            String errorLoginPasswResw = resourceLoader.GetString("strErrorLoginPassw");
 
             if (!String.IsNullOrEmpty(correo) && Regex.IsMatch(correo, formato) && !String.IsNullOrEmpty(psw))
             {
@@ -63,11 +66,13 @@ namespace FootballTrainingManagerUI
                 mng = await manejadora.obtenerManagerPorEmail(correo);
 
                 if (mng != null) {
-                    //TODO comprobar contrasenia
-                    //si es correcta
-                    this.Frame.Navigate(typeof(MainPage));
-                    //sino
-                    //mensaje errorPassw
+
+                    if (comprobarPassword(psw, mng.passwordManager)) {
+                        this.Frame.Navigate(typeof(MainPage));
+                        App.oAppManager = mng;
+                    } else
+                        this.txbErrorLogin.Text = errorLoginPasswResw;
+
                 } else {
                     this.txbErrorLogin.Text = errorLoginCorreoResw;
                 }
@@ -75,6 +80,21 @@ namespace FootballTrainingManagerUI
             else
                 this.txbErrorLogin.Text = errorFormatResw;
 
+        }
+
+        private Boolean comprobarPassword(String passwordToCheck, String correctPassword) {
+
+            Boolean ret = false;
+
+            SHA256 mySHA256 = SHA256.Create();
+            byte[] passwToCheckHash = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(passwordToCheck));
+
+            String check = Convert.ToBase64String(passwToCheckHash);
+
+            if (check.Equals(correctPassword))
+                ret = true;
+
+            return ret;
         }
     }
 }

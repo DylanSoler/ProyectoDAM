@@ -122,7 +122,7 @@ namespace ApiRestFTM_API.Controllers
         
         //POST Manager/{id}
         [HttpPost("{id}")]
-        public IActionResult Post(int id, [FromBody] byte[] passw)
+        public IActionResult Post(int id, [FromBody] String passw)
         {
             String contentType = Request.Headers["Content-Type"].ToString();
             clsManejadoraManager manejadora = new clsManejadoraManager();

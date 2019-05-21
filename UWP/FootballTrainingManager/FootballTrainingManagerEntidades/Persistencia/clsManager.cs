@@ -13,7 +13,7 @@ namespace FootballTrainingManagerEntidades.Persistencia
         public clsManager()
         { }
 
-        public clsManager(int id, String correo, byte[] passwordManager, String nombre, String apellidos, String fotoPerfil, DateTime fechaNacimiento)
+        public clsManager(int id, String correo, String passwordManager, String nombre, String apellidos, String fotoPerfil, DateTime fechaNacimiento)
         {
             this.id = id;
             this.correo = correo;
@@ -29,7 +29,7 @@ namespace FootballTrainingManagerEntidades.Persistencia
         #region Propiedades
         public int id { get; set; }
         public String correo { get; set; }
-        public byte[] passwordManager { get; set; }
+        public String passwordManager { get; set; }
         public String nombre { get; set; }
         public String apellidos { get; set; }
         public String fotoPerfil { get; set; }

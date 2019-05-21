@@ -138,7 +138,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// <param name="idManager">ID manager a actualizar</param>
         /// <param name="passw">nueva password</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<Boolean> actualizarPasswordManagerDAL(int idManager, byte[] passw)
+        public async Task<Boolean> actualizarPasswordManagerDAL(int idManager, String passw)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();

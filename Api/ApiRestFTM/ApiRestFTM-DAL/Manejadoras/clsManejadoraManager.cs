@@ -39,7 +39,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                     oManager = new clsManager();
                     oManager.id = (int)miLector["ID"];
                     oManager.correo = (string)miLector["Correo"];
-                    oManager.passwordManager = (byte[])miLector["PasswordManager"];
+                    oManager.passwordManager = (String)miLector["PasswordManager"];
                     oManager.nombre = (string)miLector["Nombre"];
                     oManager.apellidos = (string)miLector["Apellidos"];
                     oManager.fotoPerfil = (string)miLector["FotoPerfil"];
@@ -107,7 +107,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                 miComando.CommandText = "INSERT INTO Managers (Correo,PasswordManager, Nombre, Apellidos, FotoPerfil, FechaNacimiento) VALUES(@correo,@passwManager,@nombre,@apellidos,@fotoPerfil,@fechaNac)";
 
                 miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
-                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
+                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.VarChar).Value = oManager.passwordManager;
                 miComando.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = oManager.nombre;
                 miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.NVarChar).Value = oManager.apellidos;
                 miComando.Parameters.Add("@fotoPerfil", System.Data.SqlDbType.NVarChar).Value = oManager.fotoPerfil;
@@ -143,7 +143,7 @@ namespace ApiRestFTM_DAL.Manejadoras
 
                 miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = oManager.id;
                 miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
-                //miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = oManager.passwordManager;
+                //miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Varchar).Value = oManager.passwordManager;
                 miComando.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = oManager.nombre;
                 miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.NVarChar).Value = oManager.apellidos;
                 miComando.Parameters.Add("@fotoPerfil", System.Data.SqlDbType.NVarChar).Value = oManager.fotoPerfil;
@@ -166,7 +166,7 @@ namespace ApiRestFTM_DAL.Manejadoras
         /// <param name="idManager">int</param>
         /// <param name="passw">byte[]</param>
         /// <returns>int</returns>
-        public int editarPasswordManager(int idManager, byte[] passw)
+        public int editarPasswordManager(int idManager, String passw)
         {
             SqlConnection miConexion = new SqlConnection();
             SqlCommand miComando = new SqlCommand();
@@ -179,7 +179,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                 miComando.CommandText = "UPDATE Managers SET PasswordManager=@passwManager WHERE ID=@id";
 
                 miComando.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = idManager;
-                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.Binary).Value = passw;
+                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.VarChar).Value = passw;
 
                 miComando.Connection = miConexion;
                 filas = miComando.ExecuteNonQuery();
@@ -216,7 +216,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                     oManager = new clsManager();
                     oManager.id = (int)miLector["ID"];
                     oManager.correo = (string)miLector["Correo"];
-                    oManager.passwordManager = (byte[])miLector["PasswordManager"];
+                    oManager.passwordManager = (String)miLector["PasswordManager"];
                     oManager.nombre = (string)miLector["Nombre"];
                     oManager.apellidos = (string)miLector["Apellidos"];
                     oManager.fotoPerfil = (string)miLector["FotoPerfil"];

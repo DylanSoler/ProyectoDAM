@@ -5,7 +5,7 @@ CREATE TABLE Managers (
 	ID int identity(1,1) NOT NULL
 		CONSTRAINT PK_Manager Primary Key,
 	Correo nvarchar(50) NOT NULL UNIQUE,
-	PassWordManager binary(64) not NULL,
+	PassWordManager varchar(44) NOT NULL,
 	Nombre nvarchar(30) NOT NULL,
 	Apellidos nvarchar(30) NOT NULL,
 	FotoPerfil nvarchar(30) NULL,

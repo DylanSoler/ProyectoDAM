@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballTrainingManagerEntidades.Persistencia;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,9 @@ namespace FootballTrainingManagerUI
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
+
+        //Variables de uso global
+        public static clsManager oAppManager = null;
 
         /// <summary>
         /// Se invoca cuando el usuario final inicia la aplicación normalmente. Se usarán otros puntos

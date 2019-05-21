@@ -129,6 +129,9 @@
   <data name="strErrorLoginFormat" xml:space="preserve">
     <value>Introduce un correo válido y una contraseña por favor.</value>
   </data>
+  <data name="strErrorLoginPassw" xml:space="preserve">
+    <value>Contraseña incorrecta.</value>
+  </data>
   <data name="strPassword.Text" xml:space="preserve">
     <value>contraseña</value>
   </data>
