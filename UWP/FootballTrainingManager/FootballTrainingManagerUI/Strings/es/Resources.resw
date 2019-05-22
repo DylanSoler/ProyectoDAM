@@ -120,6 +120,9 @@
   <data name="strBotonEntrar.Content" xml:space="preserve">
     <value>entrar</value>
   </data>
+  <data name="strBtnReg.Content" xml:space="preserve">
+    <value>registrarse</value>
+  </data>
   <data name="strCorreo.Text" xml:space="preserve">
     <value>correo</value>
   </data>
@@ -138,7 +141,28 @@
   <data name="strRecuperarPassw.Content" xml:space="preserve">
     <value>Recuperar contraseña</value>
   </data>
+  <data name="strRegApell.Text" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="strRegCorreo.Text" xml:space="preserve">
+    <value>Correo</value>
+  </data>
+  <data name="strRegDate.Text" xml:space="preserve">
+    <value>Fecha de nacimiento</value>
+  </data>
   <data name="strRegistrarte.Content" xml:space="preserve">
     <value>Registrarse</value>
+  </data>
+  <data name="strRegistro.Text" xml:space="preserve">
+    <value>Registro</value>
+  </data>
+  <data name="strRegNombre.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="strRegPsw.Text" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="strRegRepPsw.Text" xml:space="preserve">
+    <value>Repita la contraseña</value>
   </data>
 </root>

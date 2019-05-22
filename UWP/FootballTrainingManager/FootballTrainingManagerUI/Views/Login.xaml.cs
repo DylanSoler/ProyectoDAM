@@ -37,7 +37,7 @@ namespace FootballTrainingManagerUI
 
         private void registrarClick(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(Registro));
         }
 
         private void recuperarPasswClick(object sender, RoutedEventArgs e)
@@ -96,5 +96,14 @@ namespace FootballTrainingManagerUI
 
             return ret;
         }
+
+        private void PwbPassword_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                btnEntrarClick(null, null);
+            }
+        }
+
     }
 }

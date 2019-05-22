@@ -23,7 +23,7 @@
             <TextBlock x:Uid="strCorreo" Foreground="White"></TextBlock>
             <TextBox Name="txbCorreo" MinWidth="300" IsSpellCheckEnabled="False"></TextBox>
             <TextBlock x:Uid="strPassword" Foreground="White"></TextBlock>
-            <PasswordBox Name="pwbPassword" MinWidth="300"></PasswordBox>
+            <PasswordBox Name="pwbPassword" KeyDown="PwbPassword_KeyDown" MinWidth="300"></PasswordBox>
             <Button Foreground="#3F51B5" Click="btnEntrarClick" FontWeight="Bold" CornerRadius="10" Width="140" Height="32" x:Uid="strBotonEntrar" Background="#C5CAE9" HorizontalAlignment="Center" Margin="0,20,0,0"></Button>
             <StackPanel Orientation="Horizontal">
                 <HyperlinkButton Margin="0,20,0,0" x:Uid="strRegistrarte" Click="registrarClick" Foreground="White"></HyperlinkButton>
