@@ -165,4 +165,52 @@
   <data name="strRegRepPsw.Text" xml:space="preserve">
     <value>Repita la contraseña</value>
   </data>
+  <data name="strRegConfirmError" xml:space="preserve">
+    <value>Ha ocurrido un error en el proceso de registro</value>
+  </data>
+  <data name="strRegConfirmOk" xml:space="preserve">
+    <value>Registrado con exito</value>
+  </data>
+  <data name="strRegFormError" xml:space="preserve">
+    <value>Por favor, no deje campos vacíos y escribalos correctamente</value>
+  </data>
+  <data name="strChangePassw.Text" xml:space="preserve">
+    <value>Recuperar contraseña</value>
+  </data>
+  <data name="strBotonChangePsw.Content" xml:space="preserve">
+    <value>cambiar</value>
+  </data>
+  <data name="strBotonComprobarCodigo.Content" xml:space="preserve">
+    <value>revisar</value>
+  </data>
+  <data name="strBotonEnviarCodigo.Content" xml:space="preserve">
+    <value>enviar código</value>
+  </data>
+  <data name="strCheckCode.Text" xml:space="preserve">
+    <value>Inserta el código</value>
+  </data>
+  <data name="strErrorSameCode" xml:space="preserve">
+    <value>El código introducido no es correcto.</value>
+  </data>
+  <data name="strErrorSamePsw" xml:space="preserve">
+    <value>Las contraseñas no coinciden.</value>
+  </data>
+  <data name="strInsertCorreo.Text" xml:space="preserve">
+    <value>Inserta tu correo</value>
+  </data>
+  <data name="strNewPsw.Text" xml:space="preserve">
+    <value>Nueva contraseña</value>
+  </data>
+  <data name="strRestorePswNotOk" xml:space="preserve">
+    <value>Ha ocurrido un error. Vuelva al login e intente lo más tarde.</value>
+  </data>
+  <data name="strRestorePswOk" xml:space="preserve">
+    <value>Contraseña reestablecida correctamente. Vuelva al Login, para entrar en la aplicación.</value>
+  </data>
+  <data name="strSendCode404" xml:space="preserve">
+    <value>No existe ninguna cuenta registrada con el correo especificado.</value>
+  </data>
+  <data name="strSendCodeFormat" xml:space="preserve">
+    <value>Por favor, escriba un correo válido.</value>
+  </data>
 </root>

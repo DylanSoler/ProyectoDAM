@@ -42,7 +42,7 @@ namespace FootballTrainingManagerUI
 
         private void recuperarPasswClick(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(CambiarPassw));
         }
 
         private async void btnEntrarClick(object sender, RoutedEventArgs e)

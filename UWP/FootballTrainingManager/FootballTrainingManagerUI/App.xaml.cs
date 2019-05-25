@@ -1,4 +1,5 @@
-﻿using FootballTrainingManagerEntidades.Persistencia;
+﻿using FootballTrainingManagerDAL.Listados;
+using FootballTrainingManagerEntidades.Persistencia;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,6 +37,15 @@ namespace FootballTrainingManagerUI
 
         //Variables de uso global
         public static clsManager oAppManager = null;
+        public static List<clsTactica> oTacticas = null;
+
+        //Carga inicial
+        public static async void obtenerTacticas() {
+
+            clsListadoTacticas gestora = new clsListadoTacticas();
+            oTacticas = await gestora.listadoCompletoTacticasDAL();
+        }
+
 
         /// <summary>
         /// Se invoca cuando el usuario final inicia la aplicación normalmente. Se usarán otros puntos

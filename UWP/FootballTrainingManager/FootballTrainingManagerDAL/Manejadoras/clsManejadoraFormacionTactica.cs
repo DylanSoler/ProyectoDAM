@@ -105,6 +105,6 @@ namespace FootballTrainingManagerDAL.Manejadoras
 
             return ret;
         }
-        
+
     }
 }

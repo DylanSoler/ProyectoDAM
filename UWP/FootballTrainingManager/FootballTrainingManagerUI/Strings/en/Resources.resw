@@ -165,4 +165,52 @@
   <data name="strRegRepPsw.Text" xml:space="preserve">
     <value>Repeat Password</value>
   </data>
+  <data name="strRegConfirmError" xml:space="preserve">
+    <value>An error has occurred in the registration process</value>
+  </data>
+  <data name="strRegConfirmOk" xml:space="preserve">
+    <value>Successfully registered</value>
+  </data>
+  <data name="strRegFormError" xml:space="preserve">
+    <value>Please, insert all the data correctly</value>
+  </data>
+  <data name="strChangePassw.Text" xml:space="preserve">
+    <value>Restore password</value>
+  </data>
+  <data name="strBotonChangePsw.Content" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="strBotonComprobarCodigo.Content" xml:space="preserve">
+    <value>check</value>
+  </data>
+  <data name="strBotonEnviarCodigo.Content" xml:space="preserve">
+    <value>send code</value>
+  </data>
+  <data name="strCheckCode.Text" xml:space="preserve">
+    <value>Insert code</value>
+  </data>
+  <data name="strErrorSameCode" xml:space="preserve">
+    <value>Incorrect code.</value>
+  </data>
+  <data name="strErrorSamePsw" xml:space="preserve">
+    <value>the entered passwords don't match</value>
+  </data>
+  <data name="strInsertCorreo.Text" xml:space="preserve">
+    <value>Insert email</value>
+  </data>
+  <data name="strNewPsw.Text" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="strRestorePswNotOk" xml:space="preserve">
+    <value>An error was ocurred. Please, return to login and try later.</value>
+  </data>
+  <data name="strRestorePswOk" xml:space="preserve">
+    <value>Password reset correctly. Return to Login.</value>
+  </data>
+  <data name="strSendCode404" xml:space="preserve">
+    <value>This email is not registered.</value>
+  </data>
+  <data name="strSendCodeFormat" xml:space="preserve">
+    <value>Email is not valid.</value>
+  </data>
 </root>

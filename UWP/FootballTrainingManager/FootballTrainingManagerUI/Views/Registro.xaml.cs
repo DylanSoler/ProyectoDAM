@@ -1,8 +1,14 @@
-﻿using System;
+﻿using FootballTrainingManagerDAL.Manejadoras;
+using FootballTrainingManagerEntidades.Persistencia;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,13 +33,60 @@ namespace FootballTrainingManagerUI.Views
             this.InitializeComponent();
         }
 
-        private void btnRegistrar(object sender, RoutedEventArgs e)
+        private async void btnRegistrar(object sender, RoutedEventArgs e)
         {
-            //Revisar
-            //Si todo ok
-                //registro
-            //sino
-                //informar
+            var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
+            String strRegConfirmOk = resourceLoader.GetString("strRegConfirmOk");
+            String strRegConfirmError = resourceLoader.GetString("strRegConfirmError");
+            String strRegFormError = resourceLoader.GetString("strRegFormError");
+
+            if (formCorrecto()){
+
+                DateTimeOffset dtOffset = dpDate.Date.GetValueOrDefault();
+                DateTime date = dtOffset.UtcDateTime;
+
+                SHA256 mySHA256 = SHA256.Create();
+                byte[] psw = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(pwbPassword.Password));
+                String password = Convert.ToBase64String(psw);
+
+                clsManejadoraManager manejadora = new clsManejadoraManager();
+                clsManager oMng = new clsManager(0, txbCorreo.Text, password, txbNombre.Text, txbApellidos.Text, "../Assets/avatarDefault.png", date);
+
+                bool ok = await manejadora.insertarManagerDAL(oMng);
+
+                if (ok)
+                {
+                    App.oAppManager = oMng;
+                    txbNotifyUser.Text = strRegConfirmOk;
+                    txbNotifyUser.Foreground = new SolidColorBrush(Windows.UI.Colors.Green);
+                    System.Threading.Thread.Sleep(1000);
+                    this.Frame.Navigate(typeof(MainPage));
+                }
+                else
+                    txbNotifyUser.Text = strRegConfirmError;
+
+            } else {
+                txbNotifyUser.Text = strRegFormError;
+            }
+
         }
+
+        private bool formCorrecto() {
+
+            bool ret = false;
+            String formato = "^[^@]+@[^@]+\\.[a-zA-Z]{2,}$";
+
+            if (!String.IsNullOrEmpty(txbNombre.Text) && !String.IsNullOrEmpty(txbApellidos.Text) && Regex.IsMatch(txbCorreo.Text, formato) 
+                && dpDate.Date!=null && pwbPassword.Password!=null && pwbRepeatPassword!=null && pwbPassword.Password.Equals(pwbRepeatPassword.Password))
+                ret = true;
+
+            return ret;
+        }
+
+        private void btnVolverClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Login));
+        }
+
     }
 }
