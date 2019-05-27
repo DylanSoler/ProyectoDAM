@@ -70,6 +70,7 @@ namespace FootballTrainingManagerUI
                     if (comprobarPassword(psw, mng.passwordManager)) {
                         this.Frame.Navigate(typeof(MainPage));
                         App.oAppManager = mng;
+                        App.obtenerTacticas();
                     } else
                         this.txbErrorLogin.Text = errorLoginPasswResw;
 

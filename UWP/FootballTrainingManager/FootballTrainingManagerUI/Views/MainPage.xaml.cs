@@ -26,5 +26,48 @@ namespace FootballTrainingManagerUI.Views
         {
             this.InitializeComponent();
         }
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            spV.IsPaneOpen = !spV.IsPaneOpen;
+        }
+
+        private void LBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (perfil.IsSelected)
+            {
+                //frmPrincipal.Navigate(typeof(MainPage));
+            }
+            else if (formTact.IsSelected)
+            {
+                //frmPrincipal.Navigate(typeof());
+            }
+            else if (entreno.IsSelected)
+            {
+                //frmPrincipal.Navigate(typeof());
+            }
+            else if (pizarra.IsSelected)
+            {
+                //frmPrincipal.Navigate(typeof());
+            }
+            else if (notas.IsSelected)
+            {
+                //frmPrincipal.Navigate(typeof());
+            }
+            else if (ajustes.IsSelected)
+            {
+                //frmPrincipal.Navigate(typeof());
+            }
+            else
+            {
+                logout();
+            }
+
+        }
+
+        private void logout() {
+            App.oAppManager = null;
+            this.Frame.Navigate(typeof(Login));
+        }
     }
 }

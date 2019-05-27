@@ -23,75 +23,63 @@
                    OpenPaneLength="200"
                    CompactPaneLength="56"
                    HorizontalAlignment="Left"
-                   RelativePanel.Below="HamburgerButton">
-            
+                   RelativePanel.Below="HamburgerButton"
+                   >
+
             <SplitView.Pane>
+
                 <ListBox SelectionMode="Single"
-                         Name="lBoxSP"
-                         SelectionChanged="lBoxSelectionChanged"
+                         Name="lBoxSelectionChanged"
+                         SelectionChanged="LBoxSelectionChanged"
                          Background="#C5CAE9"
                          Foreground="#3F51B5">
 
                     <ListBoxItem Name="perfil">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       FontSize="36"
-                                       Text="&#xE8A1;"/>
-                            <TextBlock Text="Perfil" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                            <Image Source="../Assets/avatar.png" Width="40" Height="40"/>
+                            <TextBlock x:Uid="strPerfil" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="formTact">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       FontSize="36"
-                                       Text="&#xE70F;"/>
-                            <TextBlock Text="Formación Táctica" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                            <Image Source="../Assets/tactica.png" Width="40" Height="40"/>
+                            <TextBlock x:Uid="strForTact" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="entreno">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       FontSize="36"
-                                       Text="&#xE7C5;"/>
-                            <TextBlock Text="Entrenamiento" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                            <Image Source="../Assets/entreno.png" Width="40" Height="40"/>
+                            <TextBlock x:Uid="strEnt" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="pizarra">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       FontSize="36"
-                                       Text="&#xE8A1;"/>
-                            <TextBlock Text="Pizarra Táctica" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                            <Image Source="../Assets/pizarra.png" Width="40" Height="40"/>
+                            <TextBlock x:Uid="strPizTac" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="notas">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       FontSize="36"
-                                       Text="&#xE70F;"/>
-                            <TextBlock Text="Notas" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                            <Image Source="../Assets/notas.png" Width="40" Height="40"/>
+                            <TextBlock x:Uid="strNotas" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="ajustes">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       FontSize="36"
-                                       Text="&#xE7C5;"/>
-                            <TextBlock Text="Ajustes" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                            <Image Source="../Assets/ajustes.png" Width="40" Height="40"/>
+                            <TextBlock x:Uid="strAjustes" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="salir">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       FontSize="36"
-                                       Text="&#xE7C5;"/>
-                            <TextBlock Text="Desconectar" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                            <Image Source="../Assets/logout.png" Width="30" Height="30"/>
+                            <TextBlock x:Uid="strLogout" Margin="20,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
@@ -103,6 +91,37 @@
             </SplitView.Content>
 
         </SplitView>
+        <Grid Name="gridPrincipal" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="8*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="12*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1" RelativePanel.AlignTopWithPanel="True" Margin="0,20,0,0">
+                <TextBlock x:Uid="strPerfil" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="56,20,0,0" HorizontalAlignment="Center"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+
+                <StackPanel Name="fotoPerfil">
+                    
+                    
+                    
+                </StackPanel>
+
+                <StackPanel Name="infoPerfil">
+                    
+                </StackPanel>
+                
+            </StackPanel>
+            
+        </Grid>
 
     </RelativePanel>
 </Page>

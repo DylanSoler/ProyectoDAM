@@ -213,4 +213,28 @@
   <data name="strSendCodeFormat" xml:space="preserve">
     <value>Email is not valid.</value>
   </data>
+  <data name="strAjustes.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="strEnt.Text" xml:space="preserve">
+    <value>Training</value>
+  </data>
+  <data name="strForTact.Text" xml:space="preserve">
+    <value>Tactical scheme</value>
+  </data>
+  <data name="strLogout.Text" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="strNoExit.Text" xml:space="preserve">
+    <value>(Do not close the application until completing the process)</value>
+  </data>
+  <data name="strNotas.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="strPerfil.Text" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="strPizTac.Text" xml:space="preserve">
+    <value>Tactical blackboard</value>
+  </data>
 </root>

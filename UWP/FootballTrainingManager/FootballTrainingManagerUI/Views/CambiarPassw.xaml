@@ -25,6 +25,8 @@
                         <Setter Target="txbChangePasswTittle.FontSize" Value="22"/>
                         <Setter Target="txbConfirmacionesUsuario.FontSize" Value="14"/>
                         <Setter Target="txbConfirmacionesUsuario.Width" Value="222"/>
+                        <Setter Target="txbNoExit.FontSize" Value="12"/>
+                        <Setter Target="txbNoExit.Width" Value="222"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -52,6 +54,7 @@
         <ScrollViewer Grid.Column="1" Grid.Row="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Margin="0,40,0,0">
 
             <StackPanel Name="stkSendAndCheckCode">
+                <TextBlock Name="txbNoExit" x:Uid="strNoExit" Foreground="White" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,16,0,6"></TextBlock>
                 <TextBlock Name="txblInsertEmail" Visibility="Visible" x:Uid="strInsertCorreo" Foreground="White" FontSize="20"  HorizontalAlignment="Center" MinWidth="160" Height="32" Margin="0,16,0,0"></TextBlock>
                 <TextBox Name="txbCorreo" Visibility="Visible" HorizontalAlignment="Center" Width="140" Height="32" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
                 <Button Name="btnSendCod" x:Uid="strBotonEnviarCodigo" Visibility="Visible" Click="btnSendCode" HorizontalAlignment="Center" Margin="0,18,0,0" Foreground="#3F51B5" FontWeight="Bold" CornerRadius="10" Width="140" Height="32" Background="#C5CAE9"></Button>

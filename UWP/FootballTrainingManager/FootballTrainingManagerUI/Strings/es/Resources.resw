@@ -213,4 +213,28 @@
   <data name="strSendCodeFormat" xml:space="preserve">
     <value>Por favor, escriba un correo válido.</value>
   </data>
+  <data name="strAjustes.Text" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+  <data name="strEnt.Text" xml:space="preserve">
+    <value>Entrenos</value>
+  </data>
+  <data name="strForTact.Text" xml:space="preserve">
+    <value>Formación táctica</value>
+  </data>
+  <data name="strLogout.Text" xml:space="preserve">
+    <value>Desconectar</value>
+  </data>
+  <data name="strNoExit.Text" xml:space="preserve">
+    <value>(No cierres la aplicación hasta completar el proceso)</value>
+  </data>
+  <data name="strNotas.Text" xml:space="preserve">
+    <value>Notas</value>
+  </data>
+  <data name="strPerfil.Text" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="strPizTac.Text" xml:space="preserve">
+    <value>Pizarra táctica</value>
+  </data>
 </root>

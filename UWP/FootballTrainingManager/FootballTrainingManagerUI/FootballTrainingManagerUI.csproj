@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\clsVmMainPage.cs" />
     <Compile Include="Views\CambiarPassw.xaml.cs">
       <DependentUpon>CambiarPassw.xaml</DependentUpon>
     </Compile>
@@ -142,8 +143,16 @@
     <PRIResource Include="Strings\es\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ajustes.png" />
+    <Content Include="Assets\avatar.png" />
     <Content Include="Assets\avatarDefault.png" />
+    <Content Include="Assets\entreno.png" />
     <Content Include="Assets\logo.png" />
+    <Content Include="Assets\logout.png" />
+    <Content Include="Assets\notas.png" />
+    <Content Include="Assets\pizarra.png" />
+    <Content Include="Assets\tactica.png" />
+    <Content Include="Assets\tactica2.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
