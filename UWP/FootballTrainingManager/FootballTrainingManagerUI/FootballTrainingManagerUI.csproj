@@ -119,7 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\clsVMBase.cs" />
     <Compile Include="ViewModels\clsVmMainPage.cs" />
+    <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="Views\CambiarPassw.xaml.cs">
       <DependentUpon>CambiarPassw.xaml</DependentUpon>
     </Compile>

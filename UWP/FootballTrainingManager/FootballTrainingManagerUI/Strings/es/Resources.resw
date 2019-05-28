@@ -237,4 +237,10 @@
   <data name="strPizTac.Text" xml:space="preserve">
     <value>Pizarra táctica</value>
   </data>
+  <data name="strMPdatos.Text" xml:space="preserve">
+    <value>Datos personales</value>
+  </data>
+  <data name="strMpEdad.Text" xml:space="preserve">
+    <value>Edad</value>
+  </data>
 </root>

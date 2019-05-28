@@ -47,7 +47,7 @@ namespace FootballTrainingManagerUI
 
         private async void btnEntrarClick(object sender, RoutedEventArgs e)
         {
-            clsManejadoraManager manejadora = new clsManejadoraManager();
+            /*clsManejadoraManager manejadora = new clsManejadoraManager();
 
             String formato = "^[^@]+@[^@]+\\.[a-zA-Z]{2,}$";
 
@@ -68,9 +68,9 @@ namespace FootballTrainingManagerUI
                 if (mng != null) {
 
                     if (comprobarPassword(psw, mng.passwordManager)) {
-                        this.Frame.Navigate(typeof(MainPage));
                         App.oAppManager = mng;
                         App.obtenerTacticas();
+                        this.Frame.Navigate(typeof(MainPage));                       
                     } else
                         this.txbErrorLogin.Text = errorLoginPasswResw;
 
@@ -79,8 +79,10 @@ namespace FootballTrainingManagerUI
                 }
             }
             else
-                this.txbErrorLogin.Text = errorFormatResw;
-
+                this.txbErrorLogin.Text = errorFormatResw;*/
+            clsManager mng = new clsManager(1, "dylan@gmail.com", "dylan", "Dylan", "Soler", "/Assets/avatarDefault.png", new DateTime());
+            App.oAppManager = mng;
+            this.Frame.Navigate(typeof(MainPage));
         }
 
         private Boolean comprobarPassword(String passwordToCheck, String correctPassword) {

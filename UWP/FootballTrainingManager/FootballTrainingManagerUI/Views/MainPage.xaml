@@ -5,10 +5,67 @@
     xmlns:local="using:FootballTrainingManagerUI.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FootballTrainingManagerUI.ViewModels"
     mc:Ignorable="d"
     Background="#3F51B5">
 
+    <Page.DataContext>
+        <vm:clsVmMainPage></vm:clsVmMainPage>
+    </Page.DataContext>
+
     <RelativePanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="stkPerfilSV.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbPerfilSV.FontSize" Value="10"/>
+                        <Setter Target="txbPerfilSV.MaxWidth" Value="54"/>
+                        <Setter Target="txbPerfilSV.Margin" Value="0,0,0,0"/>
+                        <Setter Target="stkFormTactSV.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbFormTactSV.FontSize" Value="10"/>
+                        <Setter Target="txbFormTactSV.MaxWidth" Value="58"/>
+                        <Setter Target="txbFormTactSV.Margin" Value="0,0,0,0"/>
+                        <Setter Target="stkEntrenoSV.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbEntrenoSV.FontSize" Value="10"/>
+                        <Setter Target="txbEntrenoSV.MaxWidth" Value="54"/>
+                        <Setter Target="txbEntrenoSV.Margin" Value="0,0,0,0"/>
+                        <Setter Target="stkPizarraSV.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbPizSV.FontSize" Value="10"/>
+                        <Setter Target="txbPizSV.MaxWidth" Value="54"/>
+                        <Setter Target="txbPizSV.Margin" Value="0,0,0,0"/>
+                        <Setter Target="stkNotasSV.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbNotasSV.FontSize" Value="10"/>
+                        <Setter Target="txbNotasSV.MaxWidth" Value="54"/>
+                        <Setter Target="txbNotasSV.Margin" Value="0,0,0,0"/>
+                        <Setter Target="stkAjustesSV.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbAjustesSV.FontSize" Value="10"/>
+                        <Setter Target="txbAjustesSV.MaxWidth" Value="54"/>
+                        <Setter Target="txbAjustesSV.Margin" Value="0,0,0,0"/>
+                        <Setter Target="stkSalirSV.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbSalirSV.FontSize" Value="9"/>
+                        <Setter Target="txbSalirSV.MaxWidth" Value="54"/>
+                        <Setter Target="txbSalirSV.Margin" Value="0,0,0,0"/>
+                        <Setter Target="spV.OpenPaneLength" Value="64"/>
+                        <Setter Target="spV.CompactPaneLength" Value="64"/>
+                        <Setter Target="HamburgerButton.Width" Value="64"/>
+                        <Setter Target="stkPrincipal.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbDatosPersonales.FontSize" Value="30"/>
+                        <Setter Target="infoPerfil.Margin" Value="20,0,0,0"/>
+                        <Setter Target="txbDatosPersonales.HorizontalAlignment" Value="Left"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
         <Button Name="HamburgerButton"
                 FontFamily="Segoe MDL2 Assets"
@@ -16,7 +73,8 @@
                 FontSize="36"
                 Click="HamburgerButton_Click"
                 Background="#C5CAE9"
-                Foreground="#3F51B5"/>
+                Foreground="#3F51B5"
+                />
 
         <SplitView Name="spV" RelativePanel.AlignBottomWithPanel="True" 
                    DisplayMode="CompactOverlay"
@@ -32,54 +90,55 @@
                          Name="lBoxSelectionChanged"
                          SelectionChanged="LBoxSelectionChanged"
                          Background="#C5CAE9"
-                         Foreground="#3F51B5">
+                         Foreground="#3F51B5"
+                         >
 
                     <ListBoxItem Name="perfil">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../Assets/avatar.png" Width="40" Height="40"/>
-                            <TextBlock x:Uid="strPerfil" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <StackPanel Name="stkPerfilSV" Orientation="Horizontal">
+                            <Image Source="../Assets/avatar.png" HorizontalAlignment="Left" Width="40" Height="40"/>
+                            <TextBlock Name="txbPerfilSV" HorizontalAlignment="Left" x:Uid="strPerfil" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="formTact">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../Assets/tactica.png" Width="40" Height="40"/>
-                            <TextBlock x:Uid="strForTact" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <StackPanel Name="stkFormTactSV" Orientation="Horizontal">
+                            <Image Source="../Assets/tactica.png" HorizontalAlignment="Left" Width="40" Height="40"/>
+                            <TextBlock Name="txbFormTactSV" HorizontalAlignment="Left" TextWrapping="Wrap" x:Uid="strForTact" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="entreno">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../Assets/entreno.png" Width="40" Height="40"/>
-                            <TextBlock x:Uid="strEnt" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <StackPanel Name="stkEntrenoSV" Orientation="Horizontal">
+                            <Image Source="../Assets/entreno.png" HorizontalAlignment="Left" Width="40" Height="40"/>
+                            <TextBlock Name="txbEntrenoSV" HorizontalAlignment="Left" TextWrapping="Wrap" x:Uid="strEnt" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="pizarra">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../Assets/pizarra.png" Width="40" Height="40"/>
-                            <TextBlock x:Uid="strPizTac" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <StackPanel Name="stkPizarraSV" Orientation="Horizontal">
+                            <Image Source="../Assets/pizarra.png" HorizontalAlignment="Left" Width="40" Height="40"/>
+                            <TextBlock Name="txbPizSV" HorizontalAlignment="Left" TextWrapping="Wrap" x:Uid="strPizTac" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="notas">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../Assets/notas.png" Width="40" Height="40"/>
-                            <TextBlock x:Uid="strNotas" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <StackPanel Name="stkNotasSV" Orientation="Horizontal">
+                            <Image Source="../Assets/notas.png" HorizontalAlignment="Left" Width="40" Height="40"/>
+                            <TextBlock Name="txbNotasSV" HorizontalAlignment="Left" TextWrapping="Wrap" x:Uid="strNotas" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="ajustes">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../Assets/ajustes.png" Width="40" Height="40"/>
-                            <TextBlock x:Uid="strAjustes" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <StackPanel Name="stkAjustesSV" Orientation="Horizontal">
+                            <Image Source="../Assets/ajustes.png" HorizontalAlignment="Left" Width="40" Height="40"/>
+                            <TextBlock Name="txbAjustesSV" HorizontalAlignment="Left" TextWrapping="Wrap" x:Uid="strAjustes" Margin="10,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="salir">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../Assets/logout.png" Width="30" Height="30"/>
-                            <TextBlock x:Uid="strLogout" Margin="20,0,0,0" VerticalAlignment="Center"/>
+                        <StackPanel Name="stkSalirSV" Orientation="Horizontal">
+                            <Image Source="../Assets/logout.png" HorizontalAlignment="Left" Width="30" Height="30"/>
+                            <TextBlock Name="txbSalirSV" HorizontalAlignment="Left" TextWrapping="Wrap" x:Uid="strLogout" Margin="20,0,0,0" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
@@ -91,34 +150,49 @@
             </SplitView.Content>
 
         </SplitView>
+
         <Grid Name="gridPrincipal" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="8*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="12*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1" RelativePanel.AlignTopWithPanel="True" Margin="0,20,0,0">
-                <TextBlock x:Uid="strPerfil" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="56,20,0,0" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock x:Uid="strPerfil" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="55,20,0,0" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <StackPanel Name="stkPrincipal" Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
 
                 <StackPanel Name="fotoPerfil">
-                    
-                    
-                    
+
+                    <Border Margin="20,20,20,20" BorderBrush="#C5CAE9" BorderThickness="2">
+                    <Image Source="{Binding imagenPerfil}" Width="200" Height="200"></Image>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="btnEditar" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xE70F;" HorizontalAlignment="Center" Margin="0,0,16,0"></Button>
+                        <Button Name="btnQuitar" Background="#C5CAE9" Foreground="Red" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" HorizontalAlignment="Center"></Button>
+                    </StackPanel>
+                
                 </StackPanel>
 
-                <StackPanel Name="infoPerfil">
-                    
+                <StackPanel Name="infoPerfil" Margin="140,0,0,0">
+                    <TextBlock Name="txbDatosPersonales" x:Uid="strMPdatos" Foreground="White" FontSize="40" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock x:Uid="strRegNombre" Foreground="White" FontSize="20" Margin="10,10,0,0"></TextBlock>
+                    <TextBox Name="txbNombre" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
+                    <TextBlock x:Uid="strRegApell" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
+                    <TextBox Name="txbApellidos" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
+                    <TextBlock x:Uid="strRegCorreo" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
+                    <TextBox Name="txbCorreo" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
+                    <TextBlock x:Uid="strMpEdad" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
+                    <TextBox Name="txbEdad" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
                 </StackPanel>
-                
+
             </StackPanel>
             
         </Grid>

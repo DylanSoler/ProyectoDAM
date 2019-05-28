@@ -237,4 +237,10 @@
   <data name="strPizTac.Text" xml:space="preserve">
     <value>Tactical blackboard</value>
   </data>
+  <data name="strMPdatos.Text" xml:space="preserve">
+    <value>Personal data</value>
+  </data>
+  <data name="strMpEdad.Text" xml:space="preserve">
+    <value>Age</value>
+  </data>
 </root>
