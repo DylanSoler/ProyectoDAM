@@ -80,7 +80,7 @@ namespace FootballTrainingManagerUI
             }
             else
                 this.txbErrorLogin.Text = errorFormatResw;*/
-            clsManager mng = new clsManager(1, "dylan@gmail.com", "dylan", "Dylan", "Soler", "/Assets/avatarDefault.png", new DateTime());
+            clsManager mng = new clsManager(14, "dylan@gmail.com", "wOeuyBoaGU6fVPayl/ZUQEEYjHQa6PVcITO1xRCn3B0=", "Dylan", "Soler", "/Assets/avatarDefault.png", new DateTime(1993,4,12));
             App.oAppManager = mng;
             this.Frame.Navigate(typeof(MainPage));
         }

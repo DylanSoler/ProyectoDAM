@@ -90,6 +90,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             try{
                 datos = JsonConvert.SerializeObject(manager);
                 contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
+                contenido.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 response = await client.PutAsync(miUri, contenido);
             } catch (Exception ex) {
                 

@@ -243,4 +243,10 @@
   <data name="strMpEdad.Text" xml:space="preserve">
     <value>Edad</value>
   </data>
+  <data name="strMPChangePsw.Content" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="strNotificarPswError.Text" xml:space="preserve">
+    <value>Contraseña incorrecta</value>
+  </data>
 </root>
