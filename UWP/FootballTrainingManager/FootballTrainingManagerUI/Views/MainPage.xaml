@@ -184,13 +184,13 @@
                 <StackPanel Name="infoPerfil" Margin="140,0,0,0">
                     <TextBlock Name="txbDatosPersonales" x:Uid="strMPdatos" Foreground="White" FontSize="40" HorizontalAlignment="Center"></TextBlock>
                     <TextBlock x:Uid="strRegNombre" Foreground="White" FontSize="20" Margin="10,10,0,0"></TextBlock>
-                    <TextBox Name="txbNombre" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
+                    <TextBox Name="txbNombre" Text="{Binding Path=manager.nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged} HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
                     <TextBlock x:Uid="strRegApell" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                    <TextBox Name="txbApellidos" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
+                    <TextBox Name="txbApellidos" Text="{Binding Path=manager.apellidos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged} HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
                     <TextBlock x:Uid="strRegCorreo" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                    <TextBox Name="txbCorreo" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
+                    <TextBox Name="txbCorreo" Text="{Binding Path=manager.correo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged} HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
                     <TextBlock x:Uid="strMpEdad" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                    <TextBox Name="txbEdad" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
+                    <TextBox Name="txbEdad" Text="{Binding Path=edad} HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
                 </StackPanel>
 
             </StackPanel>
