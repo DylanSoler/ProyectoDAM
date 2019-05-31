@@ -37,6 +37,8 @@ namespace FootballTrainingManagerUI.Views
             if (perfil.IsSelected)
             {
                 //frmPrincipal.Navigate(typeof(MainPage));
+                if(gridPrincipal.Visibility==Visibility.Collapsed)
+                    gridPrincipal.Visibility = Visibility.Visible;
             }
             else if (formTact.IsSelected)
             {
@@ -56,7 +58,8 @@ namespace FootballTrainingManagerUI.Views
             }
             else if (ajustes.IsSelected)
             {
-                //frmPrincipal.Navigate(typeof());
+                gridPrincipal.Visibility = Visibility.Collapsed;
+                frmPrincipal.Navigate(typeof(Ajustes));
             }
             else
             {

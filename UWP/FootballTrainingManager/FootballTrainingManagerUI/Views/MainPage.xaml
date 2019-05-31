@@ -67,7 +67,9 @@
                         <Setter Target="txbDatosPersonales.FontSize" Value="30"/>
                         <Setter Target="stkInfoPerfil.Margin" Value="20,0,0,0"/>
                         <Setter Target="txbDatosPersonales.HorizontalAlignment" Value="Left"/>
-                        <Setter Target="stkChangePassword.Margin" Value="20,10,0,0"></Setter>
+                        <Setter Target="stkChangePassword.Margin" Value="20,10,0,0"/>
+                        <Setter Target="txbNotificarPswError.Width" Value="200"/>
+                        <Setter Target="txbNotificarNewPswError.Width" Value="200"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -181,10 +183,10 @@
                 <StackPanel Name="fotoPerfil">
 
                     <Border Margin="20,20,20,20" BorderBrush="#C5CAE9" BorderThickness="2">
-                    <Image Source="{Binding imagenPerfil}" Width="200" Height="200"></Image>
+                    <Image Name="imgPerfil" Source="{Binding imagenPerfil, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="200"></Image>
                     </Border>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Name="btnEditar" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xE70F;" HorizontalAlignment="Center" Margin="0,0,16,0"></Button>
+                            <Button Name="btnEditar" Command="{Binding editarFotoCommand}" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xE70F;" HorizontalAlignment="Center" Margin="0,0,16,0"></Button>
                             <Button Name="btnQuitar" Background="#C5CAE9" Foreground="Red" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" HorizontalAlignment="Center"></Button>
                         </StackPanel>
                     </StackPanel>
@@ -209,15 +211,18 @@
                 </StackPanel>
 
                 <StackPanel Name="stkChangePassword" Margin="40,10,0,0">
-                    <HyperlinkButton Name="hlbCambiarPassword" FontSize="20" Foreground="#C5CAE9" Margin="0,60,0,10" x:Uid="strMPChangePsw"></HyperlinkButton>
-                    <PasswordBox Name="pwbActualPassword" Visibility="Visible" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,0" HorizontalAlignment="Center"></PasswordBox>
-                    <Button Name="btnCheckPassw" Visibility="Visible" Background="#C5CAE9" Foreground="#3F51B5" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE73E;" Margin="0,8,0,20" Width="32" Height="30"></Button>
-                    <TextBlock Name="txbNotificarDatP" x:Uid="strNotificarPswError" Foreground="#ff8a80" FontSize="12" TextWrapping="Wrap" Margin="0,10,0,0"></TextBlock>
-                    <PasswordBox Name="pwbNewPassword" Visibility="Visible" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,0" HorizontalAlignment="Center"></PasswordBox>
-                    <PasswordBox Name="pwbRNewPassword" Visibility="Visible" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,8" HorizontalAlignment="Center"></PasswordBox>
+                    <HyperlinkButton Name="hlbCambiarPassword" Command="{Binding cambiarPswLinkCommand}" FontSize="20" Foreground="#C5CAE9" Margin="0,60,0,10" x:Uid="strMPChangePsw"></HyperlinkButton>
+                    <TextBlock Name="txbActualPsw" x:Uid="strMPActualPsw" Visibility="{Binding passwActualVisibility}" FontSize="20" Foreground="White" Margin="0,10,0,0"></TextBlock>
+                    <PasswordBox Name="pwbActualPassword" Visibility="{Binding passwActualVisibility}" Password="{Binding pswActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,0" HorizontalAlignment="Center"></PasswordBox>
+                    <Button Command="{Binding checkPasswordCommand}" Name="btnCheckPassw" Visibility="{Binding passwActualVisibility}" Background="#C5CAE9" Foreground="#3F51B5" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE73E;" Margin="0,8,0,20" Width="32" Height="30"></Button>
+                    <TextBlock Name="txbNotificarPswError" Visibility="{Binding txbNotifyErrorPswVisibility}" x:Uid="strNotificarPswError" Foreground="#ff8a80" FontSize="12" TextWrapping="Wrap" Margin="0,10,0,0"></TextBlock>
+                    <TextBlock Name="txbNewPsw" x:Uid="strMPNewPsw" Visibility="{Binding formCambiarPswVisibility}" FontSize="20" Foreground="White" Margin="0,10,0,0"></TextBlock>
+                    <PasswordBox Name="pwbNewPassword" Password="{Binding newPsw, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding formCambiarPswVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,0" HorizontalAlignment="Center"></PasswordBox>
+                    <PasswordBox Name="pwbRNewPassword" Password="{Binding newRepPsw, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding formCambiarPswVisibility}" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,8" HorizontalAlignment="Center"></PasswordBox>
+                    <TextBlock Name="txbNotificarNewPswError" Visibility="{Binding txbNotifyErrorNewPswVisibility}" x:Uid="strNotificarNewPswError" Width="200" Foreground="#ff8a80" FontSize="12" TextWrapping="Wrap" Margin="0,10,0,0"></TextBlock>                    
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0">
-                        <Button Name="btnGuardarPasswNueva" Visibility="Visible" Background="#C5CAE9" Foreground="#3F51B5" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" Margin="0,0,0,20"></Button>
-                        <Button Name="btnCancelarPasswNueva" Visibility="Visible" Background="#C5CAE9" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" Foreground="Red" Margin="12,0,0,20"></Button>
+                        <Button Name="btnGuardarPasswNueva" Visibility="{Binding formCambiarPswVisibility}" Command="{Binding guardarNewPswCommand}" Background="#C5CAE9" Foreground="#3F51B5" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" Margin="0,0,0,20"></Button>
+                        <Button Name="btnCancelarPasswNueva" Visibility="{Binding cancelarPswVisibility}" Command="{Binding cancelarNewPswCommand}" Background="#C5CAE9" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" Foreground="Red" Margin="12,0,0,20"></Button>
                     </StackPanel>
                 </StackPanel>
 

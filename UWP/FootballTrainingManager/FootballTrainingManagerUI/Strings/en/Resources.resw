@@ -249,4 +249,22 @@
   <data name="strNotificarPswError.Text" xml:space="preserve">
     <value>Incorrect password</value>
   </data>
+  <data name="strACambiarIdioma.Content" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="strMPActualPsw.Text" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="strMPNewPsw.Text" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="strNotificarErrorCambPsw" xml:space="preserve">
+    <value>An error has ocurred</value>
+  </data>
+  <data name="strNotificarNewPswError.Text" xml:space="preserve">
+    <value>Please fill out all fields and enter the same password in both</value>
+  </data>
+  <data name="strNotificarOkCambPsw" xml:space="preserve">
+    <value>Successfully</value>
+  </data>
 </root>

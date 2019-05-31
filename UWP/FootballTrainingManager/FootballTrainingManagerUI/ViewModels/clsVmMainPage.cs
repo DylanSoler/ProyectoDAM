@@ -1,33 +1,57 @@
 ﻿using FootballTrainingManagerDAL.Manejadoras;
 using FootballTrainingManagerEntidades.Persistencia;
+using FootballTrainingManagerUI.Views;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.AccessCache;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace FootballTrainingManagerUI.ViewModels
 {
     public class clsVmMainPage : clsVMBase
     {
         #region Propiedades privadas
-        private String _imagenPerfil;
+        private BitmapImage _imagenPerfil;
         private clsManager _manager;
         private int _edad;
         private bool _formReadOnly;
+        private String _pswActual;
+        private String _newPsw;
+        private String _newRepPsw;
+        private FileOpenPicker _picker;
         private String _datePickerVisibility;
         private String _edadVisibility;
         private String _guardarVisibility;
         private String _editarVisibility;
+        private String _passwActualVisibility;
+        private String _formCambiarPswVisibility;
+        private String _txbNotifyErrorPswVisibility;
+        private String _txbNotifyErrorNewPswVisibility;
+        private String _cancelarPswVisibility;
+        private String _passwCheck;
         private DelegateCommand _guardarCommand;
         private DelegateCommand _editarCommand;
         private DelegateCommand _cancelarCommand;
+        private DelegateCommand _cambiarPswLinkCommand;
+        private DelegateCommand _guardarNewPswCommand;
+        private DelegateCommand _cancelarNewPswCommand;
+        private DelegateCommand _checkPasswordCommand;
+        private DelegateCommand _editarFotoCommand;
         #endregion
 
         #region Propiedades publicas
-        public String imagenPerfil
+        public BitmapImage imagenPerfil
         {
             get { return _imagenPerfil; }
 
@@ -62,6 +86,29 @@ namespace FootballTrainingManagerUI.ViewModels
             }
         }
 
+        public String pswActual
+        {
+            get { return _pswActual; }
+
+            set { _pswActual = value;}
+        }
+
+        public String newRepPsw
+        {
+            get { return _newRepPsw; }
+
+            set { _newRepPsw = value;
+               _guardarNewPswCommand.RaiseCanExecuteChanged();
+                }
+        }
+
+        public String newPsw
+        {
+            get { return _newPsw; }
+
+            set { _newPsw = value; }
+        }
+
         public String datePickerVisibility
         {
             get { return _datePickerVisibility; }
@@ -87,6 +134,41 @@ namespace FootballTrainingManagerUI.ViewModels
             get { return _editarVisibility; }
 
             set { _editarVisibility = value; }
+        }
+
+        public String passwActualVisibility
+        {
+            get { return _passwActualVisibility; }
+
+            set { _passwActualVisibility=value; }
+        }
+
+        public String formCambiarPswVisibility
+        {
+            get { return _formCambiarPswVisibility; }
+
+            set { _formCambiarPswVisibility = value; }
+        }
+
+        public String txbNotifyErrorPswVisibility
+        {
+            get { return _txbNotifyErrorPswVisibility; }
+
+            set { _txbNotifyErrorPswVisibility = value; }
+        }
+        
+        public String txbNotifyErrorNewPswVisibility
+        {
+            get { return _txbNotifyErrorNewPswVisibility; }
+
+            set { _txbNotifyErrorNewPswVisibility = value; }
+        }
+
+        public String cancelarPswVisibility
+        {
+            get { return _cancelarPswVisibility; }
+
+            set { _cancelarPswVisibility = value; }
         }
 
         public DelegateCommand guardarCommand
@@ -115,18 +197,75 @@ namespace FootballTrainingManagerUI.ViewModels
                 return _cancelarCommand;
             }
         }
+
+        public DelegateCommand cambiarPswLinkCommand
+        {
+            get
+            {
+                _cambiarPswLinkCommand = new DelegateCommand(cambiarPswLinkCommand_Executed);
+                return _cambiarPswLinkCommand;
+            }
+        }
+        
+        public DelegateCommand guardarNewPswCommand
+        {
+            get
+            {
+                _guardarNewPswCommand = new DelegateCommand(guardarNewPswCommand_Executed, guardarNewPswCommand_CanExecuted);
+                return _guardarNewPswCommand;
+            }
+        }
+
+        public DelegateCommand cancelarNewPswCommand
+        {
+            get
+            {
+                _cancelarNewPswCommand = new DelegateCommand(cancelarNewPswCommand_Executed);
+                return _cancelarNewPswCommand;
+            }
+        }
+        
+        public DelegateCommand checkPasswordCommand
+        {
+            get
+            {
+                _checkPasswordCommand = new DelegateCommand(checkPasswordCommand_Executed, checkPasswordCommand_CanExecuted);
+                return _checkPasswordCommand;
+            }
+        }
+
+        public DelegateCommand editarFotoCommand
+        {
+            get
+            {
+                _editarFotoCommand = new DelegateCommand(editarFotoCommand_Executed);
+                return _editarFotoCommand;
+            }
+        }
         #endregion
 
         #region Constructor
         public clsVmMainPage() {
             _manager = new clsManager(App.oAppManager.id, App.oAppManager.correo, App.oAppManager.passwordManager, App.oAppManager.nombre, App.oAppManager.apellidos, App.oAppManager.fotoPerfil, App.oAppManager.fechaNacimiento);
-            _imagenPerfil = App.oAppManager.fotoPerfil;
+            _imagenPerfil = new BitmapImage(new Uri("ms-appx:///Assets/avatar.png"));
             _edad = calcularEdad(manager.fechaNacimiento.Year);
             _formReadOnly = true;
             _edadVisibility = "Visible";
             _editarVisibility = "Visible";
             _datePickerVisibility = "Collapsed";
             _guardarVisibility = "Collapsed";
+            _passwActualVisibility = "Collapsed";
+            _formCambiarPswVisibility = "Collapsed";
+            _txbNotifyErrorPswVisibility = "Collapsed";
+            _txbNotifyErrorNewPswVisibility = "Collapsed";
+            _cancelarPswVisibility = "Collapsed";
+            _pswActual = "";
+            _picker = new FileOpenPicker();
+            _picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            _picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
+            _picker.FileTypeFilter.Add(".jpg");
+            _picker.FileTypeFilter.Add(".jpeg");
+            _picker.FileTypeFilter.Add(".png");
         }
         #endregion
         
@@ -148,14 +287,12 @@ namespace FootballTrainingManagerUI.ViewModels
         {
             bool ok;
             clsManejadoraManager manejadora = new clsManejadoraManager();
-            //ContentDialog confirmadoCorrectamente = new ContentDialog();
 
             try
             {
                 ok = await manejadora.actualizarManagerDAL(manager);
                 if (ok)
                 {
-                    //actualizarListadoCommand_Executed();
                     _formReadOnly = true;
                     NotifyPropertyChanged("formReadOnly");
                     _edadVisibility = "Visible";
@@ -167,15 +304,11 @@ namespace FootballTrainingManagerUI.ViewModels
                     _guardarVisibility = "Collapsed";
                     NotifyPropertyChanged("guardarVisibility");
                     App.oAppManager = _manager;
-                    //confirmadoCorrectamente.Title = "Guardado";
-                    //confirmadoCorrectamente.Content = "Se ha guardado correctamente";
-                    //confirmadoCorrectamente.PrimaryButtonText = "Aceptar";
-                    //ContentDialogResult resultado = await confirmadoCorrectamente.ShowAsync();
                 }
             }
             catch (Exception e)
             {
-                //TODO lanzar dialogo con error(message dialog)
+                //TODO
             }
         }
 
@@ -210,6 +343,162 @@ namespace FootballTrainingManagerUI.ViewModels
             NotifyPropertyChanged("manager");
         }
 
+        private void cambiarPswLinkCommand_Executed()
+        {
+            _passwActualVisibility = "Visible";
+            NotifyPropertyChanged("passwActualVisibility");
+            _cancelarPswVisibility = "Visible";
+            NotifyPropertyChanged("cancelarPswVisibility");
+            _checkPasswordCommand.RaiseCanExecuteChanged();
+        }
+
+        private void cancelarNewPswCommand_Executed()
+        {
+            _passwActualVisibility = "Collapsed";
+            NotifyPropertyChanged("passwActualVisibility");
+            _cancelarPswVisibility = "Collapsed";
+            NotifyPropertyChanged("cancelarPswVisibility");
+            _formCambiarPswVisibility = "Collapsed";
+            NotifyPropertyChanged("formCambiarPswVisibility");
+            _passwCheck = "";
+            NotifyPropertyChanged("passwCheck");
+            _pswActual = "";
+            NotifyPropertyChanged("pswActual");
+            _newPsw = "";
+            NotifyPropertyChanged("newPsw");
+            _newRepPsw = "";
+            NotifyPropertyChanged("newRepPsw");
+        }
+
+        private void checkPasswordCommand_Executed()
+        {
+            clsManejadoraManager manejadora = new clsManejadoraManager();
+
+            if (comprobarPassword(pswActual, _manager.passwordManager))
+            {
+                _formCambiarPswVisibility = "Visible";
+                NotifyPropertyChanged("formCambiarPswVisibility");
+                _passwActualVisibility = "Collapsed";
+                NotifyPropertyChanged("passwActualVisibility");
+
+                if (_txbNotifyErrorPswVisibility.Equals("Visible"))
+                {
+                    _txbNotifyErrorPswVisibility = "Collapsed";
+                    NotifyPropertyChanged("txbNotifyErrorPswVisibility");
+                }
+            }
+            else
+            {
+                _txbNotifyErrorPswVisibility = "Visible";
+                NotifyPropertyChanged("txbNotifyErrorPswVisibility");
+            }
+        }
+
+        private bool checkPasswordCommand_CanExecuted()
+        {
+            bool comprobar = false;
+
+            if (_passwActualVisibility.Equals("Visible"))
+                comprobar=true;
+
+            return comprobar;
+        }
+
+        private bool guardarNewPswCommand_CanExecuted()
+        {
+            bool sePuedeGuardar = false;
+
+            if (_formCambiarPswVisibility.Equals("Visible") && !String.IsNullOrEmpty(_newPsw) && !String.IsNullOrEmpty(_newRepPsw))
+            {
+                sePuedeGuardar = true;
+            }
+
+            return sePuedeGuardar;
+        }
+
+        private async void guardarNewPswCommand_Executed()
+        {
+            bool ok = false;
+            clsManejadoraManager manejadora = new clsManejadoraManager();
+
+            if (_newPsw.Equals(_newRepPsw))
+            {
+                if (_txbNotifyErrorNewPswVisibility == "Visible")
+                {
+                    _txbNotifyErrorNewPswVisibility = "Collapsed";
+                    NotifyPropertyChanged("txbNotifyErrorNewPswVisibility");
+                }
+
+                try
+                {
+                    ok = await manejadora.actualizarPasswordManagerDAL(_manager.id, _passwCheck);
+                    if (ok)
+                    {
+                        App.oAppManager.passwordManager = _passwCheck;
+                        _manager.passwordManager = _passwCheck;
+                        //Lanzar content dialog bueno
+                    }
+                }
+                catch (Exception e)
+                {
+                    //TODO
+                }
+                finally
+                {
+                    if (!ok)
+                    {
+                        //Lanzar content dialog malo y mezquino
+                    }
+                }
+                _cancelarPswVisibility = "Collapsed";
+                NotifyPropertyChanged("cancelarPswVisibility");
+                _formCambiarPswVisibility = "Collapsed";
+                NotifyPropertyChanged("formCambiarPswVisibility");
+                _passwCheck = "";
+                NotifyPropertyChanged("passwCheck");
+                _pswActual = "";
+                NotifyPropertyChanged("pswActual");
+                _newPsw = "";
+                NotifyPropertyChanged("newPsw");
+                _newRepPsw = "";
+                NotifyPropertyChanged("newRepPsw");
+            }
+            else {
+                _txbNotifyErrorNewPswVisibility = "Visible";
+                NotifyPropertyChanged("txbNotifyErrorNewPswVisibility");
+            }
+        }
+
+        private async void editarFotoCommand_Executed()
+        {
+
+            //StorageFolder storageFolder = KnownFolders.PicturesLibrary;
+            //StorageFile foto = await storageFolder.GetFileAsync("asta.jpg");
+
+            StorageFile foto = await _picker.PickSingleFileAsync();
+
+            if (foto != null) {
+                try
+                {
+                    //Image myBmp = Image.FromFile("path here");
+
+                    BitmapImage fotoPerfil = new BitmapImage();
+                    fotoPerfil = await LoadImage(foto);
+                    _imagenPerfil = fotoPerfil;
+
+                    /*Uri ruta = new Uri("C:\\Users\\Dylan\\Pictures\\asta.jpg");
+                    BitmapImage fotaza = new BitmapImage(ruta);
+                    _imagenPerfil = fotaza;*/
+
+                    //_imagenPerfil = "../Assets/asta.jpg";
+
+                    NotifyPropertyChanged("imagenPerfil");
+                }
+                catch(Exception ex) {
+
+                }
+            }
+        }
         #endregion
 
         #region Otros métodos
@@ -217,6 +506,34 @@ namespace FootballTrainingManagerUI.ViewModels
             int age = (DateTime.Now.Year)-(anioNac);
             return age;
         }
+
+        private Boolean comprobarPassword(String passwordToCheck, String correctPassword)
+        {
+
+            Boolean ret = false;
+
+            SHA256 mySHA256 = SHA256.Create();
+            byte[] passwToCheckHash = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(passwordToCheck));
+
+            _passwCheck = Convert.ToBase64String(passwToCheckHash);
+
+            if (_passwCheck.Equals(correctPassword))
+                ret = true;
+
+            return ret;
+        }
+
+        private static async Task<BitmapImage> LoadImage(StorageFile file)
+        {
+            BitmapImage bitmapImage = new BitmapImage();
+            FileRandomAccessStream stream = (FileRandomAccessStream)await file.OpenAsync(FileAccessMode.Read);
+
+            bitmapImage.SetSource(stream);
+
+            return bitmapImage;
+
+        }
         #endregion
+
     }
 }
