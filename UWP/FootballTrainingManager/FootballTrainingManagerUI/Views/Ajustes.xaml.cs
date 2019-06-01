@@ -43,6 +43,7 @@ namespace FootballTrainingManagerUI.Views
             {
                 ApplicationLanguages.PrimaryLanguageOverride = "en";
                 await Task.Delay(300);
+                this.Frame.Navigate(typeof(Ajustes));
                 spa.Visibility = Visibility.Collapsed;
                 eng.Visibility = Visibility.Collapsed;
             }
@@ -54,6 +55,7 @@ namespace FootballTrainingManagerUI.Views
             {
                 ApplicationLanguages.PrimaryLanguageOverride = "es";
                 await Task.Delay(300);
+                this.Frame.Navigate(typeof(Ajustes));
                 spa.Visibility = Visibility.Collapsed;
                 eng.Visibility = Visibility.Collapsed;
             }

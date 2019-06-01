@@ -65,7 +65,7 @@ namespace FootballTrainingManagerUI.ViewModels
             set {
                 _manager = value;
                 NotifyPropertyChanged("manager");
-                _edad = calcularEdad(manager.fechaNacimiento.Year);
+                _edad = calcularEdad(_manager.fechaNacimiento.Year);
                 NotifyPropertyChanged("edad");
             }
         }

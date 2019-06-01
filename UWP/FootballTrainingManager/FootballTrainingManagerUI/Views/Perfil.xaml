@@ -1,0 +1,119 @@
+﻿<Page
+    x:Class="FootballTrainingManagerUI.Views.Perfil"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FootballTrainingManagerUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FootballTrainingManagerUI.ViewModels"
+    xmlns:Converter="using:FootballTrainingManagerUI.ViewModels.Converters"
+    mc:Ignorable="d"
+    Background="#3F51B5">
+
+    <Page.DataContext>
+        <vm:clsVmMainPage></vm:clsVmMainPage>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <Converter:clsConverterDtTimeDtOffset x:Key="datePicker"></Converter:clsConverterDtTimeDtOffset>
+    </Page.Resources>
+
+    <RelativePanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="stkPrincipal.(Orientation)" Value="Vertical"/>
+                        <Setter Target="txbDatosPersonales.FontSize" Value="30"/>
+                        <Setter Target="stkInfoPerfil.Margin" Value="20,0,0,0"/>
+                        <Setter Target="txbDatosPersonales.HorizontalAlignment" Value="Left"/>
+                        <Setter Target="stkChangePassword.Margin" Value="20,10,0,0"/>
+                        <Setter Target="txbNotificarPswError.Width" Value="200"/>
+                        <Setter Target="txbNotificarNewPswError.Width" Value="200"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <Grid Name="gridPrincipal" Width="1920" Height="1080">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="8*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="12*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1" RelativePanel.AlignTopWithPanel="True" Margin="0,20,0,0">
+                <TextBlock x:Uid="strPerfil" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="55,20,0,0" HorizontalAlignment="Center"></TextBlock>
+            </StackPanel>
+
+            <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                <StackPanel Name="stkPrincipal" Orientation="Horizontal">
+
+                    <StackPanel Name="fotoPerfil">
+
+                        <Border Margin="20,20,20,20" BorderBrush="#C5CAE9" BorderThickness="2">
+                            <Image Name="imgPerfil" Source="{Binding imagenPerfil, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="200"></Image>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Name="btnEditar" Command="{Binding editarFotoCommand}" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xE70F;" HorizontalAlignment="Center" Margin="0,0,16,0"></Button>
+                            <Button Name="btnQuitar" Background="#C5CAE9" Foreground="Red" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" HorizontalAlignment="Center"></Button>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Name="stkInfoPerfil" Margin="100,0,0,0">
+                        <TextBlock Name="txbDatosPersonales" TextDecorations="Underline" x:Uid="strMPdatos" Foreground="White" FontSize="40" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock x:Uid="strRegNombre" Foreground="White" FontSize="20" Margin="10,10,0,0"></TextBlock>
+                        <TextBox Foreground="Black" FontSize="20" Name="txbNombre" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
+                        <TextBlock x:Uid="strRegApell" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
+                        <TextBox Name="txbApellidos" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.apellidos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
+                        <TextBlock x:Uid="strRegCorreo" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
+                        <TextBox Name="txbCorreo" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.correo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
+                        <TextBlock x:Uid="strMpEdad" Visibility="{Binding edadVisibility}" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
+                        <TextBox Name="txbEdad" Visibility="{Binding edadVisibility}" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=edad}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
+                        <TextBlock x:Uid="strRegDate" Visibility="{Binding datePickerVisibility}" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
+                        <CalendarDatePicker Width="160" Date="{Binding manager.fechaNacimiento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource datePicker}}" Visibility="{Binding datePickerVisibility}" Margin="10,0,0,0"></CalendarDatePicker>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                            <Button Name="btnEditarDatosPersonales" Command="{Binding editarCommand}" Visibility="{Binding editarVisibility}" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xEE56;" HorizontalAlignment="Center" Margin="10,14,16,0"></Button>
+                            <Button Name="btnGuardarDatosPersonales" Command="{Binding guardarCommand}" Visibility="{Binding guardarVisibility}" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" HorizontalAlignment="Center" Margin="10,14,16,0"></Button>
+                            <Button Name="btnCancelarEdicionDatPer" Command="{Binding cancelarCommand}" Visibility="{Binding guardarVisibility}" Background="#C5CAE9" Foreground="Red" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" HorizontalAlignment="Center" Margin="10,14,16,0"></Button>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Name="stkChangePassword" Margin="40,10,0,0">
+                        <HyperlinkButton Name="hlbCambiarPassword" Command="{Binding cambiarPswLinkCommand}" FontSize="20" Foreground="#C5CAE9" Margin="0,60,0,10" x:Uid="strMPChangePsw"></HyperlinkButton>
+                        <TextBlock Name="txbActualPsw" x:Uid="strMPActualPsw" Visibility="{Binding passwActualVisibility}" FontSize="20" Foreground="White" Margin="0,10,0,0"></TextBlock>
+                        <PasswordBox Name="pwbActualPassword" Visibility="{Binding passwActualVisibility}" Password="{Binding pswActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,0" HorizontalAlignment="Center"></PasswordBox>
+                        <Button Command="{Binding checkPasswordCommand}" Name="btnCheckPassw" Visibility="{Binding passwActualVisibility}" Background="#C5CAE9" Foreground="#3F51B5" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE73E;" Margin="0,8,0,20" Width="32" Height="30"></Button>
+                        <TextBlock Name="txbNotificarPswError" Visibility="{Binding txbNotifyErrorPswVisibility}" x:Uid="strNotificarPswError" Foreground="#ff8a80" FontSize="12" TextWrapping="Wrap" Margin="0,10,0,0"></TextBlock>
+                        <TextBlock Name="txbNewPsw" x:Uid="strMPNewPsw" Visibility="{Binding formCambiarPswVisibility}" FontSize="20" Foreground="White" Margin="0,10,0,0"></TextBlock>
+                        <PasswordBox Name="pwbNewPassword" Password="{Binding newPsw, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding formCambiarPswVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,0" HorizontalAlignment="Center"></PasswordBox>
+                        <PasswordBox Name="pwbRNewPassword" Password="{Binding newRepPsw, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding formCambiarPswVisibility}" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,8" HorizontalAlignment="Center"></PasswordBox>
+                        <TextBlock Name="txbNotificarNewPswError" Visibility="{Binding txbNotifyErrorNewPswVisibility}" x:Uid="strNotificarNewPswError" Width="200" Foreground="#ff8a80" FontSize="12" TextWrapping="Wrap" Margin="0,10,0,0"></TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0">
+                            <Button Name="btnGuardarPasswNueva" Visibility="{Binding formCambiarPswVisibility}" Command="{Binding guardarNewPswCommand}" Background="#C5CAE9" Foreground="#3F51B5" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" Margin="0,0,0,20"></Button>
+                            <Button Name="btnCancelarPasswNueva" Visibility="{Binding cancelarPswVisibility}" Command="{Binding cancelarNewPswCommand}" Background="#C5CAE9" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" Foreground="Red" Margin="12,0,0,20"></Button>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+
+    </RelativePanel>
+</Page>
