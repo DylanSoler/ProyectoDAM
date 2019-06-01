@@ -5,10 +5,16 @@
     xmlns:local="using:FootballTrainingManagerUI.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FootballTrainingManagerUI.ViewModels"
     mc:Ignorable="d"
     Background="#3F51B5">
 
-    <Grid>
+    <Page.DataContext>
+        <vm:clsVmAjustes x:Name="vmAjustes"></vm:clsVmAjustes>
+    </Page.DataContext>
+
+    <Grid Name="gridAjustes" Width="1920" Height="1080">
+    <!--<Grid Name="gridPrincipal" Width="{Binding screenWidth, UpdateSourceTrigger=PropertyChanged}" Height="{Binding screenHeight, UpdateSourceTrigger=PropertyChanged}">-->
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>

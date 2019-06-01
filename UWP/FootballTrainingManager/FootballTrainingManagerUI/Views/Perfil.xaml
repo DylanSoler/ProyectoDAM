@@ -8,10 +8,11 @@
     xmlns:vm="using:FootballTrainingManagerUI.ViewModels"
     xmlns:Converter="using:FootballTrainingManagerUI.ViewModels.Converters"
     mc:Ignorable="d"
+    SizeChanged="Page_SizeChanged"
     Background="#3F51B5">
 
     <Page.DataContext>
-        <vm:clsVmMainPage></vm:clsVmMainPage>
+        <vm:clsVmPerfil x:Name="vmPerfil"></vm:clsVmPerfil>
     </Page.DataContext>
 
     <Page.Resources>
@@ -44,8 +45,8 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-
         <Grid Name="gridPrincipal" Width="1920" Height="1080">
+        <!--<Grid Name="gridPrincipal" Width="{Binding screenWidth, UpdateSourceTrigger=PropertyChanged}" Height="{Binding screenHeight, UpdateSourceTrigger=PropertyChanged}">-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="8*"></ColumnDefinition>
@@ -86,7 +87,7 @@
                         <TextBlock x:Uid="strMpEdad" Visibility="{Binding edadVisibility}" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
                         <TextBox Name="txbEdad" Visibility="{Binding edadVisibility}" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=edad}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
                         <TextBlock x:Uid="strRegDate" Visibility="{Binding datePickerVisibility}" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                        <CalendarDatePicker Width="160" Date="{Binding manager.fechaNacimiento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource datePicker}}" Visibility="{Binding datePickerVisibility}" Margin="10,0,0,0"></CalendarDatePicker>
+                        <DatePicker Width="160" SelectedDate="{Binding manager.fechaNacimiento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource datePicker}}" Visibility="{Binding datePickerVisibility}" Margin="10,0,0,0"></DatePicker>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
                             <Button Name="btnEditarDatosPersonales" Command="{Binding editarCommand}" Visibility="{Binding editarVisibility}" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xEE56;" HorizontalAlignment="Center" Margin="10,14,16,0"></Button>
                             <Button Name="btnGuardarDatosPersonales" Command="{Binding guardarCommand}" Visibility="{Binding guardarVisibility}" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xE74E;" HorizontalAlignment="Center" Margin="10,14,16,0"></Button>

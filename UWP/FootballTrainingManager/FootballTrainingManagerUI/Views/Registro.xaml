@@ -26,6 +26,7 @@
                         <Setter Target="stkFormularioPart2.Margin" Value="0,0,0,0"/>
                         <Setter Target="txbNotifyUser.Width" Value="222"/>
                         <Setter Target="txbNotifyUser.HorizontalAlignment" Value="Left"/>
+                        <Setter Target="dpDate.Margin" Value="0,8,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -69,7 +70,7 @@
                 <TextBlock x:Uid="strRegRepPsw" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
                 <PasswordBox Name="pwbRepeatPassword" HorizontalAlignment="Left" Margin="20,10,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></PasswordBox>
                 <TextBlock x:Uid="strRegDate" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                <CalendarDatePicker Name="dpDate" HorizontalAlignment="Left" Margin="20,10,0,10" BorderThickness="0" MinWidth="160"></CalendarDatePicker>
+                <DatePicker Name="dpDate" HorizontalAlignment="Left" Margin="20,10,0,10" BorderThickness="0"></DatePicker>
                 <Button x:Uid="strBtnReg" Click="btnRegistrar" Foreground="#3F51B5" FontWeight="Bold" CornerRadius="10" Width="140" Height="32" Background="#C5CAE9" Margin="20,60,0,0"></Button>
                 <TextBlock Name="txbNotifyUser" TextWrapping="Wrap" Margin="0,20,0,0" Foreground="#ff8a80" FontSize="20"></TextBlock>
             </StackPanel>

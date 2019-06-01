@@ -42,8 +42,7 @@ namespace FootballTrainingManagerUI.Views
 
             if (formCorrecto()){
 
-                DateTimeOffset dtOffset = dpDate.Date.GetValueOrDefault();
-                DateTime date = dtOffset.UtcDateTime;
+                DateTime date = dpDate.Date.DateTime;
 
                 SHA256 mySHA256 = SHA256.Create();
                 byte[] psw = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(pwbPassword.Password));

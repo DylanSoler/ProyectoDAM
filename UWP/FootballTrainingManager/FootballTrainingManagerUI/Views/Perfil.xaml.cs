@@ -1,10 +1,13 @@
-﻿using System;
+﻿using FootballTrainingManagerUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +28,14 @@ namespace FootballTrainingManagerUI.Views
         public Perfil()
         {
             this.InitializeComponent();
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+            var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+            vmPerfil.screenHeight = bounds.Height*scaleFactor;
+            vmPerfil.screenWidth = bounds.Width*scaleFactor;
         }
     }
 }

@@ -119,8 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\clsVmAjustes.cs" />
     <Compile Include="ViewModels\clsVMBase.cs" />
-    <Compile Include="ViewModels\clsVmMainPage.cs" />
+    <Compile Include="ViewModels\clsVmPerfil.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDtTimeDtOffset.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="Views\Ajustes.xaml.cs">

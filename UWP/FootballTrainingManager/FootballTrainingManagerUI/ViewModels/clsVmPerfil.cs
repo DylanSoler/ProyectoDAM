@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace FootballTrainingManagerUI.ViewModels
 {
-    public class clsVmMainPage : clsVMBase
+    public class clsVmPerfil : clsVMBase
     {
         #region Propiedades privadas
         private BitmapImage _imagenPerfil;
@@ -29,7 +29,6 @@ namespace FootballTrainingManagerUI.ViewModels
         private String _pswActual;
         private String _newPsw;
         private String _newRepPsw;
-        private FileOpenPicker _picker;
         private String _datePickerVisibility;
         private String _edadVisibility;
         private String _guardarVisibility;
@@ -48,6 +47,8 @@ namespace FootballTrainingManagerUI.ViewModels
         private DelegateCommand _cancelarNewPswCommand;
         private DelegateCommand _checkPasswordCommand;
         private DelegateCommand _editarFotoCommand;
+        private Double _screenHeight;
+        private Double _screenWidth;
         #endregion
 
         #region Propiedades publicas
@@ -242,10 +243,32 @@ namespace FootballTrainingManagerUI.ViewModels
                 return _editarFotoCommand;
             }
         }
+
+        public double screenWidth
+        {
+            get { return _screenWidth; }
+
+            set {
+                _screenWidth = value;
+                NotifyPropertyChanged("screenWidth");
+                }
+        }
+
+        public double screenHeight
+        {
+            get { return _screenHeight; }
+
+            set
+            {
+                _screenHeight = value;
+                NotifyPropertyChanged("screenHeight");
+            }
+        }
+
         #endregion
 
         #region Constructor
-        public clsVmMainPage() {
+        public clsVmPerfil() {
             _manager = new clsManager(App.oAppManager.id, App.oAppManager.correo, App.oAppManager.passwordManager, App.oAppManager.nombre, App.oAppManager.apellidos, App.oAppManager.fotoPerfil, App.oAppManager.fechaNacimiento);
             _imagenPerfil = new BitmapImage(new Uri("ms-appx:///Assets/avatar.png"));
             _edad = calcularEdad(manager.fechaNacimiento.Year);
@@ -260,12 +283,6 @@ namespace FootballTrainingManagerUI.ViewModels
             _txbNotifyErrorNewPswVisibility = "Collapsed";
             _cancelarPswVisibility = "Collapsed";
             _pswActual = "";
-            _picker = new FileOpenPicker();
-            _picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            _picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
-            _picker.FileTypeFilter.Add(".jpg");
-            _picker.FileTypeFilter.Add(".jpeg");
-            _picker.FileTypeFilter.Add(".png");
         }
         #endregion
         
@@ -304,6 +321,8 @@ namespace FootballTrainingManagerUI.ViewModels
                     _guardarVisibility = "Collapsed";
                     NotifyPropertyChanged("guardarVisibility");
                     App.oAppManager = _manager;
+                    _edad = calcularEdad(_manager.fechaNacimiento.Year);
+                    NotifyPropertyChanged("edad");
                 }
             }
             catch (Exception e)
@@ -472,10 +491,15 @@ namespace FootballTrainingManagerUI.ViewModels
         private async void editarFotoCommand_Executed()
         {
 
-            //StorageFolder storageFolder = KnownFolders.PicturesLibrary;
-            //StorageFile foto = await storageFolder.GetFileAsync("asta.jpg");
+            //StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            FileOpenPicker picker = new FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
 
-            StorageFile foto = await _picker.PickSingleFileAsync();
+            StorageFile foto = await picker.PickSingleFileAsync();
 
             if (foto != null) {
                 try
@@ -485,14 +509,13 @@ namespace FootballTrainingManagerUI.ViewModels
                     BitmapImage fotoPerfil = new BitmapImage();
                     fotoPerfil = await LoadImage(foto);
                     _imagenPerfil = fotoPerfil;
-
-                    /*Uri ruta = new Uri("C:\\Users\\Dylan\\Pictures\\asta.jpg");
-                    BitmapImage fotaza = new BitmapImage(ruta);
-                    _imagenPerfil = fotaza;*/
-
-                    //_imagenPerfil = "../Assets/asta.jpg";
-
                     NotifyPropertyChanged("imagenPerfil");
+
+
+
+                    //StorageFile guardarFoto = await storageFolder.CreateFileAsync("fotoPerfil.jpg", Windows.Storage.CreationCollisionOption.ReplaceExisting);
+                    //await FileIO.WriteTextAsync(guardarFoto, htmlSrc);
+
                 }
                 catch(Exception ex) {
 
