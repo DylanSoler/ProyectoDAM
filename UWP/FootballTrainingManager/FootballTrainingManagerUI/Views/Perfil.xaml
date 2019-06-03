@@ -25,7 +25,7 @@
             <VisualStateGroup>
                 <VisualState x:Name="Wide">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                        <AdaptiveTrigger MinWindowWidth="1200"/>
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState x:Name="Narrow">
@@ -41,6 +41,8 @@
                         <Setter Target="txbNotificarPswError.Width" Value="200"/>
                         <Setter Target="txbNotificarNewPswError.Width" Value="200"/>
                         <Setter Target="ballDecoration.Visibility" Value="Collapsed"/>
+                        <Setter Target="line1.Visibility" Value="Collapsed"/>
+                        <Setter Target="line2.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -80,13 +82,13 @@
                     <StackPanel Name="stkInfoPerfil" Margin="100,0,0,0">
                         <TextBlock Name="txbDatosPersonales" TextDecorations="Underline" x:Uid="strMPdatos" Foreground="White" FontSize="40" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock x:Uid="strRegNombre" Foreground="White" FontSize="20" Margin="10,10,0,0"></TextBlock>
-                        <TextBox Foreground="Black" FontSize="20" Name="txbNombre" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
+                        <TextBox Foreground="Black" FontSize="20" Name="txbNombre" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.nombre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="190" MaxWidth="400" BorderThickness="0"></TextBox>
                         <TextBlock x:Uid="strRegApell" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                        <TextBox Name="txbApellidos" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.apellidos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></TextBox>
+                        <TextBox Name="txbApellidos" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.apellidos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="190" MaxWidth="400" BorderThickness="0"></TextBox>
                         <TextBlock x:Uid="strRegCorreo" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                        <TextBox Name="txbCorreo" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.correo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
+                        <TextBox Name="txbCorreo" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=manager.correo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="190" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
                         <TextBlock x:Uid="strMpEdad" Visibility="{Binding edadVisibility}" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                        <TextBox Name="txbEdad" Visibility="{Binding edadVisibility}" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=edad}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
+                        <TextBox Name="txbEdad" Visibility="{Binding edadVisibility}" Foreground="Black" FontSize="20" IsReadOnly="{Binding formReadOnly}" Text="{Binding Path=edad}" HorizontalAlignment="Left" Margin="10,0,0,10" MinWidth="190" MaxWidth="400" BorderThickness="0" IsSpellCheckEnabled="False"></TextBox>
                         <TextBlock x:Uid="strRegDate" Visibility="{Binding datePickerVisibility}" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
                         <DatePicker MinWidth="10" FontSize="14" MonthFormat="{}{month.integer}" SelectedDate="{Binding manager.fechaNacimiento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource datePicker}}" Visibility="{Binding datePickerVisibility}" Margin="10,0,0,0"></DatePicker>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
@@ -97,7 +99,7 @@
                     </StackPanel>
 
                     <StackPanel Name="stkChangePassword" Margin="40,10,0,0">
-                        <HyperlinkButton Name="hlbCambiarPassword" Command="{Binding cambiarPswLinkCommand}" FontSize="20" Foreground="#C5CAE9" Margin="0,60,0,10" x:Uid="strMPChangePsw"></HyperlinkButton>
+                        <HyperlinkButton Name="hlbCambiarPassword" Command="{Binding cambiarPswLinkCommand}" FontSize="20" Background="#C5CAE9" Width="260" CornerRadius="20"  Foreground="#3F51B5" Margin="0,60,0,10" x:Uid="strMPChangePsw"></HyperlinkButton>
                         <TextBlock Name="txbActualPsw" x:Uid="strMPActualPsw" Visibility="{Binding passwActualVisibility}" FontSize="20" Foreground="White" Margin="0,10,0,0"></TextBlock>
                         <PasswordBox Name="pwbActualPassword" Visibility="{Binding passwActualVisibility}" Password="{Binding pswActual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,0" HorizontalAlignment="Center"></PasswordBox>
                         <Button Command="{Binding checkPasswordCommand}" Name="btnCheckPassw" Visibility="{Binding passwActualVisibility}" Background="#C5CAE9" Foreground="#3F51B5" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE73E;" Margin="0,8,0,20" Width="32" Height="30"></Button>
@@ -118,7 +120,11 @@
             <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom">
                 <Image Name="ballDecoration" Source="../Assets/ball.png" MaxWidth="200" MaxHeight="200"></Image>
             </StackPanel>
+            
         </Grid>
+
+        <Line Name="line1" X1="600" Y1="0" X2="0" Y2="400" Stroke="White" Fill="White" StrokeThickness="4" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True"></Line>
+        <Line Name="line2" X1="700" Y1="0" X2="0" Y2="470" Stroke="White" Fill="White" StrokeThickness="4" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True"></Line>
 
     </RelativePanel>
 </Page>

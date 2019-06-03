@@ -76,5 +76,14 @@ namespace FootballTrainingManagerUI.Views
             vmAjustes.screenHeight = bounds.Height * scaleFactor;
             vmAjustes.screenWidth = bounds.Width * scaleFactor;
         }
+
+        private void HlbAboutMe_Click(object sender, RoutedEventArgs e)
+        {
+            if (txbAboutMe.Visibility == Visibility.Collapsed)
+                txbAboutMe.Visibility = Visibility.Visible;
+            else
+                txbAboutMe.Visibility = Visibility.Collapsed;
+        }
+
     }
 }

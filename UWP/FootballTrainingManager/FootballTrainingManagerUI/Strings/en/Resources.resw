@@ -282,4 +282,12 @@
   <data name="strEliminarCuenta.Content" xml:space="preserve">
     <value>Delete account</value>
   </data>
+  <data name="strAboutMeText.Text" xml:space="preserve">
+    <value>My name is Dylan. This application has been developed as a final project of the multiplatform application development course. This course is taught in an institute in Seville, it is called I.E.S. Nervion
+It is a great institute, with very good teachers.
+With this project I hope to get approved.😉😬</value>
+  </data>
+  <data name="streAboutMe.Content" xml:space="preserve">
+    <value>About me</value>
+  </data>
 </root>
