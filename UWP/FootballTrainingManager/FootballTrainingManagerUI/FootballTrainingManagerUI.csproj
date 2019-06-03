@@ -157,6 +157,7 @@
     <Content Include="Assets\asta.jpg" />
     <Content Include="Assets\avatar.png" />
     <Content Include="Assets\avatarDefault.png" />
+    <Content Include="Assets\ball.png" />
     <Content Include="Assets\english.png" />
     <Content Include="Assets\entreno.png" />
     <Content Include="Assets\espana.jpg" />
@@ -164,6 +165,7 @@
     <Content Include="Assets\logout.png" />
     <Content Include="Assets\notas.png" />
     <Content Include="Assets\pizarra.png" />
+    <Content Include="Assets\settings2.png" />
     <Content Include="Assets\tactica.png" />
     <Content Include="Assets\tactica2.png" />
     <Content Include="Properties\Default.rd.xml" />

@@ -7,14 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:FootballTrainingManagerUI.ViewModels"
     mc:Ignorable="d"
-    Background="#3F51B5">
+    Background="#3F51B5"
+    SizeChanged="Page_SizeChanged">
 
     <Page.DataContext>
         <vm:clsVmAjustes x:Name="vmAjustes"></vm:clsVmAjustes>
     </Page.DataContext>
 
-    <Grid Name="gridAjustes" Width="1920" Height="1080">
-    <!--<Grid Name="gridPrincipal" Width="{Binding screenWidth, UpdateSourceTrigger=PropertyChanged}" Height="{Binding screenHeight, UpdateSourceTrigger=PropertyChanged}">-->
+    <!--<Grid Name="gridAjustes" Width="1920" Height="1080">-->
+    <Grid Name="gridPrincipal" Width="{Binding screenWidth, UpdateSourceTrigger=PropertyChanged}" Height="{Binding screenHeight, UpdateSourceTrigger=PropertyChanged}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -27,35 +28,72 @@
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1" RelativePanel.AlignTopWithPanel="True" Margin="0,20,0,0">
-            <TextBlock x:Uid="strAjustes" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="55,20,0,0" HorizontalAlignment="Center"></TextBlock>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="stkAjustesPrincipal.(Orientation)" Value="Vertical"/>
+                        <Setter Target="stkAjustesPrincipal.HorizontalAlignment" Value="Left"/>
+                        <Setter Target="stkDeleteAccount.Margin" Value="0,0,0,0"/>
+                        <Setter Target="stkIdioma.HorizontalAlignment" Value="Left"/>
+                        <Setter Target="stkDeleteAccount.HorizontalAlignment" Value="Left"/>
+                        <Setter Target="settDecoration.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <StackPanel Grid.Column="1" RelativePanel.AlignTopWithPanel="True" Margin="0,0,0,0">
+            <TextBlock x:Uid="strAjustes" FontSize="60" Foreground="White" VerticalAlignment="Center"  HorizontalAlignment="Center"></TextBlock>
         </StackPanel>
 
-        <StackPanel Name="stkAjustesPrincipal" Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Column="1" Grid.Row="1">
+            <StackPanel Name="stkAjustesPrincipal" Orientation="Horizontal" BorderBrush="#C5CAE9" BorderThickness="2" HorizontalAlignment="Center">
 
-        <StackPanel Name="stkIdioma" Orientation="Vertical">
+                <StackPanel Name="stkIdioma" Orientation="Vertical" HorizontalAlignment="Center">
 
-            <HyperlinkButton Name="hlbCambiarIdioma" Click="HlbCambiarIdioma_Click" FontSize="20" Foreground="#C5CAE9" Margin="10,60,0,10" x:Uid="strACambiarIdioma"></HyperlinkButton>
-            <Button Name="spa" Click="Spa_Click" Width="80" Height="60" Visibility="Collapsed">
-                    <Button.Content>
-                        <Image Name="spanish" Source="../Assets/espana.jpg"></Image>
-                    </Button.Content>   
-            </Button>
-            <Button Name="eng" Click="Eng_Click" Width="80" Height="60" Visibility="Collapsed">
-                    <Button.Content>
-                        <Image Name="english" Source="../Assets/english.png"></Image>
-                    </Button.Content>
-            </Button>
-            
-            
+                    <HyperlinkButton Background="#C5CAE9" Width="280" CornerRadius="20" Name="hlbCambiarIdioma" Click="HlbCambiarIdioma_Click" FontSize="20" Foreground="#3F51B5" Margin="20,60,0,10" x:Uid="strACambiarIdioma"></HyperlinkButton>
+                    <Button Margin="40,40,0,10" Name="spa" Click="Spa_Click" Width="80" Height="60" Visibility="Collapsed">
+                        <Button.Content>
+                            <Image Name="spanish" Source="../Assets/espana.jpg"></Image>
+                        </Button.Content>
+                    </Button>
+                    <Button Margin="40,40,0,10" Name="eng" Click="Eng_Click" Width="80" Height="60" Visibility="Collapsed">
+                        <Button.Content>
+                            <Image Name="english" Source="../Assets/english.png"></Image>
+                        </Button.Content>
+                    </Button>
+
+
+                </StackPanel>
+
+                <StackPanel Name="stkDeleteAccount" Orientation="Vertical" Margin="140,0,20,0" HorizontalAlignment="Center">
+                    <HyperlinkButton Background="#C5CAE9" Width="280" CornerRadius="20" Name="hlbEliminarCuenta" Command="{Binding linkEliminarCuentaCommand}" FontSize="20" Foreground="#3F51B5" Margin="10,60,0,10" x:Uid="strEliminarCuenta"></HyperlinkButton>
+                    <TextBlock Name="txbPsw" x:Uid="strPassword" Visibility="{Binding formPswVisibility}" FontSize="20" Foreground="White" Margin="0,10,0,0"></TextBlock>
+                    <PasswordBox Name="pwbPassword" Password="{Binding password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding formPswVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="160" MaxWidth="400" Height="26" BorderThickness="0" Margin="0,16,0,0" HorizontalAlignment="Center"></PasswordBox>
+                    <TextBlock Name="txbNotificarNewPswError" Visibility="{Binding txbNotifyErrorPswVisibility}" x:Uid="strNotificarPswError" Width="200" Foreground="#ff8a80" FontSize="12" TextWrapping="Wrap" Margin="0,10,0,0"></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0">
+                        <Button Name="btnGuardarPasswNueva" Visibility="{Binding formPswVisibility}" Command="{Binding eliminarCuentaCommand}" Background="#C5CAE9" Foreground="Red" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE74D;" Margin="0,0,0,20"></Button>
+                        <Button Name="btnCancelarPasswNueva" Visibility="{Binding formPswVisibility}" Command="{Binding cancelarCommand}" Background="#C5CAE9" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" Foreground="DarkGreen" Margin="12,0,0,20"></Button>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom">
+            <Image Name="settDecoration" Source="../Assets/settings2.png" MaxWidth="100" MaxHeight="100"></Image>
         </StackPanel>
         
-        <StackPanel Name="stkChangePassword" Orientation="Vertical">
-            
-        </StackPanel>
-        
-    </StackPanel>
-
     </Grid>
 
 </Page>

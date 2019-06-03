@@ -267,4 +267,19 @@
   <data name="strNotificarOkCambPsw" xml:space="preserve">
     <value>Contraseña actualizada</value>
   </data>
+  <data name="strAjustesCancelDialog" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="strAjustesContentDialog" xml:space="preserve">
+    <value>¿Estás seguro?</value>
+  </data>
+  <data name="strAjustesOkDialog" xml:space="preserve">
+    <value>Eliminar :(</value>
+  </data>
+  <data name="strBorrarCuenta" xml:space="preserve">
+    <value>Eliminar cuenta</value>
+  </data>
+  <data name="strEliminarCuenta.Content" xml:space="preserve">
+    <value>Eliminar cuenta</value>
+  </data>
 </root>

@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
@@ -270,7 +271,7 @@ namespace FootballTrainingManagerUI.ViewModels
         #region Constructor
         public clsVmPerfil() {
             _manager = new clsManager(App.oAppManager.id, App.oAppManager.correo, App.oAppManager.passwordManager, App.oAppManager.nombre, App.oAppManager.apellidos, App.oAppManager.fotoPerfil, App.oAppManager.fechaNacimiento);
-            _imagenPerfil = new BitmapImage(new Uri("ms-appx:///Assets/avatar.png"));
+            //_imagenPerfil = new BitmapImage(new Uri("ms-appx:///Assets/avatar.png"));
             _edad = calcularEdad(manager.fechaNacimiento.Year);
             _formReadOnly = true;
             _edadVisibility = "Visible";
@@ -490,8 +491,10 @@ namespace FootballTrainingManagerUI.ViewModels
 
         private async void editarFotoCommand_Executed()
         {
-
-            //StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            //Carpeta donde se guarda la imagen inicialmente dado que Assets es 
+            //de solo lectura y no permite crear archivos en ella directamente
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            //Instanciamos selector de archivosm, personalizando las caracteristicas
             FileOpenPicker picker = new FileOpenPicker();
             picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
             picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
@@ -499,26 +502,54 @@ namespace FootballTrainingManagerUI.ViewModels
             picker.FileTypeFilter.Add(".jpeg");
             picker.FileTypeFilter.Add(".png");
 
+            //Obtenemos la foto
             StorageFile foto = await picker.PickSingleFileAsync();
 
-            if (foto != null) {
+            //Si no es nula y su tipo es correcto
+            if (foto != null && (foto.ContentType!= "image/jpeg" || foto.ContentType != "image/png" || foto.ContentType != "image/jpg")) {
                 try
                 {
-                    //Image myBmp = Image.FromFile("path here");
+                    //Obtenemos softwareBitmap
+                    SoftwareBitmap softwareBitmap;
 
-                    BitmapImage fotoPerfil = new BitmapImage();
-                    fotoPerfil = await LoadImage(foto);
-                    _imagenPerfil = fotoPerfil;
-                    NotifyPropertyChanged("imagenPerfil");
+                    IRandomAccessStream stream = await foto.OpenAsync(FileAccessMode.Read);
 
+                    //Creamos el decodificador del stream
+                    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
 
+                    //Obtenemos la representación SoftwareBitmap del archivo
+                    softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+                    
+                    //Guardamos en el almacén de datos local de la aplicación
+                    StorageFile fileSave = await storageFolder.CreateFileAsync(foto.Name, CreationCollisionOption.ReplaceExisting);
+                    BitmapEncoder encoder = await BitmapEncoder.CreateAsync(Windows.Graphics.Imaging.BitmapEncoder.JpegEncoderId, await fileSave.OpenAsync(FileAccessMode.ReadWrite));
+                    encoder.SetSoftwareBitmap(softwareBitmap);
+                    await encoder.FlushAsync();
 
-                    //StorageFile guardarFoto = await storageFolder.CreateFileAsync("fotoPerfil.jpg", Windows.Storage.CreationCollisionOption.ReplaceExisting);
-                    //await FileIO.WriteTextAsync(guardarFoto, htmlSrc);
+                    //Movemos a Assets
+                    StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+                    StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Assets");
 
+                    await fileSave.MoveAsync(assetsFolder, $"perfil{manager.id}.jpg", NameCollisionOption.ReplaceExisting);
+
+                    //Establecemos la foto perfil
+                    _manager.fotoPerfil = $"ms-appx:///Assets/perfil{manager.id}.jpg";
+                    App.oAppManager.fotoPerfil = $"ms-appx:///Assets/perfil{manager.id}.jpg";
+                    NotifyPropertyChanged("manager");
+
+                    //Actualizar API
+                    try {
+                        clsManejadoraManager manejadora = new clsManejadoraManager();
+                        bool ok = await manejadora.actualizarManagerDAL(_manager);
+                    } catch (Exception e) {
+                        //TODO
+                    }
                 }
                 catch(Exception ex) {
-
+                    //Establecemos foto perfil por defecto
+                    manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                    App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                    NotifyPropertyChanged("manager");
                 }
             }
         }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Globalization;
+using Windows.Graphics.Display;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,10 +33,16 @@ namespace FootballTrainingManagerUI.Views
 
         private void HlbCambiarIdioma_Click(object sender, RoutedEventArgs e)
         {
-
-            spa.Visibility = Visibility.Visible;
-            eng.Visibility = Visibility.Visible;
-
+            if (spa.Visibility==Visibility.Collapsed && eng.Visibility==Visibility.Collapsed)
+            {
+                spa.Visibility = Visibility.Visible;
+                eng.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                spa.Visibility = Visibility.Collapsed;
+                eng.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void Eng_Click(object sender, RoutedEventArgs e)
@@ -59,6 +67,14 @@ namespace FootballTrainingManagerUI.Views
                 spa.Visibility = Visibility.Collapsed;
                 eng.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+            var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+            vmAjustes.screenHeight = bounds.Height * scaleFactor;
+            vmAjustes.screenWidth = bounds.Width * scaleFactor;
         }
     }
 }

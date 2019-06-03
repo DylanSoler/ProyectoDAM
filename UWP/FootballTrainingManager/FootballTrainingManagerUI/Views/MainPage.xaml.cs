@@ -25,6 +25,8 @@ namespace FootballTrainingManagerUI.Views
         public MainPage()
         {
             this.InitializeComponent();
+            perfil.IsSelected = true;
+            frmPrincipal.Navigate(typeof(Perfil));
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)

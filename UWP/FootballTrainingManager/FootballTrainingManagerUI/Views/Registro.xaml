@@ -33,7 +33,7 @@
         </VisualStateManager.VisualStateGroups>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -70,7 +70,7 @@
                 <TextBlock x:Uid="strRegRepPsw" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
                 <PasswordBox Name="pwbRepeatPassword" HorizontalAlignment="Left" Margin="20,10,0,10" MinWidth="160" MaxWidth="400" BorderThickness="0"></PasswordBox>
                 <TextBlock x:Uid="strRegDate" Foreground="White" FontSize="20" Margin="10,0,0,0"></TextBlock>
-                <DatePicker Name="dpDate" HorizontalAlignment="Left" Margin="20,10,0,10" BorderThickness="0"></DatePicker>
+                <DatePicker Margin="0,10,0,10" MinWidth="10" Name="dpDate" HorizontalAlignment="Left" BorderThickness="0" FontSize="12" MonthFormat="{}{month.abbreviated(3)}"></DatePicker>
                 <Button x:Uid="strBtnReg" Click="btnRegistrar" Foreground="#3F51B5" FontWeight="Bold" CornerRadius="10" Width="140" Height="32" Background="#C5CAE9" Margin="20,60,0,0"></Button>
                 <TextBlock Name="txbNotifyUser" TextWrapping="Wrap" Margin="0,20,0,0" Foreground="#ff8a80" FontSize="20"></TextBlock>
             </StackPanel>
