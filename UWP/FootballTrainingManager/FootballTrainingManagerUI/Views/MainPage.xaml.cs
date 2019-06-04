@@ -51,7 +51,7 @@ namespace FootballTrainingManagerUI.Views
             }
             else if (pizarra.IsSelected)
             {
-                //frmPrincipal.Navigate(typeof());
+                frmPrincipal.Navigate(typeof(Pizarra));
             }
             else if (notas.IsSelected)
             {

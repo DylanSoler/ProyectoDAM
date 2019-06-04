@@ -140,6 +140,9 @@
     <Compile Include="Views\Perfil.xaml.cs">
       <DependentUpon>Perfil.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pizarra.xaml.cs">
+      <DependentUpon>Pizarra.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Registro.xaml.cs">
       <DependentUpon>Registro.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,9 @@
     <Content Include="Assets\avatar.png" />
     <Content Include="Assets\avatarDefault.png" />
     <Content Include="Assets\ball.png" />
+    <Content Include="Assets\campo2H.png" />
+    <Content Include="Assets\campoverde1.png" />
+    <Content Include="Assets\campoverde2.png" />
     <Content Include="Assets\english.png" />
     <Content Include="Assets\entreno.png" />
     <Content Include="Assets\espana.jpg" />
@@ -199,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Perfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pizarra.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
