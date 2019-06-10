@@ -15,6 +15,7 @@ using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -281,7 +282,6 @@ namespace FootballTrainingManagerUI.ViewModels
         #region Constructor
         public clsVmPerfil() {
             _manager = new clsManager(App.oAppManager.id, App.oAppManager.correo, App.oAppManager.passwordManager, App.oAppManager.nombre, App.oAppManager.apellidos, App.oAppManager.fotoPerfil, App.oAppManager.fechaNacimiento);
-            //_imagenPerfil = new BitmapImage(new Uri("ms-appx:///Assets/avatar.png"));
             _edad = calcularEdad(manager.fechaNacimiento.Year);
             _formReadOnly = true;
             _edadVisibility = "Visible";
@@ -309,10 +309,11 @@ namespace FootballTrainingManagerUI.ViewModels
             }
 
             return sePuedeGuardar;
+            //return true;
         }
         
         private async void guardarCommand_Executed()
-        {
+        {        
             bool ok;
             clsManejadoraManager manejadora = new clsManejadoraManager();
 
@@ -335,10 +336,36 @@ namespace FootballTrainingManagerUI.ViewModels
                     _edad = calcularEdad(_manager.fechaNacimiento.Year);
                     NotifyPropertyChanged("edad");
                 }
+                else
+                {
+                    var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
+                    String errorGuardadoCorreo = resourceLoader.GetString("strErrorGuardadoCorreoExistente");
+
+                    ContentDialog error = new ContentDialog();
+                    error.Title = "Error";
+                    error.Content = errorGuardadoCorreo;
+                    error.PrimaryButtonText = "Ok";
+
+                    ContentDialogResult resultado = await error.ShowAsync();
+
+                    if (resultado == ContentDialogResult.Primary)
+                        cancelarCommand_Executed();
+                }
             }
             catch (Exception e)
             {
-                //TODO
+                var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
+                String errorGuardado = resourceLoader.GetString("strErrorGuardado");
+
+                ContentDialog error = new ContentDialog();
+                error.Title = "Error";
+                error.Content = errorGuardado;
+                error.PrimaryButtonText = "Ok";
+
+                ContentDialogResult resultado = await error.ShowAsync();
+
+                if (resultado == ContentDialogResult.Primary)
+                    cancelarCommand_Executed();
             }
         }
 
@@ -369,7 +396,7 @@ namespace FootballTrainingManagerUI.ViewModels
             NotifyPropertyChanged("datePickerVisibility");
             _guardarVisibility = "Collapsed";
             NotifyPropertyChanged("guardarVisibility");
-            _manager = App.oAppManager;
+            _manager = new clsManager(App.oAppManager.id, App.oAppManager.correo, App.oAppManager.passwordManager, App.oAppManager.nombre, App.oAppManager.apellidos, App.oAppManager.fotoPerfil, App.oAppManager.fechaNacimiento);
             NotifyPropertyChanged("manager");
         }
 
@@ -467,19 +494,33 @@ namespace FootballTrainingManagerUI.ViewModels
                         App.oAppManager.passwordManager = _passwCheck;
                         _manager.passwordManager = _passwCheck;
                         //Lanzar content dialog bueno
+                        var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
+                        String success = resourceLoader.GetString("strNotificarOkCambPsw");
+
+                        ContentDialog todoOk = new ContentDialog();
+                        todoOk.Title = "";
+                        todoOk.Content = success;
+                        todoOk.PrimaryButtonText = "Ok";
+
+                        ContentDialogResult resultado = await todoOk.ShowAsync();
                     }
                 }
                 catch (Exception e)
                 {
-                    //TODO
+                    var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
+                    String errorGuardado = resourceLoader.GetString("strErrorGuardado");
+
+                    ContentDialog error = new ContentDialog();
+                    error.Title = "Error";
+                    error.Content = errorGuardado;
+                    error.PrimaryButtonText = "Ok";
+
+                    ContentDialogResult resultado = await error.ShowAsync();
+
+                    if (resultado == ContentDialogResult.Primary)
+                        cancelarNewPswCommand_Executed();
                 }
-                finally
-                {
-                    if (!ok)
-                    {
-                        //Lanzar content dialog malo y mezquino
-                    }
-                }
+
                 _cancelarPswVisibility = "Collapsed";
                 NotifyPropertyChanged("cancelarPswVisibility");
                 _formCambiarPswVisibility = "Collapsed";

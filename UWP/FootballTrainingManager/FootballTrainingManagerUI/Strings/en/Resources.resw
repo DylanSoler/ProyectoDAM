@@ -217,7 +217,7 @@
     <value>Settings</value>
   </data>
   <data name="strEnt.Text" xml:space="preserve">
-    <value>Training</value>
+    <value>Training of the week</value>
   </data>
   <data name="strForTact.Text" xml:space="preserve">
     <value>Tactical scheme</value>
@@ -289,5 +289,11 @@ With this project I hope to get approved.😉😬</value>
   </data>
   <data name="streAboutMe.Content" xml:space="preserve">
     <value>About me</value>
+  </data>
+  <data name="strErrorGuardado" xml:space="preserve">
+    <value>An error has ocurred</value>
+  </data>
+  <data name="strErrorGuardadoCorreoExistente" xml:space="preserve">
+    <value>An error has ocurred. If you have modified the entered email, it is likely that you already have an associated user.</value>
   </data>
 </root>

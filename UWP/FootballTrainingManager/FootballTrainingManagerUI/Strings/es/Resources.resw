@@ -217,7 +217,7 @@
     <value>Ajustes</value>
   </data>
   <data name="strEnt.Text" xml:space="preserve">
-    <value>Entrenos</value>
+    <value>Entrenos semana</value>
   </data>
   <data name="strForTact.Text" xml:space="preserve">
     <value>Formación táctica</value>
@@ -289,5 +289,11 @@ Con este proyecto espero conseguir aprobar.😉😬</value>
   </data>
   <data name="streAboutMe.Content" xml:space="preserve">
     <value>Sobre mí</value>
+  </data>
+  <data name="strErrorGuardado" xml:space="preserve">
+    <value>Ha ocurrido un error</value>
+  </data>
+  <data name="strErrorGuardadoCorreoExistente" xml:space="preserve">
+    <value>Ha ocurrido un error. Si ha modificado el correo introducido, es probable que ya tenga un usuario asociado.</value>
   </data>
 </root>

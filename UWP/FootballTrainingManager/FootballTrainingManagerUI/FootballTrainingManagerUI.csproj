@@ -121,14 +121,19 @@
     </Compile>
     <Compile Include="ViewModels\clsVmAjustes.cs" />
     <Compile Include="ViewModels\clsVMBase.cs" />
+    <Compile Include="ViewModels\clsVmEntrenos.cs" />
     <Compile Include="ViewModels\clsVmPerfil.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDtTimeDtOffset.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
+    <Compile Include="ViewModels\NotifyTaskCompletion.cs" />
     <Compile Include="Views\Ajustes.xaml.cs">
       <DependentUpon>Ajustes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CambiarPassw.xaml.cs">
       <DependentUpon>CambiarPassw.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Entrenos.xaml.cs">
+      <DependentUpon>Entrenos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -192,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CambiarPassw.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Entrenos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

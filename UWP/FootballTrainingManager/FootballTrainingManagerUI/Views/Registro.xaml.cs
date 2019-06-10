@@ -49,7 +49,7 @@ namespace FootballTrainingManagerUI.Views
                 String password = Convert.ToBase64String(psw);
 
                 clsManejadoraManager manejadora = new clsManejadoraManager();
-                clsManager oMng = new clsManager(0, txbCorreo.Text, password, txbNombre.Text, txbApellidos.Text, "../Assets/avatarDefault.png", date);
+                clsManager oMng = new clsManager(0, txbCorreo.Text, password, txbNombre.Text, txbApellidos.Text, "ms-appx:///Assets/avatar.png", date);
 
                 bool ok = await manejadora.insertarManagerDAL(oMng);
 
