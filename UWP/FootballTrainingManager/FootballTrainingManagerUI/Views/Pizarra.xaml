@@ -24,13 +24,14 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="titulo.HorizontalAlignment" Value="Left"/>
+                        <Setter Target="titulo.Margin" Value="0,0,0,0"/>
+                        <Setter Target="campo.Source" Value="../Assets/campoverde1V.png"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <!--<Grid Name="gridPizarraPrincipal" Width="1920" Height="1080">-->
         <Grid Name="gridPizarraPrincipal">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -40,17 +41,16 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"></RowDefinition>
                 <RowDefinition Height="9*"></RowDefinition>
-                <!--<RowDefinition Height="2*"></RowDefinition>-->
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="1" RelativePanel.AlignTopWithPanel="True" Margin="0,20,0,0">
-                <TextBlock x:Uid="strPizTac" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="55,20,0,0" HorizontalAlignment="Center"></TextBlock>
+            <StackPanel Name="stkTitulo" Grid.Column="1" RelativePanel.AlignTopWithPanel="True" Margin="0,20,0,0">
+                <TextBlock Name="titulo" x:Uid="strPizTac" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="55,0,0,0" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
 
 
             <Grid Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="2">
-                <Image Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Source="../Assets/campoverde1.png"></Image>
+                <Image Name="campo" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Source="../Assets/campoverde1.png"></Image>
                 <InkCanvas x:Name="inkC"/>
                 <StackPanel Orientation="Horizontal">
                     <InkToolbar TargetInkCanvas="{x:Bind inkC}" InitialControls="All" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#C5CAE9" MaxWidth="200"/>

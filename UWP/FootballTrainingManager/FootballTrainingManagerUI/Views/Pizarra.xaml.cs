@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Graphics.Canvas;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
+using Windows.UI;
 using Windows.UI.Input.Inking;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -49,30 +51,36 @@ namespace FootballTrainingManagerUI.Views
             gridPizarraPrincipal.Width = bounds.Width * scaleFactor;
         }
 
+        /// <summary>
+        /// Evento asociado al botón de guardar, guarda el canvas como una imagen
+        /// en la ruta especificada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void GuardarComoImagen_Click(object sender, RoutedEventArgs e)
         {
             if (inkC != null)
             {
-                RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap();
-                await renderTargetBitmap.RenderAsync(inkC);
-
+                //Abrimos selector de archivos para seleccionar ruta y nombre del archivo a guardar
                 var picker = new FileSavePicker();
                 picker.FileTypeChoices.Add("JPEG Image", new string[] { ".jpg",".jpeg",".png" });
                 StorageFile file = await picker.PickSaveFileAsync();
+                //Una vez seleccionado/creado el archivo donde se va a guardar nuestro canvas
                 if (file != null)
                 {
-                    var pixels = await renderTargetBitmap.GetPixelsAsync();
-
-                    using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                    //Usamos librería Win2D
+                    CanvasDevice device = CanvasDevice.GetSharedDevice();
+                    CanvasRenderTarget renderTarget = new CanvasRenderTarget(device, (int)inkC.ActualWidth, (int)inkC.ActualHeight, 96);
+                    //Configuramos el fondo verde e insertamos el dibujo realizado
+                    using (var ds = renderTarget.CreateDrawingSession())
                     {
-                        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream);
-                        byte[] bytes = pixels.ToArray();
-                        encoder.SetPixelData(BitmapPixelFormat.Bgra8,
-                                             BitmapAlphaMode.Ignore,
-                                             1567, 694,
-                                             96, 96, bytes);
-
-                        await encoder.FlushAsync();
+                        ds.Clear(Colors.LightGreen);
+                        ds.DrawInk(inkC.InkPresenter.StrokeContainer.GetStrokes());
+                    }
+                    //Finalmente guardamos la imagen
+                    using (var fileStream = await file.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await renderTarget.SaveAsync(fileStream, CanvasBitmapFileFormat.Jpeg, 1f);
                     }
                 }
 

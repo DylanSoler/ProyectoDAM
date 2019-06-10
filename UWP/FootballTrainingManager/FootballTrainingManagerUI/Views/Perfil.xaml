@@ -75,7 +75,7 @@
                         </Border>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Button Name="btnEditar" Command="{Binding editarFotoCommand}" Background="#C5CAE9" Foreground="#3F51B5" FontFamily="Segoe MDL2 Assets" Content="&#xE70F;" HorizontalAlignment="Center" Margin="0,0,16,0"></Button>
-                            <Button Name="btnQuitar" Background="#C5CAE9" Foreground="Red" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" HorizontalAlignment="Center"></Button>
+                            <Button Name="btnQuitar" Command="{Binding cancelarFotoCommand}" Background="#C5CAE9" Foreground="Red" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" HorizontalAlignment="Center"></Button>
                         </StackPanel>
                     </StackPanel>
 

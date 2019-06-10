@@ -48,6 +48,7 @@ namespace FootballTrainingManagerUI.ViewModels
         private DelegateCommand _cancelarNewPswCommand;
         private DelegateCommand _checkPasswordCommand;
         private DelegateCommand _editarFotoCommand;
+        private DelegateCommand _cancelarFotoCommand;
         private Double _screenHeight;
         private Double _screenWidth;
         #endregion
@@ -242,6 +243,15 @@ namespace FootballTrainingManagerUI.ViewModels
             {
                 _editarFotoCommand = new DelegateCommand(editarFotoCommand_Executed);
                 return _editarFotoCommand;
+            }
+        }
+
+        public DelegateCommand cancelarFotoCommand
+        {
+            get
+            {
+                _cancelarFotoCommand = new DelegateCommand(cancelarFotoCommand_Executed);
+                return _cancelarFotoCommand;
             }
         }
 
@@ -553,6 +563,29 @@ namespace FootballTrainingManagerUI.ViewModels
                 }
             }
         }
+
+        private async void cancelarFotoCommand_Executed()
+        {
+            //Si la foto de perfil es distinta a la foto por defecto
+            if (!_manager.fotoPerfil.Equals("ms-appx:///Assets/avatar.png"))
+            {
+                //Se establece la foto perfil por defecto
+                manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                NotifyPropertyChanged("manager");
+                //Se actualiza la API
+                try
+                {
+                    clsManejadoraManager manejadora = new clsManejadoraManager();
+                    bool ok = await manejadora.actualizarManagerDAL(_manager);
+                }
+                catch (Exception e)
+                {
+                    //TODO
+                }
+            }
+        }
+
         #endregion
 
         #region Otros métodos
