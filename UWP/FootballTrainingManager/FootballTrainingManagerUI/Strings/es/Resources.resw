@@ -296,4 +296,13 @@ Con este proyecto espero conseguir aprobar.😉😬</value>
   <data name="strErrorGuardadoCorreoExistente" xml:space="preserve">
     <value>Ha ocurrido un error. Si ha modificado el correo introducido, es probable que ya tenga un usuario asociado.</value>
   </data>
+  <data name="strCancelar.Text" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="strEditar.Text" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="strGuardar.Text" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
 </root>

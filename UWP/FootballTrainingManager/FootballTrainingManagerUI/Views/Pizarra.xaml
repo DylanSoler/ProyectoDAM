@@ -49,7 +49,7 @@
             </StackPanel>
 
 
-            <Grid Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="2">
+            <Grid Grid.Row="1" Grid.Column="1" BorderBrush="White" BorderThickness="2" Margin="0,0,30,0">
                 <Image Name="campo" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Source="../Assets/campoverde1.png"></Image>
                 <InkCanvas x:Name="inkC"/>
                 <StackPanel Orientation="Horizontal">

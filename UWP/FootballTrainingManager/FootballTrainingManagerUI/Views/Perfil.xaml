@@ -36,6 +36,8 @@
                         <Setter Target="stkPrincipal.(Orientation)" Value="Vertical"/>
                         <Setter Target="txbDatosPersonales.FontSize" Value="30"/>
                         <Setter Target="stkInfoPerfil.Margin" Value="20,0,0,0"/>
+                        <Setter Target="txbPerfil.Margin" Value="10,20,0,0"/>
+                        <Setter Target="txbPerfil.HorizontalAlignment" Value="Left"/>
                         <Setter Target="txbDatosPersonales.HorizontalAlignment" Value="Left"/>
                         <Setter Target="stkChangePassword.Margin" Value="20,10,0,0"/>
                         <Setter Target="txbNotificarPswError.Width" Value="200"/>
@@ -62,7 +64,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1" RelativePanel.AlignTopWithPanel="True" Margin="0,20,0,0">
-                <TextBlock x:Uid="strPerfil" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="55,20,0,0" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Name="txbPerfil" x:Uid="strPerfil" FontSize="60" Foreground="White" VerticalAlignment="Center" Margin="55,20,0,0" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
 
             <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">

@@ -570,7 +570,11 @@ namespace FootballTrainingManagerUI.ViewModels
 
                     //Obtenemos la representación SoftwareBitmap del archivo
                     softwareBitmap = await decoder.GetSoftwareBitmapAsync();
-                    
+
+                    //Reemplazamos por si falla al estar en uso
+                    manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                    NotifyPropertyChanged("manager");
+
                     //Guardamos en el almacén de datos local de la aplicación
                     StorageFile fileSave = await storageFolder.CreateFileAsync(foto.Name, CreationCollisionOption.ReplaceExisting);
                     BitmapEncoder encoder = await BitmapEncoder.CreateAsync(Windows.Graphics.Imaging.BitmapEncoder.JpegEncoderId, await fileSave.OpenAsync(FileAccessMode.ReadWrite));
@@ -597,6 +601,7 @@ namespace FootballTrainingManagerUI.ViewModels
                     }
                 }
                 catch(Exception ex) {
+                    //Error habitual -> HRESULT E_FAIL has been returned from a call to a COM component
                     //Establecemos foto perfil por defecto
                     manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
                     App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
