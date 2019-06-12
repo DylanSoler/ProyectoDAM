@@ -308,4 +308,13 @@ With this project I hope to get approved.😉😬</value>
   <data name="strGuardar.Text" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="strFTdescripcion.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="strFTMentalidad.Text" xml:space="preserve">
+    <value>Mentality</value>
+  </data>
+  <data name="strFTsistema.Text" xml:space="preserve">
+    <value>System</value>
+  </data>
 </root>

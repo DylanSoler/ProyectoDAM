@@ -308,4 +308,13 @@ Con este proyecto espero conseguir aprobar.😉😬</value>
   <data name="strGuardar.Text" xml:space="preserve">
     <value>Guardar</value>
   </data>
+  <data name="strFTdescripcion.Text" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="strFTMentalidad.Text" xml:space="preserve">
+    <value>Mentalidad</value>
+  </data>
+  <data name="strFTsistema.Text" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
 </root>

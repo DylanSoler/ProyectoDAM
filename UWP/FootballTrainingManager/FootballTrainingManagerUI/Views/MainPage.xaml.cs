@@ -39,11 +39,10 @@ namespace FootballTrainingManagerUI.Views
             if (perfil.IsSelected)
             {
                 frmPrincipal.Navigate(typeof(Perfil));
-                //this.Frame.Navigate(typeof(Perfil));
             }
             else if (formTact.IsSelected)
             {
-                //frmPrincipal.Navigate(typeof());
+                frmPrincipal.Navigate(typeof(FormTactica));
             }
             else if (entreno.IsSelected)
             {

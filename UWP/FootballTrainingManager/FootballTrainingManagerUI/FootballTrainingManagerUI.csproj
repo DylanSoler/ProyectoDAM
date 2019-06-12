@@ -122,6 +122,7 @@
     <Compile Include="ViewModels\clsVmAjustes.cs" />
     <Compile Include="ViewModels\clsVMBase.cs" />
     <Compile Include="ViewModels\clsVmEntrenos.cs" />
+    <Compile Include="ViewModels\clsVmFormTactica.cs" />
     <Compile Include="ViewModels\clsVmPerfil.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDiaSemana.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDtTimeDtOffset.cs" />
@@ -135,6 +136,9 @@
     </Compile>
     <Compile Include="Views\Entrenos.xaml.cs">
       <DependentUpon>Entrenos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormTactica.xaml.cs">
+      <DependentUpon>FormTactica.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -162,6 +166,23 @@
     <PRIResource Include="Strings\es\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\3-4-3 diamante.png" />
+    <Content Include="Assets\3-4-3.png" />
+    <Content Include="Assets\3-5-2.png" />
+    <Content Include="Assets\4-1-4-1.png" />
+    <Content Include="Assets\4-2-3-1 abierto.png" />
+    <Content Include="Assets\4-2-3-1 mediapuntas.png" />
+    <Content Include="Assets\4-2-4.png" />
+    <Content Include="Assets\4-3-1-2.png" />
+    <Content Include="Assets\4-3-2-1 abierto.png" />
+    <Content Include="Assets\4-3-2-1.png" />
+    <Content Include="Assets\4-3-3.png" />
+    <Content Include="Assets\4-4-1-1.png" />
+    <Content Include="Assets\4-4-2 diamante.png" />
+    <Content Include="Assets\4-4-2 mediocentros.png" />
+    <Content Include="Assets\4-4-2.png" />
+    <Content Include="Assets\5-3-2.png" />
+    <Content Include="Assets\5-4-1 diamante.png" />
     <Content Include="Assets\ajustes.png" />
     <Content Include="Assets\asta.jpg" />
     <Content Include="Assets\avatar.png" />
@@ -202,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Entrenos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormTactica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
