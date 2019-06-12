@@ -15,7 +15,6 @@ namespace FootballTrainingManagerUI.ViewModels
 
         #region Propiedades privadas
         private NotifyTaskCompletion<List<clsEntreno>> _listadoEntrenos;
-        private List<clsEntreno> _listadoEntrenosCopia;
         private Double _screenHeight;
         private Double _screenWidth;
         private String _entrenosSoloLecturaVisibility;
@@ -29,16 +28,6 @@ namespace FootballTrainingManagerUI.ViewModels
         public NotifyTaskCompletion<List<clsEntreno>> listadoEntrenos
         {
             get { return _listadoEntrenos; }
-        }
-
-        public List<clsEntreno> listadoEntrenosCopia
-        {
-            get { return _listadoEntrenosCopia; }
-
-            set {
-                _listadoEntrenosCopia = value;
-                NotifyPropertyChanged("listadoEntrenosCopia");
-                }
         }
 
         public String entrenosSoloLecturaVisibility
@@ -120,8 +109,6 @@ namespace FootballTrainingManagerUI.ViewModels
         #region Commands
         private void editarEntrenosCommand_Executed()
         {
-            _listadoEntrenosCopia = _listadoEntrenos.Result;
-            NotifyPropertyChanged("listadoEntrenosCopia");
             _entrenosEditablesVisibility = "Visible";
             NotifyPropertyChanged("entrenosEditablesVisibility");
             _entrenosSoloLecturaVisibility = "Collapsed";
@@ -143,7 +130,7 @@ namespace FootballTrainingManagerUI.ViewModels
         private async void guardarEntrenosCommand_ExecutedAsync()
         {
             clsManejadoraEntreno manejadora = new clsManejadoraEntreno();
-            bool ret = await manejadora.actualizarEntrenosDAL(_listadoEntrenosCopia);
+            bool ret = await manejadora.actualizarEntrenosDAL(_listadoEntrenos.Result);
 
             if (ret)
             {
@@ -186,8 +173,6 @@ namespace FootballTrainingManagerUI.ViewModels
 
         private void cancelarCommand_Executed()
         {
-            _listadoEntrenosCopia = _listadoEntrenos.Result;
-            NotifyPropertyChanged("listadoEntrenosCopia");
             _entrenosEditablesVisibility = "Collapsed";
             NotifyPropertyChanged("entrenosEditablesVisibility");
             _entrenosSoloLecturaVisibility = "Visible";

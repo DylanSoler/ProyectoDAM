@@ -126,6 +126,7 @@
     <Compile Include="ViewModels\clsVmPerfil.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDiaSemana.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDtTimeDtOffset.cs" />
+    <Compile Include="ViewModels\Converters\clsConverterRutaImagenFormTact.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\NotifyTaskCompletion.cs" />
     <Compile Include="Views\Ajustes.xaml.cs">

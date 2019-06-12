@@ -1,8 +1,12 @@
-﻿using System;
+﻿using FootballTrainingManagerDAL.Manejadoras;
+using FootballTrainingManagerEntidades.Complejas;
+using FootballTrainingManagerEntidades.Persistencia;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace FootballTrainingManagerUI.ViewModels
 {
@@ -10,47 +14,55 @@ namespace FootballTrainingManagerUI.ViewModels
     {
 
         #region Propiedades privadas
-        /*private NotifyTaskCompletion<List<clsEntreno>> _listadoEntrenos;
-        private List<clsEntreno> _listadoEntrenosCopia;*/
+        private NotifyTaskCompletion<clsFormacionTactica> _formTacticaAsin;
+        private List<clsTactica> _listadoTacticas;
+        private bool _formReadOnly;
         private Double _screenHeight;
         private Double _screenWidth;
-        /*private String _entrenosSoloLecturaVisibility;
-        private String _entrenosEditablesVisibility;*/
+        private String _comboBoxSistemaVisibility;
+        private String _txbSistemaVisibility;
         private DelegateCommand _editarFormTactCommand;
         private DelegateCommand _guardarFormTactCommand;
         private DelegateCommand _cancelarCommand;
         #endregion
 
         #region Propiedades publicas
-        /*public NotifyTaskCompletion<List<clsEntreno>> listadoEntrenos
+        public NotifyTaskCompletion<clsFormacionTactica> formTacticaAsin
         {
-            get { return _listadoEntrenos; }
+            get { return _formTacticaAsin; }
         }
 
-        public List<clsEntreno> listadoEntrenosCopia
+        public List<clsTactica> listadoTacticas
         {
-            get { return _listadoEntrenosCopia; }
+            get { return _listadoTacticas; }
+
+            set { _listadoTacticas = value; }
+        }
+
+        public bool formReadOnly
+        {
+            get { return _formReadOnly; }
 
             set
             {
-                _listadoEntrenosCopia = value;
-                NotifyPropertyChanged("listadoEntrenosCopia");
+                _formReadOnly = value;
+                NotifyPropertyChanged("formReadOnly");
             }
         }
 
-        public String entrenosSoloLecturaVisibility
+        public String comboBoxSistemaVisibility
         {
-            get { return _entrenosSoloLecturaVisibility; }
+            get { return _comboBoxSistemaVisibility; }
 
-            set { _entrenosSoloLecturaVisibility = value; }
+            set { _comboBoxSistemaVisibility = value; }
         }
 
-        public String entrenosEditablesVisibility
+        public String txbSistemaVisibility
         {
-            get { return _entrenosEditablesVisibility; }
+            get { return _txbSistemaVisibility; }
 
-            set { _entrenosEditablesVisibility = value; }
-        }*/
+            set { _txbSistemaVisibility = value; }
+        }
 
         public DelegateCommand editarFormTactCommand
         {
@@ -106,58 +118,63 @@ namespace FootballTrainingManagerUI.ViewModels
         #region Constructor
         public clsVmFormTactica()
         {
-            /*clsListadoEntrenos gest = new clsListadoEntrenos();
-            _listadoEntrenos = new NotifyTaskCompletion<List<clsEntreno>>(gest.listadoCompletoEntrenosDAL(App.oAppManager.id));
+            _formReadOnly = true;
+            clsManejadoraFormacionTactica gest = new clsManejadoraFormacionTactica();
+            _formTacticaAsin = new NotifyTaskCompletion<clsFormacionTactica>(gest.obtenerFormacionTacticaPorManagerIDDAL(App.oAppManager.id));
 
-            _entrenosEditablesVisibility = "Collapsed";
-            _entrenosSoloLecturaVisibility = "Visible";*/
+            _listadoTacticas = new List<clsTactica>(App.oTacticas);
+
+            _comboBoxSistemaVisibility = "Collapsed";
+            _txbSistemaVisibility = "Visible";
         }
         #endregion
 
         #region Commands
         private void editarFormTactCommand_Executed()
         {
-            /*_listadoEntrenosCopia = _listadoEntrenos.Result;
-            NotifyPropertyChanged("listadoEntrenosCopia");
-            _entrenosEditablesVisibility = "Visible";
-            NotifyPropertyChanged("entrenosEditablesVisibility");
-            _entrenosSoloLecturaVisibility = "Collapsed";
-            NotifyPropertyChanged("entrenosSoloLecturaVisibility");
-            _guardarEntrenosCommand.RaiseCanExecuteChanged();
-            _cancelarCommand.RaiseCanExecuteChanged();*/
+            _formReadOnly = false;
+            NotifyPropertyChanged("formReadOnly");
+            _comboBoxSistemaVisibility = "Visible";
+            NotifyPropertyChanged("comboBoxSistemaVisibility");
+            _txbSistemaVisibility = "Collapsed";
+            NotifyPropertyChanged("txbSistemaVisibility");
+            _guardarFormTactCommand.RaiseCanExecuteChanged();
+            _cancelarCommand.RaiseCanExecuteChanged();
         }
 
         private bool guardarFormTactCommand_CanExecuted()
         {
             bool ret = false;
 
-            /*if (_entrenosSoloLecturaVisibility.Equals("Collapsed") && _entrenosEditablesVisibility.Equals("Visible"))
-                ret = true;*/
+            if (_txbSistemaVisibility.Equals("Collapsed") && _comboBoxSistemaVisibility.Equals("Visible"))
+                ret = true;
 
             return ret;
         }
 
         private async void guardarFormTactCommand_Executed()
         {
-            /*clsManejadoraEntreno manejadora = new clsManejadoraEntreno();
-            bool ret = await manejadora.actualizarEntrenosDAL(_listadoEntrenosCopia);
+            clsManejadoraFormacionTactica manejadora = new clsManejadoraFormacionTactica();
+            bool ret = await manejadora.actualizarFormacionTacticaDAL(_formTacticaAsin.Result);
 
             if (ret)
             {
-                clsListadoEntrenos gest = new clsListadoEntrenos();
-                _listadoEntrenos = new NotifyTaskCompletion<List<clsEntreno>>(gest.listadoCompletoEntrenosDAL(App.oAppManager.id));
-                NotifyPropertyChanged("listadoEntrenos");
-                _entrenosEditablesVisibility = "Collapsed";
-                NotifyPropertyChanged("entrenosEditablesVisibility");
-                _entrenosSoloLecturaVisibility = "Visible";
-                NotifyPropertyChanged("entrenosSoloLecturaVisibility");
-                _guardarEntrenosCommand.RaiseCanExecuteChanged();
+                clsManejadoraFormacionTactica gest = new clsManejadoraFormacionTactica();
+                _formTacticaAsin = new NotifyTaskCompletion<clsFormacionTactica>(gest.obtenerFormacionTacticaPorManagerIDDAL(App.oAppManager.id));
+                NotifyPropertyChanged("formTacticaAsin");
+                _formReadOnly = true;
+                NotifyPropertyChanged("formReadOnly");
+                _comboBoxSistemaVisibility = "Collapsed";
+                NotifyPropertyChanged("comboBoxSistemaVisibility");
+                _txbSistemaVisibility = "Visible";
+                NotifyPropertyChanged("txbSistemaVisibility");
+                _guardarFormTactCommand.RaiseCanExecuteChanged();
                 _cancelarCommand.RaiseCanExecuteChanged();
             }
             else
             {
                 var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
-                String errorGuardado = resourceLoader.GetString("strErrorActualizarEntrenos");
+                String errorGuardado = resourceLoader.GetString("strErrorActualizarFormTact");
 
                 ContentDialog error = new ContentDialog();
                 error.Title = "Error";
@@ -168,29 +185,29 @@ namespace FootballTrainingManagerUI.ViewModels
 
                 if (resultado == ContentDialogResult.Primary)
                     cancelarCommand_Executed();
-            }*/
+            }
         }
 
         private bool cancelarCommand_CanExecuted()
         {
             bool ret = false;
 
-            /*if (_entrenosSoloLecturaVisibility.Equals("Collapsed") && _entrenosEditablesVisibility.Equals("Visible"))
-                ret = true;*/
+            if (_txbSistemaVisibility.Equals("Collapsed") && _comboBoxSistemaVisibility.Equals("Visible"))
+                ret = true;
 
             return ret;
         }
 
         private void cancelarCommand_Executed()
         {
-            /*_listadoEntrenosCopia = _listadoEntrenos.Result;
-            NotifyPropertyChanged("listadoEntrenosCopia");
-            _entrenosEditablesVisibility = "Collapsed";
-            NotifyPropertyChanged("entrenosEditablesVisibility");
-            _entrenosSoloLecturaVisibility = "Visible";
-            NotifyPropertyChanged("entrenosSoloLecturaVisibility");
-            _guardarEntrenosCommand.RaiseCanExecuteChanged();
-            _cancelarCommand.RaiseCanExecuteChanged();*/
+            _formReadOnly = true;
+            NotifyPropertyChanged("formReadOnly");
+            _comboBoxSistemaVisibility = "Collapsed";
+            NotifyPropertyChanged("comboBoxSistemaVisibility");
+            _txbSistemaVisibility = "Visible";
+            NotifyPropertyChanged("txbSistemaVisibility");
+            _guardarFormTactCommand.RaiseCanExecuteChanged();
+            _cancelarCommand.RaiseCanExecuteChanged();
         }
         #endregion
 

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:FootballTrainingManagerUI.ViewModels"
+    xmlns:Converter="using:FootballTrainingManagerUI.ViewModels.Converters"
     SizeChanged="Page_SizeChanged"
     mc:Ignorable="d"
     Background="#3F51B5">
@@ -13,6 +14,10 @@
     <Page.DataContext>
         <vm:clsVmFormTactica x:Name="vmFormTact"></vm:clsVmFormTactica>
     </Page.DataContext>
+
+    <Page.Resources>
+        <Converter:clsConverterRutaImagenFormTact x:Key="rutaImagen"></Converter:clsConverterRutaImagenFormTact>
+    </Page.Resources>
 
     <RelativePanel>
 
@@ -40,7 +45,7 @@
                         <Setter Target="stkFormTact1.Margin" Value="10,10,10,40"/>
                         <Setter Target="stkFormTact2.Margin" Value="10,0,10,10"/>
                         <Setter Target="txbDescripcion.MaxWidth" Value="240"/>
-                        <Setter Target="txbDescripcion.MinWidth" Value="240"/>
+                        <Setter Target="txbDescripcion.MinWidth" Value="236"/>
                         <Setter Target="txbDescripcion.Height" Value="auto"/>
                         <Setter Target="txbEdit.Visibility" Value="Collapsed"/>
                         <Setter Target="btnEditar.Width" Value="60"/>
@@ -103,19 +108,27 @@
             <ScrollViewer Name="scroll" Grid.Column="1" Grid.Row="2" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center">
             <StackPanel Name="stkPrincipal" Orientation="Horizontal">
                 
-                <Image Name="imgSistema" Source="ms-appx:///Assets/4-2-3-1 abierto.png" Margin="40,0,0,0"></Image>
+                <Image Name="imgSistema" Source="{Binding formTacticaAsin.Result.sistemaTactico, Converter={StaticResource rutaImagen}}" Margin="40,0,0,0"></Image>
 
-                <StackPanel Name="stkFormTact1" Orientation="Vertical" Margin="80,40,140,20">
+                <StackPanel Name="stkFormTact1" Orientation="Vertical" Margin="80,40,120,20">
                     <TextBlock x:Uid="strFTsistema" Foreground="White" FontSize="20" Margin="0,0,0,10"></TextBlock>
-                    <TextBox Visibility="Visible" TextWrapping="Wrap" MinWidth="160" MaxWidth="220" Margin="0,0,0,40" HorizontalAlignment="Left"></TextBox>
-                    <ComboBox Visibility="Collapsed" MinWidth="160" MaxWidth="220" Margin="0,0,0,40" HorizontalAlignment="Left"></ComboBox>
+                    <TextBox Text="{Binding formTacticaAsin.Result.sistemaTactico, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" Visibility="{Binding txbSistemaVisibility}" FontSize="16" TextWrapping="Wrap" MinWidth="160" MaxWidth="220" Margin="0,0,0,40" HorizontalAlignment="Left"></TextBox>
+                    <ComboBox Name="cbxSistema" ItemsSource="{Binding listadoTacticas}" Visibility="{Binding comboBoxSistemaVisibility}" SelectedValuePath="idTactica" SelectedValue="{Binding formTacticaAsin.Result.idTactica, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="#3F51B5" Background="#C5CAE9" MinWidth="160" MaxWidth="220" Margin="0,0,0,40" HorizontalAlignment="Left">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=sistema}" Margin="5,0,0,0"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <TextBlock x:Uid="strFTMentalidad" Foreground="White" FontSize="20" Margin="0,10,0,0"></TextBlock>
-                    <TextBox TextWrapping="Wrap" MinWidth="160" MaxWidth="220" HorizontalAlignment="Left"></TextBox>
+                    <TextBox Text="{Binding formTacticaAsin.Result.mentalidad, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="{Binding formReadOnly}" FontSize="16" TextWrapping="Wrap" MinWidth="160" MaxWidth="220" HorizontalAlignment="Left"></TextBox>
                 </StackPanel>
 
                 <StackPanel Name="stkFormTact2" Orientation="Vertical" Margin="0,40,0,20">
                     <TextBlock x:Uid="strFTdescripcion" Foreground="White" FontSize="20" Margin="0,0,0,10"></TextBlock>
-                        <TextBox Name="txbDescripcion" AcceptsReturn="True" MinWidth="360" Height="400" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBox>
+                    <TextBox Text="{Binding formTacticaAsin.Result.descripcion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="{Binding formReadOnly}" FontSize="18" Name="txbDescripcion" AcceptsReturn="True" MinWidth="356" Height="400" MaxWidth="500" TextWrapping="Wrap" HorizontalAlignment="Left"></TextBox>
                 </StackPanel>
 
             </StackPanel>

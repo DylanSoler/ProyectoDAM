@@ -57,7 +57,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             String ruta = uribase.getUriBaseApi();
             String datos;
             HttpContent contenido;
-            Uri miUri = new Uri($"{ruta}manager/{formTactica.idManager}/entreno");
+            Uri miUri = new Uri($"{ruta}manager/{formTactica.idManager}/formacion");
             Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();

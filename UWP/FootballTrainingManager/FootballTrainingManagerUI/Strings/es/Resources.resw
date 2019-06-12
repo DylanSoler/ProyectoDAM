@@ -308,6 +308,9 @@ Con este proyecto espero conseguir aprobar.😉😬</value>
   <data name="strGuardar.Text" xml:space="preserve">
     <value>Guardar</value>
   </data>
+  <data name="strErrorActualizarFormTact" xml:space="preserve">
+    <value>Ha ocurrido un error al actualizar la formación táctica.</value>
+  </data>
   <data name="strFTdescripcion.Text" xml:space="preserve">
     <value>Descripción</value>
   </data>

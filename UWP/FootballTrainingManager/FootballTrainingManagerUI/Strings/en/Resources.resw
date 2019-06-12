@@ -220,7 +220,7 @@
     <value>Training of the week</value>
   </data>
   <data name="strForTact.Text" xml:space="preserve">
-    <value>Tactical scheme</value>
+    <value>Tactical system</value>
   </data>
   <data name="strLogout.Text" xml:space="preserve">
     <value>Log out</value>
@@ -307,6 +307,9 @@ With this project I hope to get approved.😉😬</value>
   </data>
   <data name="strGuardar.Text" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="strErrorActualizarFormTact" xml:space="preserve">
+    <value>An error has ocurred in the update of the tactical system</value>
   </data>
   <data name="strFTdescripcion.Text" xml:space="preserve">
     <value>Description</value>
