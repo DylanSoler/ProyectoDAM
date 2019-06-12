@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:FootballTrainingManagerUI.ViewModels"
+    xmlns:Converter="using:FootballTrainingManagerUI.ViewModels.Converters"
     mc:Ignorable="d"
     SizeChanged="Page_SizeChanged"
     Background="#3F51B5">
@@ -13,7 +14,11 @@
     <Page.DataContext>
         <vm:clsVmEntrenos x:Name="vmEntrenos"></vm:clsVmEntrenos>
     </Page.DataContext>
-    
+
+    <Page.Resources>
+        <Converter:clsConverterDiaSemana x:Key="diaSemana"></Converter:clsConverterDiaSemana>
+    </Page.Resources>
+
     <RelativePanel>
 
         <VisualStateManager.VisualStateGroups>
@@ -78,6 +83,7 @@
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel x:Name="stkTemplateGV" Orientation="Vertical" BorderBrush="#C5CAE9" BorderThickness="0.5" Width="280" Height="280" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding dia, Converter={StaticResource diaSemana}}" TextWrapping="Wrap" Margin="20,10,20,0" FontSize="20" FontWeight="Medium" Foreground="White"/>
                             <TextBox Text="{Binding sesion1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" IsReadOnly="True" Margin="20,40,20,40"/>
                             <TextBox Text="{Binding sesion2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" IsReadOnly="True" Margin="20,0,20,40"/>
                             <TextBox Text="{Binding sesionExtra, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" IsReadOnly="True" Margin="20,0,20,40"/>
@@ -98,6 +104,7 @@
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel x:Name="stkTemplateGV" Orientation="Vertical" BorderBrush="#C5CAE9" BorderThickness="0.5" Width="280" Height="280" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding dia, Converter={StaticResource diaSemana}}" TextWrapping="Wrap" Margin="20,10,20,0" FontSize="20" FontWeight="Medium" Foreground="White"/>
                             <TextBox Text="{Binding sesion1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" IsReadOnly="False" Margin="20,40,20,40"/>
                             <TextBox Text="{Binding sesion2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" IsReadOnly="False" Margin="20,0,20,40"/>
                             <TextBox Text="{Binding sesionExtra, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" IsReadOnly="False" Margin="20,0,20,40"/>

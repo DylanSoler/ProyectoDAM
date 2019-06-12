@@ -64,26 +64,30 @@ namespace ApiRestFTM_DAL.Manejadoras
         /// </summary>
         /// <param name="oEntreno">clsEntreno</param>
         /// <returns>int</returns>
-        public int insertarEntreno(clsEntreno oEntreno)
+        public int insertarEntreno(List<clsEntreno> oEntrenos)
         {
             SqlConnection miConexion = new SqlConnection();
-            SqlCommand miComando = new SqlCommand();
+            SqlCommand miComando;
             int filas = 0;
             clsMyConnection gestConexion = new clsMyConnection();
 
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "INSERT INTO Entrenos (ID_Manager,Dia,Sesion1,Sesion2,SesionExtra) VALUES(@idManager,@dia,@sesion1,@sesion2,@sesionExtra)";
+                for (int i = 0; i < oEntrenos.Count; i++)
+                {
+                    miComando = new SqlCommand();
+                    miComando.CommandText = "INSERT INTO Entrenos (ID_Manager,Dia,Sesion1,Sesion2,SesionExtra) VALUES(@idManager,@dia,@sesion1,@sesion2,@sesionExtra)";
 
-                miComando.Parameters.Add("@idManager",System.Data.SqlDbType.Int).Value = oEntreno.idManager;
-                miComando.Parameters.Add("@dia", System.Data.SqlDbType.Int).Value = oEntreno.dia;
-                miComando.Parameters.Add("@sesion1", System.Data.SqlDbType.NVarChar).Value = oEntreno.sesion1;
-                miComando.Parameters.Add("@sesion2", System.Data.SqlDbType.NVarChar).Value = oEntreno.sesion2;
-                miComando.Parameters.Add("@sesionExtra", System.Data.SqlDbType.NVarChar).Value = oEntreno.sesionExtra;
+                    miComando.Parameters.Add("@idManager", System.Data.SqlDbType.Int).Value = oEntrenos[i].idManager;
+                    miComando.Parameters.Add("@dia", System.Data.SqlDbType.Int).Value = oEntrenos[i].dia;
+                    miComando.Parameters.Add("@sesion1", System.Data.SqlDbType.NVarChar).Value = oEntrenos[i].sesion1;
+                    miComando.Parameters.Add("@sesion2", System.Data.SqlDbType.NVarChar).Value = oEntrenos[i].sesion2;
+                    miComando.Parameters.Add("@sesionExtra", System.Data.SqlDbType.NVarChar).Value = oEntrenos[i].sesionExtra;
 
-                miComando.Connection = miConexion;
-                filas = miComando.ExecuteNonQuery();
+                    miComando.Connection = miConexion;
+                    filas += miComando.ExecuteNonQuery();
+                }
             }
             catch (SqlException exSql)
             {
@@ -103,27 +107,30 @@ namespace ApiRestFTM_DAL.Manejadoras
         /// </summary>
         /// <param name="oEntreno">clsEntreno</param>
         /// <returns>int</returns>
-        public int editarEntreno(clsEntreno oEntreno)
+        public int editarEntreno(List<clsEntreno> oEntrenos)
         {
             SqlConnection miConexion = new SqlConnection();
-            SqlCommand miComando = new SqlCommand();
+            SqlCommand miComando;
             int filas = 0;
             clsMyConnection gestConexion = new clsMyConnection();
 
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "UPDATE Entrenos SET Sesion1=@sesion1, Sesion2=@sesion2, SesionExtra=@sesionExtra WHERE ID_Manager=@idManager AND Dia=@dia";
+                for (int i = 0; i < oEntrenos.Count; i++)
+                {
+                    miComando = new SqlCommand();
+                    miComando.CommandText = "UPDATE Entrenos SET Sesion1=@sesion1, Sesion2=@sesion2, SesionExtra=@sesionExtra WHERE ID_Manager=@idManager AND Dia=@dia";
 
-                miComando.Parameters.Add("@idManager",System.Data.SqlDbType.Int).Value = oEntreno.idManager;
-                miComando.Parameters.Add("@dia", System.Data.SqlDbType.Int).Value = oEntreno.dia;
-                miComando.Parameters.Add("@sesion1", System.Data.SqlDbType.NVarChar).Value = oEntreno.sesion1;
-                miComando.Parameters.Add("@sesion2", System.Data.SqlDbType.NVarChar).Value = oEntreno.sesion2;
-                miComando.Parameters.Add("@sesionExtra", System.Data.SqlDbType.NVarChar).Value = oEntreno.sesionExtra;
+                    miComando.Parameters.Add("@idManager", System.Data.SqlDbType.Int).Value = oEntrenos[i].idManager;
+                    miComando.Parameters.Add("@dia", System.Data.SqlDbType.Int).Value = oEntrenos[i].dia;
+                    miComando.Parameters.Add("@sesion1", System.Data.SqlDbType.NVarChar).Value = oEntrenos[i].sesion1;
+                    miComando.Parameters.Add("@sesion2", System.Data.SqlDbType.NVarChar).Value = oEntrenos[i].sesion2;
+                    miComando.Parameters.Add("@sesionExtra", System.Data.SqlDbType.NVarChar).Value = oEntrenos[i].sesionExtra;
 
-                miComando.Connection = miConexion;
-                filas = miComando.ExecuteNonQuery();
-
+                    miComando.Connection = miConexion;
+                    filas += miComando.ExecuteNonQuery();
+                }
             }
             catch (SqlException exSql)
             {

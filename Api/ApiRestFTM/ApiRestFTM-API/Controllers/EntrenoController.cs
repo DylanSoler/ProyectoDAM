@@ -36,18 +36,18 @@ namespace ApiRestFTM_API.Controllers
 	}
         
 	[HttpPost]
-	public IActionResult Post([FromBody] clsEntreno oEntrenoNuevo)
+	public IActionResult Post([FromBody] List<clsEntreno> oEntrenosNuevos)
 	{
-            String contentType = Request.Headers["Content-Type"].ToString();
+        String contentType = Request.Headers["Content-Type"].ToString();
 	    clsManejadoraEntreno gestEntrenos = new clsManejadoraEntreno();
 	    
-            if (contentType != "application/json" && contentType != "*/*")
+        if (contentType != "application/json" && contentType != "*/*")
                 return StatusCode(415); //Unsupported Media Type
 	    else
 	    {
-		    int filas = gestEntrenos.insertarEntreno(oEntrenoNuevo);
+		    int filas = gestEntrenos.insertarEntreno(oEntrenosNuevos);
 
-		    if (filas == 1)
+		    if (filas == 7)
 			    return StatusCode(201);
 		    else
 			    return StatusCode(400); //Bad Request
@@ -56,21 +56,21 @@ namespace ApiRestFTM_API.Controllers
         }
 
 	[HttpPut]
-	public IActionResult Put(clsEntreno oEntreno)
+	public IActionResult Put([FromBody] List<clsEntreno> oEntrenos)
 	{
-            String contentType = Request.Headers["Content-Type"].ToString();
+        String contentType = Request.Headers["Content-Type"].ToString();
 	    clsManejadoraEntreno gestEntrenos = new clsManejadoraEntreno();
 	    
-            if (contentType != "application/json" && contentType != "*/*")
+        if (contentType != "application/json" && contentType != "*/*")
                 return StatusCode(415); //Unsupported Media Type
 	    else
 	    {
-		    int filas = gestEntrenos.editarEntreno(oEntreno);
+		    int filas = gestEntrenos.editarEntreno(oEntrenos);
 
-		    if (filas == 1)
+		    if (filas == 7)
 			    return NoContent(); //204 No content
 		    else
-			    return NotFound(oEntreno.idManager); //404 No encontrado
+			    return NotFound(oEntrenos[1].idManager); //404 No encontrado
 	    }
 	    
 	}

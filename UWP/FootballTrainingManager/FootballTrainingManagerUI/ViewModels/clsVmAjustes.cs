@@ -143,6 +143,24 @@ namespace FootballTrainingManagerUI.ViewModels
 
                     try {
                         manejadora.eliminarManagerDAL(App.oAppManager.id);
+
+                        /*//Eliminar foto perfil
+                        // Delete a file by using File class static method...
+                        if (System.IO.File.Exists($"ms-appx:///Assets/perfil{App.oAppManager.id}.jpg"))
+                        {
+                            // Use a try block to catch IOExceptions, to
+                            // handle the case of the file already being
+                            // opened by another process.
+                            try
+                            {
+                                System.IO.File.Delete($"ms-appx:///Assets/perfil{App.oAppManager.id}.jpg");
+                            }
+                            catch (System.IO.IOException e)
+                            {
+                                
+                            }
+                        }*/
+
                         Frame frame = Window.Current.Content as Frame;
                         frame.Navigate(typeof(Login));
                     } catch (Exception ex) {

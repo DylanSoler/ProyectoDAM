@@ -57,7 +57,7 @@ namespace ApiRestFTM_API.Controllers
 
 
         [HttpPut]
-        public IActionResult Put(clsFormacionTactica oFormacion)
+        public IActionResult Put([FromBody]clsFormacionTactica oFormacion)
         {
             String contentType = Request.Headers["Content-Type"].ToString();
             clsManejadoraFormacion gestFormacion = new clsManejadoraFormacion();

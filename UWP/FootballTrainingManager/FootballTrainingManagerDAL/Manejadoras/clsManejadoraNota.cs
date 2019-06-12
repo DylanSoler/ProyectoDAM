@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using FootballTrainingManagerEntidades.Persistencia;
 using FootballTrainingManagerDAL.Conexion;
+using System.Net.Http.Headers;
 
 namespace FootballTrainingManagerDAL.Manejadoras
 {
@@ -64,6 +65,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             try{
                 datos = JsonConvert.SerializeObject(nota);
                 contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
+                contenido.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 response = await client.PutAsync(miUri, contenido);
             } catch (Exception ex) {
                 
@@ -95,6 +97,7 @@ namespace FootballTrainingManagerDAL.Manejadoras
             try{
                 datos = JsonConvert.SerializeObject(nota);
                 contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
+                contenido.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 response = await client.PostAsync(miUri, contenido);
             } catch (Exception ex) {
                 

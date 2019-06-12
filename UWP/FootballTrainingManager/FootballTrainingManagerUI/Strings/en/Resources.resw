@@ -302,6 +302,9 @@ With this project I hope to get approved.😉😬</value>
   <data name="strEditar.Text" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="strErrorActualizarEntrenos" xml:space="preserve">
+    <value>An error has ocurred in the update of the trainings</value>
+  </data>
   <data name="strGuardar.Text" xml:space="preserve">
     <value>Save</value>
   </data>

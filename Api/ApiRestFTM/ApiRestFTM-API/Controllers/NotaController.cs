@@ -58,7 +58,7 @@ namespace ApiRestFTM_API.Controllers
         
         //PUT Manager/{id}/nota
         [HttpPut]
-        public IActionResult Put(clsNota oNota)
+        public IActionResult Put([FromBody] clsNota oNota)
         {
             String contentType = Request.Headers["Content-Type"].ToString();
             clsManejadoraNota gestNotas = new clsManejadoraNota();

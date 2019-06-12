@@ -123,6 +123,7 @@
     <Compile Include="ViewModels\clsVMBase.cs" />
     <Compile Include="ViewModels\clsVmEntrenos.cs" />
     <Compile Include="ViewModels\clsVmPerfil.cs" />
+    <Compile Include="ViewModels\Converters\clsConverterDiaSemana.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDtTimeDtOffset.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\NotifyTaskCompletion.cs" />

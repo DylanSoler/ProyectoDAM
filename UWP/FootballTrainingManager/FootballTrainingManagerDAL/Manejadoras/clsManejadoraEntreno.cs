@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using FootballTrainingManagerEntidades.Persistencia;
 using FootballTrainingManagerDAL.Conexion;
+using System.Net.Http.Headers;
 
 namespace FootballTrainingManagerDAL.Manejadoras
 {
@@ -48,21 +49,22 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="entreno">entreno a actualizar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<Boolean> actualizarEntrenoDAL(clsEntreno entreno)
+        public async Task<Boolean> actualizarEntrenosDAL(List<clsEntreno> entrenos)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
             String ruta = uribase.getUriBaseApi();
             String datos;
             HttpContent contenido;
-            Uri miUri = new Uri($"{ruta}manager/{entreno.idManager}/entreno");
+            Uri miUri = new Uri($"{ruta}manager/{entrenos[1].idManager}/entreno");
             Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
             try{
-                datos = JsonConvert.SerializeObject(entreno);
+                datos = JsonConvert.SerializeObject(entrenos, Formatting.Indented);
                 contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
+                contenido.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 response = await client.PutAsync(miUri, contenido);
             } catch (Exception ex) {
                 
@@ -79,21 +81,22 @@ namespace FootballTrainingManagerDAL.Manejadoras
         /// </summary>
         /// <param name="entreno">entreno a insertar</param>
         /// <returns>boolean true si todo va bien, false si no</returns>
-        public async Task<Boolean> insertarEntrenoDAL(clsEntreno entreno)
+        public async Task<Boolean> insertarEntrenoDAL(List<clsEntreno> entrenos)
         {
             HttpClient client = new HttpClient();
             clsUriBase uribase = new clsUriBase();
             String ruta = uribase.getUriBaseApi();
             String datos;
             HttpContent contenido;
-            Uri miUri = new Uri($"{ruta}manager/{entreno.idManager}/entreno");
+            Uri miUri = new Uri($"{ruta}manager/{entrenos[1].idManager}/entreno");
             Boolean ret = false;
 
             HttpResponseMessage response = new HttpResponseMessage();
 
             try{
-                datos = JsonConvert.SerializeObject(entreno);
+                datos = JsonConvert.SerializeObject(entrenos, Formatting.Indented);
                 contenido = new StringContent(datos, System.Text.Encoding.UTF8, "application/json");
+                contenido.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 response = await client.PostAsync(miUri, contenido);
             } catch (Exception ex) {
                 

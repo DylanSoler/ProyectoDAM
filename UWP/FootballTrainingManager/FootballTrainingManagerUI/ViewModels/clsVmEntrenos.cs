@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace FootballTrainingManagerUI.ViewModels
 {
@@ -67,7 +68,7 @@ namespace FootballTrainingManagerUI.ViewModels
         {
             get
             {
-                _guardarEntrenosCommand = new DelegateCommand(guardarEntrenosCommand_Executed, guardarEntrenosCommand_CanExecuted);
+                _guardarEntrenosCommand = new DelegateCommand(guardarEntrenosCommand_ExecutedAsync, guardarEntrenosCommand_CanExecuted);
                 return _guardarEntrenosCommand;
             }
         }
@@ -141,10 +142,38 @@ namespace FootballTrainingManagerUI.ViewModels
             return ret;
         }
 
-        private void guardarEntrenosCommand_Executed()
+        private async void guardarEntrenosCommand_ExecutedAsync()
         {
             clsManejadoraEntreno manejadora = new clsManejadoraEntreno();
-            //manejadora.
+            bool ret = await manejadora.actualizarEntrenosDAL(_listadoEntrenosCopia);
+
+            if (ret)
+            {
+                clsListadoEntrenos gest = new clsListadoEntrenos();
+                _listadoEntrenos = new NotifyTaskCompletion<List<clsEntreno>>(gest.listadoCompletoEntrenosDAL(App.oAppManager.id));
+                NotifyPropertyChanged("listadoEntrenos");
+                _entrenosEditablesVisibility = "Collapsed";
+                NotifyPropertyChanged("entrenosEditablesVisibility");
+                _entrenosSoloLecturaVisibility = "Visible";
+                NotifyPropertyChanged("entrenosSoloLecturaVisibility");
+                _guardarEntrenosCommand.RaiseCanExecuteChanged();
+                _cancelarCommand.RaiseCanExecuteChanged();
+            }
+            else
+            {
+                var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
+                String errorGuardado = resourceLoader.GetString("strErrorActualizarEntrenos");
+
+                ContentDialog error = new ContentDialog();
+                error.Title = "Error";
+                error.Content = errorGuardado;
+                error.PrimaryButtonText = "Ok";
+
+                ContentDialogResult resultado = await error.ShowAsync();
+
+                if (resultado == ContentDialogResult.Primary)
+                    cancelarCommand_Executed();
+            }
         }
 
         private bool cancelarCommand_CanExecuted()

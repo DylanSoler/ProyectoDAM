@@ -102,7 +102,7 @@ namespace ApiRestFTM_API.Controllers
 
         // PUT Manager/
         [HttpPut]
-        public IActionResult Put(clsManager manager)
+        public IActionResult Put([FromBody]clsManager manager)
         {
             String contentType = Request.Headers["Content-Type"].ToString();
             clsManejadoraManager manejadora = new clsManejadoraManager();
