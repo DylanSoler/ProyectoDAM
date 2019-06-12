@@ -18,10 +18,12 @@ CREATE TABLE Notas (
 	ID_Manager int NOT NULL,
 	Titulo nvarchar(30),
 	TextoNota nvarchar(2000),
+	FechaCreacion smalldatetime NOT NULL,
 	CONSTRAINT FK_Notas_Manager 
 		Foreign Key (ID_Manager) REFERENCES Managers(ID) 
 		ON DELETE CASCADE
 )
+
 
 CREATE TABLE Entrenos (
 	ID_Manager int NOT NULL,

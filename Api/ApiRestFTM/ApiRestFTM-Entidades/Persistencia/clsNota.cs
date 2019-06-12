@@ -11,12 +11,13 @@ namespace ApiRestFTM_Entidades.Persistencia
         { }
 
 
-        public clsNota(int idNota, int idManager, String titulo, String texto)
+        public clsNota(int idNota, int idManager, String titulo, String texto, DateTime fechaCreacion)
         {
             this.idNota = idNota;
             this.idManager = idManager;
             this.titulo = titulo;
             this.texto = texto;
+            this.fechaCreacion = fechaCreacion;
         }
 
         #endregion
@@ -26,6 +27,7 @@ namespace ApiRestFTM_Entidades.Persistencia
         public int idManager { get; set; }
         public String titulo { get; set; }
         public String texto { get; set; }
+        public DateTime fechaCreacion { get; set; }
         #endregion
     }
 }

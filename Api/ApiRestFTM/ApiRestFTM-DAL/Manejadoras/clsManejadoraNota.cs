@@ -42,6 +42,7 @@ namespace ApiRestFTM_DAL.Manejadoras
                     oNota.idManager = (int)miLector["ID_Manager"];
                     oNota.titulo = (string)miLector["Titulo"];
                     oNota.texto = (string)miLector["TextoNota"];
+                    oNota.fechaCreacion = miLector["FechaCreacion"] is DBNull ? new DateTime() : (DateTime)miLector["FechaCreacion"];
                 }
             }
             catch (SqlException exSql)
@@ -106,11 +107,12 @@ namespace ApiRestFTM_DAL.Manejadoras
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "INSERT INTO Notas (ID_Manager,Titulo, TextoNota) VALUES(@idManager,@titulo,@texto)";
+                miComando.CommandText = "INSERT INTO Notas (ID_Manager,Titulo,TextoNota,FechaCreacion) VALUES(@idManager,@titulo,@texto,@fechaCreacion)";
 
                 miComando.Parameters.Add("@idManager",System.Data.SqlDbType.Int).Value = oNota.idManager;
                 miComando.Parameters.Add("@titulo",System.Data.SqlDbType.NVarChar).Value = oNota.titulo;
                 miComando.Parameters.Add("@texto", System.Data.SqlDbType.NVarChar).Value = oNota.texto;
+                miComando.Parameters.Add("@fechaCreacion", System.Data.SqlDbType.SmallDateTime).Value = oNota.fechaCreacion==null ? new DateTime() : oNota.fechaCreacion;
 
                 miComando.Connection = miConexion;
                 filas = miComando.ExecuteNonQuery();
@@ -142,12 +144,13 @@ namespace ApiRestFTM_DAL.Manejadoras
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "UPDATE Notas SET Titulo=@titulo, TextoNota=@texto WHERE ID_Manager = @idManager AND ID_nota = @idNota";
+                miComando.CommandText = "UPDATE Notas SET Titulo=@titulo, TextoNota=@texto, FechaCreacion=@fechaCreacion WHERE ID_Manager = @idManager AND ID_nota = @idNota";
 
                 miComando.Parameters.Add("@idManager", System.Data.SqlDbType.Int).Value = oNota.idManager;
                 miComando.Parameters.Add("@idNota",System.Data.SqlDbType.Int).Value = oNota.idNota;
                 miComando.Parameters.Add("@titulo", System.Data.SqlDbType.NVarChar).Value = oNota.titulo;
                 miComando.Parameters.Add("@texto", System.Data.SqlDbType.NVarChar).Value = oNota.texto;
+                miComando.Parameters.Add("@fechaCreacion", System.Data.SqlDbType.SmallDateTime).Value = oNota.fechaCreacion == null ? new DateTime() : oNota.fechaCreacion;
 
                 miComando.Connection = miConexion;
                 filas = miComando.ExecuteNonQuery();

@@ -42,6 +42,7 @@ namespace ApiRestFTM_DAL.Listados
                         oNota.idManager = (int)miLector["ID_manager"];
                         oNota.titulo = (string)miLector["Titulo"];
                         oNota.texto = (string)miLector["TextoNota"];
+                        oNota.fechaCreacion = miLector["FechaCreacion"] is DBNull ? new DateTime() : (DateTime)miLector["FechaCreacion"];
                         listado.Add(oNota);
                     }
                 }
