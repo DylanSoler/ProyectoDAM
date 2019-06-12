@@ -112,8 +112,6 @@ namespace FootballTrainingManagerUI.ViewModels
             clsListadoEntrenos gest = new clsListadoEntrenos();
             _listadoEntrenos = new NotifyTaskCompletion<List<clsEntreno>>(gest.listadoCompletoEntrenosDAL(App.oAppManager.id));
 
-            //_listadoEntrenosCopia = _listadoEntrenos.Result;
-
             _entrenosEditablesVisibility = "Collapsed";
             _entrenosSoloLecturaVisibility = "Visible";
         }

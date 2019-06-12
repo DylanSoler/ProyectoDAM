@@ -2,6 +2,7 @@
 using ApiRestFTM_Entidades.Persistencia;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -97,24 +98,31 @@ namespace ApiRestFTM_DAL.Manejadoras
         public int insertarManager(clsManager oManager)
         {
             SqlConnection miConexion = new SqlConnection();
-            SqlCommand miComando = new SqlCommand();
+            SqlCommand miComando = null;
             int filas = 0;
             clsMyConnection gestConexion = new clsMyConnection();
 
             try
             {
                 miConexion = gestConexion.getConnection();
-                miComando.CommandText = "INSERT INTO Managers (Correo,PasswordManager, Nombre, Apellidos, FotoPerfil, FechaNacimiento) VALUES(@correo,@passwManager,@nombre,@apellidos,@fotoPerfil,@fechaNac)";
+                miComando = new SqlCommand("RegistroManager", miConexion);
+                miComando.CommandType = CommandType.StoredProcedure;
 
-                miComando.Parameters.Add("@correo",System.Data.SqlDbType.NVarChar).Value = oManager.correo;
-                miComando.Parameters.Add("@passwManager", System.Data.SqlDbType.VarChar).Value = oManager.passwordManager;
-                miComando.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = oManager.nombre;
-                miComando.Parameters.Add("@apellidos", System.Data.SqlDbType.NVarChar).Value = oManager.apellidos;
-                miComando.Parameters.Add("@fotoPerfil", System.Data.SqlDbType.NVarChar).Value = oManager.fotoPerfil;
-                miComando.Parameters.Add("@fechaNac", System.Data.SqlDbType.SmallDateTime).Value = oManager.fechaNacimiento;
+                miComando.Parameters.AddWithValue("@correo", oManager.correo);
+                miComando.Parameters.AddWithValue("@passwManager", oManager.passwordManager);
+                miComando.Parameters.AddWithValue("@nombre", oManager.nombre);
+                miComando.Parameters.AddWithValue("@apellidos", oManager.apellidos);
+                miComando.Parameters.AddWithValue("@fotoPerfil", oManager.fotoPerfil);
+                miComando.Parameters.AddWithValue("@fechaNac", oManager.fechaNacimiento);
 
-                miComando.Connection = miConexion;
-                filas = miComando.ExecuteNonQuery();
+                SqlParameter filasOutput = new SqlParameter("@filas", SqlDbType.Int);
+                filasOutput.Direction = ParameterDirection.Output;
+                miComando.Parameters.Add(filasOutput);
+
+                miComando.ExecuteNonQuery();
+
+                filas = (int)filasOutput.Value;
+
             } catch (SqlException exSql) {
                 throw exSql;
             } finally {

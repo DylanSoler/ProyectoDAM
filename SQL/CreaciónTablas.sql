@@ -8,7 +8,7 @@ CREATE TABLE Managers (
 	PassWordManager varchar(44) NOT NULL,
 	Nombre nvarchar(30) NOT NULL,
 	Apellidos nvarchar(30) NOT NULL,
-	FotoPerfil nvarchar(30) NULL,
+	FotoPerfil nvarchar(60) NULL,
 	FechaNacimiento smalldatetime
 )
 

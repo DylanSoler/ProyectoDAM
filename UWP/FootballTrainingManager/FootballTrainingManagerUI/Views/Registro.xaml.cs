@@ -49,17 +49,18 @@ namespace FootballTrainingManagerUI.Views
                 String password = Convert.ToBase64String(psw);
 
                 clsManejadoraManager manejadora = new clsManejadoraManager();
+                clsManejadoraEntreno manejEntreno = new clsManejadoraEntreno();
+                clsManejadoraFormacionTactica manejFormTact = new clsManejadoraFormacionTactica();
                 clsManager oMng = new clsManager(0, txbCorreo.Text, password, txbNombre.Text, txbApellidos.Text, "ms-appx:///Assets/avatar.png", date);
 
                 bool ok = await manejadora.insertarManagerDAL(oMng);
 
                 if (ok)
-                {
-                    App.oAppManager = oMng;
+                {   
                     txbNotifyUser.Text = strRegConfirmOk;
                     txbNotifyUser.Foreground = new SolidColorBrush(Windows.UI.Colors.Green);
                     System.Threading.Thread.Sleep(1000);
-                    this.Frame.Navigate(typeof(MainPage));
+                    this.Frame.Navigate(typeof(Login));
                 }
                 else
                     txbNotifyUser.Text = strRegConfirmError;
