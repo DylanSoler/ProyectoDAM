@@ -123,10 +123,13 @@
     <Compile Include="ViewModels\clsVMBase.cs" />
     <Compile Include="ViewModels\clsVmEntrenos.cs" />
     <Compile Include="ViewModels\clsVmFormTactica.cs" />
+    <Compile Include="ViewModels\clsVmNotas.cs" />
     <Compile Include="ViewModels\clsVmPerfil.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDiaSemana.cs" />
     <Compile Include="ViewModels\Converters\clsConverterDtTimeDtOffset.cs" />
+    <Compile Include="ViewModels\Converters\clsConverterFechaCorta.cs" />
     <Compile Include="ViewModels\Converters\clsConverterRutaImagenFormTact.cs" />
+    <Compile Include="ViewModels\Converters\clsConverterVisibListAsync.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\NotifyTaskCompletion.cs" />
     <Compile Include="Views\Ajustes.xaml.cs">
@@ -147,6 +150,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notas.xaml.cs">
+      <DependentUpon>Notas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Perfil.xaml.cs">
       <DependentUpon>Perfil.xaml</DependentUpon>
@@ -236,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Notas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

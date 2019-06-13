@@ -16,7 +16,7 @@ CREATE TABLE Notas (
 	ID_nota int identity(1,1) NOT NULL
 		CONSTRAINT PK_Notas Primary Key,
 	ID_Manager int NOT NULL,
-	Titulo nvarchar(30),
+	Titulo nvarchar(90),
 	TextoNota nvarchar(2000),
 	FechaCreacion smalldatetime NOT NULL,
 	CONSTRAINT FK_Notas_Manager 

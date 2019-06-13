@@ -54,7 +54,7 @@ namespace FootballTrainingManagerUI.Views
             }
             else if (notas.IsSelected)
             {
-                //frmPrincipal.Navigate(typeof());
+                frmPrincipal.Navigate(typeof(Notas));
             }
             else if (ajustes.IsSelected)
             {

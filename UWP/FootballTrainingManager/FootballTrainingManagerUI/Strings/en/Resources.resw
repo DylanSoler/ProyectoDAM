@@ -320,4 +320,22 @@ With this project I hope to get approved.😉😬</value>
   <data name="strFTsistema.Text" xml:space="preserve">
     <value>System</value>
   </data>
+  <data name="strConfBorradoTextoNotas" xml:space="preserve">
+    <value>If you confirm, all your notes will be deleted</value>
+  </data>
+  <data name="strConfBorradoTituloNotas" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="strContentDialogNotasCancelar" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="strEliminar.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="strErrorEliminarNota" xml:space="preserve">
+    <value>An error occurred in the process of deleting the note</value>
+  </data>
+  <data name="strErrorGuardarNota" xml:space="preserve">
+    <value>An error has ocurred in the process</value>
+  </data>
 </root>

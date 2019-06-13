@@ -320,4 +320,22 @@ Con este proyecto espero conseguir aprobar.😉😬</value>
   <data name="strFTsistema.Text" xml:space="preserve">
     <value>Sistema</value>
   </data>
+  <data name="strConfBorradoTextoNotas" xml:space="preserve">
+    <value>¿Estás seguro? Se eliminarán todas las notas</value>
+  </data>
+  <data name="strConfBorradoTituloNotas" xml:space="preserve">
+    <value>Eliminar todas las notas</value>
+  </data>
+  <data name="strContentDialogNotasCancelar" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="strEliminar.Text" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="strErrorEliminarNota" xml:space="preserve">
+    <value>Ha ocurrido un error en el proceso de borrado</value>
+  </data>
+  <data name="strErrorGuardarNota" xml:space="preserve">
+    <value>Ha ocurrido un error en el proceso de guardado</value>
+  </data>
 </root>
