@@ -51,6 +51,7 @@
                         <Setter Target="txbEliminar.Visibility" Value="Collapsed"/>
                         <Setter Target="btnEliminar.Margin" Value="8,0,0,0"/>
                         <Setter Target="btnEliminar.Width" Value="60"/>
+                        <Setter Target="btnDeseleccionarNota.Margin" Value="8,0,0,0"/>
                         <Setter Target="stkBotonesNota.HorizontalAlignment" Value="Left"/>
                         <Setter Target="stkNotaSelect.Margin" Value="0,10,10,10"/>
                         <Setter Target="notaSelect.Margin" Value="0,20,26,20"/>
@@ -97,7 +98,7 @@
                     </StackPanel>
 
                     <ListView Name="lvNotas" ItemsSource="{Binding listadoNotasAsincrono.Result}"
-                              SelectedItem="{Binding notaSeleccionada, Mode=TwoWay}" BorderBrush="#3F51B5" BorderThickness="1" 
+                              SelectedItem="{Binding notaSeleccionada, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#3F51B5" BorderThickness="1" 
                               Background="#C5CAE9" MaxWidth="380" MinWidth="350" Margin="0,30,20,20" MaxHeight="700" MinHeight="200" CornerRadius="10">
 
                         <ListView.HeaderTemplate>
@@ -122,10 +123,10 @@
 
                 </StackPanel> <!--fin stkPanel listado-->
 
-                <StackPanel Name="stkNotaSelect"  Margin="80,0,20,20" Orientation="Vertical" HorizontalAlignment="Right">
+                <StackPanel Name="stkNotaSelect"  Margin="80,0,20,20" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Stretch">
 
                     <StackPanel Name="stkBotonesNota" Visibility="{Binding stkBtnNotaSeleccionadaVisibility}" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Name="btnEditar" Command="{Binding editarNotaCommand}" Width="100" CornerRadius="10" Background="#C5CAE9" Foreground="#3F51B5"  Margin="100,0,20,0">
+                        <Button Name="btnEditar" Command="{Binding editarNotaCommand}" Width="100" CornerRadius="10" Background="#C5CAE9" Foreground="#3F51B5"  Margin="20,0,20,0">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEE56;"></TextBlock>
@@ -160,7 +161,10 @@
                                 </StackPanel>
                             </Button.Content>
                         </Button>
-                    </StackPanel>
+
+                        <Button Name="btnDeseleccionarNota" Command="{Binding deseleccionarNotaCommand}" FontFamily="Segoe MDL2 Assets" Content="&#xE830;" Width="40" CornerRadius="10" Background="#C5CAE9" Foreground="#3F51B5"  Margin="20,0,20,0"/>
+
+                        </StackPanel>
 
                     <StackPanel Name="notaSelect" Visibility="{Binding notaVisibility}" Orientation="Vertical" Background="#C5CAE9" Margin="20,26,20,20" CornerRadius="10" MinWidth="400" MaxWidth="600">
                         <Border BorderBrush="Black" BorderThickness="0,0,0,1" Margin="8">

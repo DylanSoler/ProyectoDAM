@@ -32,6 +32,7 @@ namespace FootballTrainingManagerDAL.Listados
             if (response.IsSuccessStatusCode){
                 string lista = await response.Content.ReadAsStringAsync();
                 listado = JsonConvert.DeserializeObject<List<clsNota>>(lista);
+                listado = listado.OrderByDescending(x => x.fechaCreacion).ToList();
             }
             
             return listado;

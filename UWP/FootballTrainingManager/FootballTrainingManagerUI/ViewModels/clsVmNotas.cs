@@ -28,6 +28,7 @@ namespace FootballTrainingManagerUI.ViewModels
         private DelegateCommand _editarNotaCommand;
         private DelegateCommand _cancelarCommand;
         private DelegateCommand _eliminarNotaCommand;
+        private DelegateCommand _deseleccionarNotaCommand;
         #endregion
 
         #region Propiedades publicas
@@ -49,6 +50,7 @@ namespace FootballTrainingManagerUI.ViewModels
                   NotifyPropertyChanged("notaVisibility");
                   _editarNotaCommand.RaiseCanExecuteChanged();
                   _eliminarNotaCommand.RaiseCanExecuteChanged();
+                  _deseleccionarNotaCommand.RaiseCanExecuteChanged();
                   //Para volver a deshabilitarlo en el caso de que se pulsara en el listado mientras se editaba otra nota
                   _guardarNotaCommand.RaiseCanExecuteChanged();
                 }
@@ -129,6 +131,15 @@ namespace FootballTrainingManagerUI.ViewModels
                 return _eliminarNotaCommand;
             }
         }
+        public DelegateCommand deseleccionarNotaCommand
+        {
+            get
+            {
+                _deseleccionarNotaCommand = new DelegateCommand(deseleccionarNotaCommand_Executed, deseleccionarNotaCommand_CanExecuted);
+                return _deseleccionarNotaCommand;
+            }
+        }
+        
 
         public double screenWidth
         {
@@ -249,6 +260,8 @@ namespace FootballTrainingManagerUI.ViewModels
             }
             else
             {
+                _notaSeleccionada.fechaCreacion = DateTime.Now;
+
                 clsManejadoraNota manejadora = new clsManejadoraNota();
                 bool ret = await manejadora.actualizarNotaDAL(_notaSeleccionada);
 
@@ -293,8 +306,11 @@ namespace FootballTrainingManagerUI.ViewModels
         {
             _notaEditableVisibility = "Visible";
             NotifyPropertyChanged("notaEditableVisibility");
+            _notaVisibility = "Collapsed";
+            NotifyPropertyChanged("notaVisibility");
             _guardarNotaCommand.RaiseCanExecuteChanged();
             _cancelarCommand.RaiseCanExecuteChanged();
+            _deseleccionarNotaCommand.RaiseCanExecuteChanged();
         }
 
         private void insertarNotaCommand_Executed()
@@ -372,29 +388,35 @@ namespace FootballTrainingManagerUI.ViewModels
         private void cancelarCommand_Executed()
         {
             if (_esInsertar)
-            {
-                _notaSeleccionada = new clsNota();
-                NotifyPropertyChanged("notaSeleccionada");
-                _stkBtnNotaSeleccionadaVisibility = "Collapsed";
-                NotifyPropertyChanged("stkBtnNotaSeleccionadaVisibility");
-                _notaEditableVisibility = "Collapsed";
-                NotifyPropertyChanged("notaEditableVisibility");
                 _esInsertar = false;
-                _guardarNotaCommand.RaiseCanExecuteChanged();
-                _cancelarCommand.RaiseCanExecuteChanged();
-                _eliminarNotaCommand.RaiseCanExecuteChanged();
-            }
             else
-            {
-                _stkBtnNotaSeleccionadaVisibility = "Collapsed";
-                NotifyPropertyChanged("stkBtnNotaSeleccionadaVisibility");
-                _notaEditableVisibility = "Collapsed";
-                NotifyPropertyChanged("notaEditableVisibility");
-                _guardarNotaCommand.RaiseCanExecuteChanged();
-                _cancelarCommand.RaiseCanExecuteChanged();
                 _editarNotaCommand.RaiseCanExecuteChanged();
-                _eliminarNotaCommand.RaiseCanExecuteChanged();
-            }
+
+            _stkBtnNotaSeleccionadaVisibility = "Collapsed";
+            NotifyPropertyChanged("stkBtnNotaSeleccionadaVisibility");
+            _notaEditableVisibility = "Collapsed";
+            NotifyPropertyChanged("notaEditableVisibility");
+            _guardarNotaCommand.RaiseCanExecuteChanged();
+            _cancelarCommand.RaiseCanExecuteChanged();
+            _eliminarNotaCommand.RaiseCanExecuteChanged();
+        }
+
+        private bool deseleccionarNotaCommand_CanExecuted()
+        {
+            bool ret = false;
+
+            if (_stkBtnNotaSeleccionadaVisibility.Equals("Visible") && _notaVisibility.Equals("Visible"))
+                ret = true;
+
+            return ret;
+        }
+
+        private void deseleccionarNotaCommand_Executed()
+        {
+            _stkBtnNotaSeleccionadaVisibility = "Collapsed";
+            NotifyPropertyChanged("stkBtnNotaSeleccionadaVisibility");
+            _notaVisibility = "Collapsed";
+            NotifyPropertyChanged("notaVisibility");
         }
 
         #endregion
