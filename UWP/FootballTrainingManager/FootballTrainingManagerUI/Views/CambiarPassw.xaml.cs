@@ -44,6 +44,11 @@ namespace FootballTrainingManagerUI.Views
             this.Frame.Navigate(typeof(Login));
         }
 
+        /// <summary>
+        /// Envia al correo del manager si este esta registrado, para con el recuperar la contrasenia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnSendCode(object sender, RoutedEventArgs e)
         {
             String strError404 = resourceLoader.GetString("strSendCode404");
@@ -81,6 +86,11 @@ namespace FootballTrainingManagerUI.Views
             }
         }
 
+        /// <summary>
+        /// Comprueba que el codigo sea correcto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCheckCode(object sender, RoutedEventArgs e)
         {
             String strErrorCode = resourceLoader.GetString("strErrorSameCode");
@@ -103,6 +113,11 @@ namespace FootballTrainingManagerUI.Views
             }
         }
 
+        /// <summary>
+        /// Actualiza la contrasenia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void BtnChangePsw_Click(object sender, RoutedEventArgs e)
         {
             String strErrorPsws = resourceLoader.GetString("strErrorSamePsw");
@@ -143,6 +158,10 @@ namespace FootballTrainingManagerUI.Views
             }
         }
 
+        /// <summary>
+        /// Verifica el formato del correo
+        /// </summary>
+        /// <returns></returns>
         private bool correoCorrecto()
         {
 
@@ -155,6 +174,11 @@ namespace FootballTrainingManagerUI.Views
             return ret;
         }
 
+        /// <summary>
+        /// Genera un codigo y lo envia al email
+        /// </summary>
+        /// <param name="correo"></param>
+        /// <returns></returns>
         private String sendCodeToEmail(String correo) {
 
             String code = Guid.NewGuid().ToString();

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace FootballTrainingManagerEntidades.Complejas
 {
+    /// <summary>
+    /// Clase de persistencia de la tabla ManagerTacticas que incluye el sistema táctico de la tabla paramétrica táctica
+    /// </summary>
     public class clsFormacionTactica
     {
         #region Constructores

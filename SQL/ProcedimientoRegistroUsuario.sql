@@ -1,6 +1,6 @@
 
 
---Procedimiento creación inicial de manager
+--Procedimiento creación inicial de manager, con datos minimos iniciales de entrenos y tactica
 GO
 CREATE PROCEDURE RegistroManager (@correo nvarchar(50), @passwManager varchar(44), @nombre nvarchar(30), @apellidos nvarchar(30), @fotoPerfil nvarchar(60), @fechaNac smalldatetime, @filas int OUTPUT)
 AS
@@ -32,13 +32,13 @@ GO
 
 
 --Prueba
-DECLARE @resultado int
-DECLARE @fechaActual smalldatetime = CONVERT(smalldatetime, CURRENT_TIMESTAMP)
-EXECUTE RegistroManager @correo ='dylansio2@gmail.com', @passwManager='wOeuyBoaGU6fVPayl/ZUQEEYjHQa6PVcITO1xRCn3B0='
+--DECLARE @resultado int
+--DECLARE @fechaActual smalldatetime = CONVERT(smalldatetime, CURRENT_TIMESTAMP)
+--EXECUTE RegistroManager @correo ='dylansio2@gmail.com', @passwManager='wOeuyBoaGU6fVPayl/ZUQEEYjHQa6PVcITO1xRCn3B0='
 						, @nombre='Dylansio', @apellidos='Gonzalez', @fotoPerfil='ms-appx:///Assets/avatar.png'
 						, @fechaNac=@fechaActual, @filas = @resultado OUTPUT
 
-select @resultado
-select * from Managers
-select * from Entrenos
-select * from ManagersTacticas
+--select @resultado
+--select * from Managers
+--select * from Entrenos
+--select * from ManagersTacticas

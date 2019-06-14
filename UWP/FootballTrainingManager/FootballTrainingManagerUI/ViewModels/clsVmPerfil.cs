@@ -364,9 +364,11 @@ namespace FootballTrainingManagerUI.ViewModels
             }
 
             return sePuedeGuardar;
-            //return true;
         }
-        
+
+        /// <summary>
+        /// Actualiza la información de perfil
+        /// </summary>
         private async void guardarCommand_Executed()
         {        
             bool ok;
@@ -424,6 +426,9 @@ namespace FootballTrainingManagerUI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Habilita el formulario de edicion del perfil
+        /// </summary>
         private void editarCommand_Executed()
         {
             _formReadOnly = false;
@@ -438,7 +443,8 @@ namespace FootballTrainingManagerUI.ViewModels
             NotifyPropertyChanged("guardarVisibility");
             _guardarCommand.RaiseCanExecuteChanged();
         }
-
+        
+        //Cancela la edicion del perfil
         private void cancelarCommand_Executed()
         {
             _formReadOnly = true;
@@ -455,6 +461,7 @@ namespace FootballTrainingManagerUI.ViewModels
             NotifyPropertyChanged("manager");
         }
 
+        //Habilita la edicion de la contraseña
         private void cambiarPswLinkCommand_Executed()
         {
             _passwActualVisibility = "Visible";
@@ -464,6 +471,7 @@ namespace FootballTrainingManagerUI.ViewModels
             _checkPasswordCommand.RaiseCanExecuteChanged();
         }
 
+        //Cancela el proceso de cambio de contraseña
         private void cancelarNewPswCommand_Executed()
         {
             _passwActualVisibility = "Collapsed";
@@ -482,6 +490,7 @@ namespace FootballTrainingManagerUI.ViewModels
             NotifyPropertyChanged("newRepPsw");
         }
 
+        //Comprueba que la contraseña actual sea correcta antes de cambiarla por otra
         private void checkPasswordCommand_Executed()
         {
             clsManejadoraManager manejadora = new clsManejadoraManager();
@@ -528,6 +537,7 @@ namespace FootballTrainingManagerUI.ViewModels
             return sePuedeGuardar;
         }
 
+        //Actualiza la nueva contraseña
         private async void guardarNewPswCommand_Executed()
         {
             bool ok = false;
@@ -595,6 +605,7 @@ namespace FootballTrainingManagerUI.ViewModels
             }
         }
 
+        //Habilita la edicion de la imagen perfil
         private async void editarFotoCommand_Executed()
         {
             _infoVisibility = "Collapsed";
@@ -607,6 +618,175 @@ namespace FootballTrainingManagerUI.ViewModels
             _cancelarImagenNuevaCommand.RaiseCanExecuteChanged();
         }
 
+        //Pone la foto por defecto de perfil
+        private async void quitarFotoCommand_Executed()
+        {
+            //Si la foto de perfil es distinta a la foto por defecto
+            if (!_manager.fotoPerfil.Equals("ms-appx:///Assets/avatar.png"))
+            {
+                //Se establece la foto perfil por defecto
+                manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                NotifyPropertyChanged("manager");
+                //Se actualiza la API
+                try {
+                    clsManejadoraManager manejadora = new clsManejadoraManager();
+                    bool ok = await manejadora.actualizarManagerDAL(_manager);
+                } catch (Exception e) {
+                    
+                }
+            }
+        }
+
+        private bool guardarImagenNuevaCommand_CanExecuted()
+        {
+            bool ret = false;
+
+            if (_gvAvataresVisibility.Equals("Visible"))
+                ret = true;
+
+            return ret;
+        }
+        
+        //Actualiza la imagen de perfil
+        private async void guardarImagenNuevaCommand_Executed()
+        {
+            //Establecemos la foto perfil
+            _manager.fotoPerfil = _imagenPerfil;
+            App.oAppManager.fotoPerfil = _imagenPerfil;
+            NotifyPropertyChanged("manager");
+
+            //Actualizar API
+            try
+            {
+                clsManejadoraManager manejadora = new clsManejadoraManager();
+                bool ok = await manejadora.actualizarManagerDAL(_manager);
+            }
+            catch (Exception e)
+            {
+                manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                NotifyPropertyChanged("manager");
+            }
+            //Para volver a cambiar la visibilidad entre (Galeria/Informacion)
+            cancelarImagenNuevaCommand_Executed();
+        }
+
+        private bool cancelarImagenNuevaCommand_CanExecuted()
+        {
+            bool ret = false;
+
+            if (_gvAvataresVisibility.Equals("Visible") && String.IsNullOrEmpty(_imagenPerfil))
+                ret = true;
+
+            return ret;
+        }
+
+        //Cancelar la edicion de foto perfil
+        private async void cancelarImagenNuevaCommand_Executed()
+        {
+            _infoVisibility = "Visible";
+            NotifyPropertyChanged("infoVisibility");
+            _gvAvataresVisibility = "Collapsed";
+            NotifyPropertyChanged("gvAvataresVisibility");
+            _lineasAdornoStroke = 4;
+            NotifyPropertyChanged("lineasAdornoStroke");
+            _guardarImagenNuevaCommand.RaiseCanExecuteChanged();
+            _cancelarImagenNuevaCommand.RaiseCanExecuteChanged();
+            _imagenPerfil = "";
+        }
+
+        #endregion
+
+        #region Otros métodos
+        /// <summary>
+        /// Calcula la edad dada una fecha
+        /// </summary>
+        /// <param name="anioNac"></param>
+        /// <returns></returns>
+        private int calcularEdad(int anioNac) {
+            int age = (DateTime.Now.Year)-(anioNac);
+            return age;
+        }
+
+        /// <summary>
+        /// Comprueba que la contraseña sea correcta
+        /// </summary>
+        /// <param name="passwordToCheck"></param>
+        /// <param name="correctPassword"></param>
+        /// <returns></returns>
+        private Boolean comprobarPassword(String passwordToCheck, String correctPassword)
+        {
+
+            Boolean ret = false;
+
+            SHA256 mySHA256 = SHA256.Create();
+            byte[] passwToCheckHash = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(passwordToCheck));
+
+            _passwCheck = Convert.ToBase64String(passwToCheckHash);
+
+            if (_passwCheck.Equals(correctPassword))
+                ret = true;
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Devuelve el listado de rutas de imagenes de perfil disponibles
+        /// </summary>
+        /// <returns></returns>
+        private List<String> rellenarListadoAvatares()
+        {
+            List<String> avatares = new List<string>();
+            avatares.Add("ms-appx:///Assets/Avatares/man1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man3.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man4.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man5.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man6.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man7.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man8.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man9.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man10.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man11.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man12.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man13.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man14.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man15.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man16.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man17.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man18.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man19.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman3.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman4.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman5.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman6.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman7.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman8.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman9.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman10.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman11.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman12.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman13.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman14.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman15.png");
+            avatares.Add("ms-appx:///Assets/Avatares/guardiola.png");
+            avatares.Add("ms-appx:///Assets/Avatares/klopp1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/klopp2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/mourinho1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/mourinho2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/robot1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/robot2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/superman.png");
+
+            return avatares;
+        }
+        #endregion
+
+        #region Command descartado por sorpresa 
+        //Metodo anteriormente usado para establecer foto de perfil que no fallaba con visual, y si con la instalacion del paquete
         //private async void editarFotoCommand_Executed()
         //{
         //    //Carpeta donde se guarda la imagen inicialmente dado que Assets es 
@@ -677,165 +857,6 @@ namespace FootballTrainingManagerUI.ViewModels
         //        }
         //    }
         //}
-
-        private async void quitarFotoCommand_Executed()
-        {
-            //Si la foto de perfil es distinta a la foto por defecto
-            if (!_manager.fotoPerfil.Equals("ms-appx:///Assets/avatar.png"))
-            {
-                //Se establece la foto perfil por defecto
-                manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
-                App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
-                NotifyPropertyChanged("manager");
-                //Se actualiza la API
-                try {
-                    clsManejadoraManager manejadora = new clsManejadoraManager();
-                    bool ok = await manejadora.actualizarManagerDAL(_manager);
-                } catch (Exception e) {
-                    
-                }
-            }
-        }
-
-        private bool guardarImagenNuevaCommand_CanExecuted()
-        {
-            bool ret = false;
-
-            if (_gvAvataresVisibility.Equals("Visible"))
-                ret = true;
-
-            return ret;
-        }
-
-        private async void guardarImagenNuevaCommand_Executed()
-        {
-            //Establecemos la foto perfil
-            _manager.fotoPerfil = _imagenPerfil;
-            App.oAppManager.fotoPerfil = _imagenPerfil;
-            NotifyPropertyChanged("manager");
-
-            //Actualizar API
-            try
-            {
-                clsManejadoraManager manejadora = new clsManejadoraManager();
-                bool ok = await manejadora.actualizarManagerDAL(_manager);
-            }
-            catch (Exception e)
-            {
-                manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
-                App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
-                NotifyPropertyChanged("manager");
-            }
-            //Para volver a cambiar la visibilidad entre (Galeria/Informacion)
-            cancelarImagenNuevaCommand_Executed();
-        }
-
-        private bool cancelarImagenNuevaCommand_CanExecuted()
-        {
-            bool ret = false;
-
-            if (_gvAvataresVisibility.Equals("Visible") && String.IsNullOrEmpty(_imagenPerfil))
-                ret = true;
-
-            return ret;
-        }
-
-        private async void cancelarImagenNuevaCommand_Executed()
-        {
-            _infoVisibility = "Visible";
-            NotifyPropertyChanged("infoVisibility");
-            _gvAvataresVisibility = "Collapsed";
-            NotifyPropertyChanged("gvAvataresVisibility");
-            _lineasAdornoStroke = 4;
-            NotifyPropertyChanged("lineasAdornoStroke");
-            _guardarImagenNuevaCommand.RaiseCanExecuteChanged();
-            _cancelarImagenNuevaCommand.RaiseCanExecuteChanged();
-            _imagenPerfil = "";
-        }
-
-        #endregion
-
-        #region Otros métodos
-        private int calcularEdad(int anioNac) {
-            int age = (DateTime.Now.Year)-(anioNac);
-            return age;
-        }
-
-        private Boolean comprobarPassword(String passwordToCheck, String correctPassword)
-        {
-
-            Boolean ret = false;
-
-            SHA256 mySHA256 = SHA256.Create();
-            byte[] passwToCheckHash = mySHA256.ComputeHash(Encoding.UTF8.GetBytes(passwordToCheck));
-
-            _passwCheck = Convert.ToBase64String(passwToCheckHash);
-
-            if (_passwCheck.Equals(correctPassword))
-                ret = true;
-
-            return ret;
-        }
-
-        private static async Task<BitmapImage> LoadImage(StorageFile file)
-        {
-            BitmapImage bitmapImage = new BitmapImage();
-            FileRandomAccessStream stream = (FileRandomAccessStream)await file.OpenAsync(FileAccessMode.Read);
-
-            bitmapImage.SetSource(stream);
-
-            return bitmapImage;
-
-        }
-
-        private List<String> rellenarListadoAvatares()
-        {
-            List<String> avatares = new List<string>();
-            avatares.Add("ms-appx:///Assets/Avatares/man1.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man2.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man3.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man4.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man5.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man6.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man7.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man8.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man9.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man10.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man11.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man12.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man13.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man14.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man15.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man16.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man17.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man18.png");
-            avatares.Add("ms-appx:///Assets/Avatares/man19.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman1.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman2.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman3.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman4.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman5.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman6.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman7.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman8.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman9.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman10.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman11.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman12.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman13.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman14.png");
-            avatares.Add("ms-appx:///Assets/Avatares/woman15.png");
-            avatares.Add("ms-appx:///Assets/Avatares/guardiola.png");
-            avatares.Add("ms-appx:///Assets/Avatares/klopp1.png");
-            avatares.Add("ms-appx:///Assets/Avatares/klopp2.png");
-            avatares.Add("ms-appx:///Assets/Avatares/mourinho1.png");
-            avatares.Add("ms-appx:///Assets/Avatares/mourinho2.png");
-            avatares.Add("ms-appx:///Assets/Avatares/robot1.png");
-            avatares.Add("ms-appx:///Assets/Avatares/robot2.png");
-            avatares.Add("ms-appx:///Assets/Avatares/superman.png");
-
-            return avatares;
-        }
         #endregion
 
     }

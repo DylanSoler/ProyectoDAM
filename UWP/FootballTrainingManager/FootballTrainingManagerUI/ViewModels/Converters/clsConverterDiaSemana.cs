@@ -10,6 +10,7 @@ namespace FootballTrainingManagerUI.ViewModels.Converters
 {
     public class clsConverterDiaSemana : IValueConverter
     {
+        //Almacenados en la base de datos como numericos se convierten segun dia e idioma
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             String dia = "";

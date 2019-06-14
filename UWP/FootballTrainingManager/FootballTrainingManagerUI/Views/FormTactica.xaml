@@ -58,7 +58,6 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <!--<Grid Name="gridPrincipal" Width="1920" Height="1080">-->
         <Grid Name="gridPrincipal" Width="{Binding screenWidth, UpdateSourceTrigger=PropertyChanged}" Height="{Binding screenHeight, UpdateSourceTrigger=PropertyChanged}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>

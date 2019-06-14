@@ -14,7 +14,6 @@
         <vm:clsVmAjustes x:Name="vmAjustes"></vm:clsVmAjustes>
     </Page.DataContext>
 
-    <!--<Grid Name="gridAjustes" Width="1920" Height="1080">-->
     <Grid Name="gridPrincipal" Width="{Binding screenWidth, UpdateSourceTrigger=PropertyChanged}" Height="{Binding screenHeight, UpdateSourceTrigger=PropertyChanged}">
 
         <Grid.ColumnDefinitions>

@@ -67,6 +67,9 @@ namespace FootballTrainingManagerUI.Views
 
         }
 
+        /// <summary>
+        /// Desconecta al manager actual y lo envia al Login
+        /// </summary>
         private void logout() {
             App.oAppManager = null;
             this.Frame.Navigate(typeof(Login));

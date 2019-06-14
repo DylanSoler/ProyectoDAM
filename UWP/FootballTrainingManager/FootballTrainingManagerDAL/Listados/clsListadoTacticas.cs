@@ -26,7 +26,6 @@ namespace FootballTrainingManagerDAL.Listados
 
             List<clsTactica> listado = new List<clsTactica>();
 
-            //try catch, throw ex 
             HttpResponseMessage response = await client.GetAsync($"{ruta}tactica");
 
             if (response.IsSuccessStatusCode){

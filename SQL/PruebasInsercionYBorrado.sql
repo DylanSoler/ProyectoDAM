@@ -4,49 +4,53 @@
 ----------------------------------------------------------INSERCION--------------------------------------------------------------
 
 INSERT INTO Managers(Correo,PasswordManager, Nombre, Apellidos, FotoPerfil, FechaNacimiento)
-				--VALUES('dylan@gmail.com',CAST('C0E7AEC81A1A194E9F54F6B297F6544041188C741AE8F55C2133B5C510A7DC1D' AS BINARY)
-				--		,'Dylan','Soler Patino','/fotazas/micareto.png',NULL)
-						VALUES('dylan@gmail.com','wOeuyBoaGU6fVPayl/ZUQEEYjHQa6PVcITO1xRCn3B0='
-						,'Dylan','Soler Patino','/fotazas/micareto.png',NULL)
+					VALUES('dylanadriansoler@gmail.com','wOeuyBoaGU6fVPayl/ZUQEEYjHQa6PVcITO1xRCn3B0='
+							,'Dylan','Soler Patino','ms-appx:///Assets/Avatares/man1.png','1993-04-12 19:36:00')
 				
 SELECT * FROM Managers
+
+DECLARE @ID int
+	SET @ID = @@IDENTITY
 ---------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO Entrenos(ID_Manager,Dia,Sesion1,Sesion2,SesionExtra)
-				VALUES	(14,1,'Fisico','Recuperacion','Descanso'),
-						(14,2,'Defensivo','Tactico','Descanso'),
-						(14,3,'Ofensivo','Tecnico','Descanso'),
-						(14,4,'Balon parado','Control','Descanso'),
-						(14,5,'Tacticas prepartido','Recuperacion','Descanso'),
-						(14,6,'','',''),
-						(14,7,'','','')
+				VALUES	(@ID,1,'Fisico','Recuperacion','Descanso'),
+						(@ID,2,'Defensivo','Tactico','Descanso'),
+						(@ID,3,'Ofensivo','Tecnico','Descanso'),
+						(@ID,4,'Balon parado','Control','Descanso'),
+						(@ID,5,'Tacticas prepartido','Recuperacion','Descanso'),
+						(@ID,6,'','',''),
+						(@ID,7,'','','')
 						
-SELECT * FROM Entrenos
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO Notas(ID_Manager, Titulo, TextoNota)
-				VALUES(14,'Retrasos','El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre'),
-					  (14,'Entenos','Aumentar con sesion fisica')
-				
-SELECT * FROM Notas
-DELETE FROM NOTAS --WHERE ID_Manager=5 AND ID_nota=8
+INSERT INTO Notas(ID_Manager, Titulo, TextoNota, FechaCreacion)
+				VALUES(@ID,'Retrasos','El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre',GETDATE()),
+					  (@ID,'Entenos','Aumentar con sesion fisica',GETDATE()),
+					  (@ID,'Retrasos','El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre',GETDATE()),
+					  (@ID,'Entenos','Aumentar con sesion fisica',GETDATE()),
+					  (@ID,'Retrasos','El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre',GETDATE()),
+					  (@ID,'Entenos','Aumentar con sesion fisica',GETDATE()),
+					  (@ID,'Retrasos','El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre. El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre
+						El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbreEl jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre dfhdhrhehrehrhrhr
+						El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbreEl jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre',GETDATE()),
+					  (@ID,'Entenos','Aumentar con sesion fisica',GETDATE()),
+					  (@ID,'Retrasos','El jugador Luis Z ha llegado tarde hoy otra vez, como de costumbre',GETDATE()),
+					  (@ID,'Entenos','Aumentar con sesion fisica',GETDATE())
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO ManagersTacticas(ID_Manager,ID_Tactica,Mentalidad,Descripcion)
-								VALUES(14,5,'Ofensiva','Juego de posesión, con presión constante alta y verticalidad ofensiva')
+								VALUES(@ID,5,'Ofensiva','Juego de posesión, con presión constante alta y verticalidad ofensiva. Tirar fuera de juego con linea defensiva adelantada.')
 								
-SELECT * FROM ManagersTacticas
-
 
 -----------------------------------------------------------BORRADO---------------------------------------------------------------
 
---DELETE FROM Managers WHERE ID=14
+--DELETE FROM Managers WHERE ID=@ID
 
 SELECT * FROM Managers
 SELECT * FROM ManagersTacticas
 SELECT * FROM Entrenos
 SELECT * FROM Notas
 SELECT * FROM Tacticas
-

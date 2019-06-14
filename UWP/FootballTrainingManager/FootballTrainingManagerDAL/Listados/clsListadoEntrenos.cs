@@ -26,7 +26,6 @@ namespace FootballTrainingManagerDAL.Listados
 
             List<clsEntreno> listado = new List<clsEntreno>();
 
-            //try catch, throw ex 
             HttpResponseMessage response = await client.GetAsync($"{ruta}manager/{idManager}/entreno");
 
             if (response.IsSuccessStatusCode){

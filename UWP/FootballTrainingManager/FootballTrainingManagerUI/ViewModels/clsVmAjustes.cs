@@ -170,6 +170,12 @@ namespace FootballTrainingManagerUI.ViewModels
         #endregion
 
         #region Otros métodos
+        /// <summary>
+        /// Comprueba la contraseña introducida verificando que sea la correcta
+        /// </summary>
+        /// <param name="passwordToCheck"></param>
+        /// <param name="correctPassword"></param>
+        /// <returns></returns>
         private Boolean comprobarPassword(String passwordToCheck, String correctPassword)
         {
 

@@ -9,6 +9,7 @@ namespace FootballTrainingManagerUI.ViewModels.Converters
 {
     public class clsConverterRutaImagenFormTact : IValueConverter
     {
+        //Dado un sistema (Ej. 4-2-3-1), se convierte al source de la imagen correspondiente de dicha tactica
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             string sistema = (string)value;

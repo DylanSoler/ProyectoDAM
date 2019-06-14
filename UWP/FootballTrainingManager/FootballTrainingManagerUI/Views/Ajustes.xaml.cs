@@ -31,6 +31,11 @@ namespace FootballTrainingManagerUI.Views
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Habilita los botones para cambiar de idioma
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HlbCambiarIdioma_Click(object sender, RoutedEventArgs e)
         {
             if (spa.Visibility==Visibility.Collapsed && eng.Visibility==Visibility.Collapsed)
@@ -45,6 +50,11 @@ namespace FootballTrainingManagerUI.Views
             }
         }
 
+        /// <summary>
+        /// Cambia el idioma a ingles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Eng_Click(object sender, RoutedEventArgs e)
         {
             if (!ApplicationLanguages.PrimaryLanguageOverride.Equals("en"))
@@ -57,6 +67,11 @@ namespace FootballTrainingManagerUI.Views
             }
         }
 
+        /// <summary>
+        /// Cambia el idioma a castellano
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Spa_Click(object sender, RoutedEventArgs e)
         {
             if (!ApplicationLanguages.PrimaryLanguageOverride.Equals("es"))
@@ -77,7 +92,8 @@ namespace FootballTrainingManagerUI.Views
             vmAjustes.screenWidth = bounds.Width * scaleFactor;
         }
 
-        private void HlbAboutMe_Click(object sender, RoutedEventArgs e)
+        
+private void HlbAboutMe_Click(object sender, RoutedEventArgs e)
         {
             if (txbAboutMe.Visibility == Visibility.Collapsed)
                 txbAboutMe.Visibility = Visibility.Visible;

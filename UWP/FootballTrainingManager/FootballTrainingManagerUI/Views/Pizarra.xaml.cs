@@ -24,19 +24,15 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
-// La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace FootballTrainingManagerUI.Views
 {
-    /// <summary>
-    /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
-    /// </summary>
     public sealed partial class Pizarra : Page
     {
         public Pizarra()
         {
             this.InitializeComponent();
-
+            //Inicializa el modo de entrada de dibujo en el canvas
             inkC.InkPresenter.InputDeviceTypes =
             Windows.UI.Core.CoreInputDeviceTypes.Touch |
             Windows.UI.Core.CoreInputDeviceTypes.Mouse |
