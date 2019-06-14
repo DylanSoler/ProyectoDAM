@@ -24,7 +24,7 @@ namespace FootballTrainingManagerUI.ViewModels
     public class clsVmPerfil : clsVMBase
     {
         #region Propiedades privadas
-        private BitmapImage _imagenPerfil;
+        private String _imagenPerfil;
         private clsManager _manager;
         private int _edad;
         private bool _formReadOnly;
@@ -40,7 +40,11 @@ namespace FootballTrainingManagerUI.ViewModels
         private String _txbNotifyErrorPswVisibility;
         private String _txbNotifyErrorNewPswVisibility;
         private String _cancelarPswVisibility;
+        private String _gvAvataresVisibility;
+        private String _infoVisibility;
+        private List<String> _listadoAvatares;
         private String _passwCheck;
+        private int _lineasAdornoStroke;
         private DelegateCommand _guardarCommand;
         private DelegateCommand _editarCommand;
         private DelegateCommand _cancelarCommand;
@@ -49,13 +53,15 @@ namespace FootballTrainingManagerUI.ViewModels
         private DelegateCommand _cancelarNewPswCommand;
         private DelegateCommand _checkPasswordCommand;
         private DelegateCommand _editarFotoCommand;
-        private DelegateCommand _cancelarFotoCommand;
+        private DelegateCommand _quitarFotoCommand;
+        private DelegateCommand _guardarImagenNuevaCommand;
+        private DelegateCommand _cancelarImagenNuevaCommand;
         private Double _screenHeight;
         private Double _screenWidth;
         #endregion
 
         #region Propiedades publicas
-        public BitmapImage imagenPerfil
+        public String imagenPerfil
         {
             get { return _imagenPerfil; }
 
@@ -79,6 +85,13 @@ namespace FootballTrainingManagerUI.ViewModels
             get { return _edad; }
 
             set { _edad = value; }
+        }
+
+        public int lineasAdornoStroke
+        {
+            get { return _lineasAdornoStroke; }
+
+            set { _lineasAdornoStroke = value; }
         }
 
         public bool formReadOnly
@@ -111,6 +124,13 @@ namespace FootballTrainingManagerUI.ViewModels
             get { return _newPsw; }
 
             set { _newPsw = value; }
+        }
+
+        public List<String> listadoAvatares
+        {
+            get { return _listadoAvatares; }
+
+            set { _listadoAvatares = value; }
         }
 
         public String datePickerVisibility
@@ -173,6 +193,19 @@ namespace FootballTrainingManagerUI.ViewModels
             get { return _cancelarPswVisibility; }
 
             set { _cancelarPswVisibility = value; }
+        }
+
+        public String gvAvataresVisibility
+        {
+            get { return _gvAvataresVisibility; }
+
+            set { _gvAvataresVisibility = value; }
+        }
+        public String infoVisibility
+        {
+            get { return _infoVisibility; }
+
+            set { _infoVisibility = value; }
         }
 
         public DelegateCommand guardarCommand
@@ -247,12 +280,30 @@ namespace FootballTrainingManagerUI.ViewModels
             }
         }
 
-        public DelegateCommand cancelarFotoCommand
+        public DelegateCommand quitarFotoCommand
         {
             get
             {
-                _cancelarFotoCommand = new DelegateCommand(cancelarFotoCommand_Executed);
-                return _cancelarFotoCommand;
+                _quitarFotoCommand = new DelegateCommand(quitarFotoCommand_Executed);
+                return _quitarFotoCommand;
+            }
+        }
+
+        public DelegateCommand guardarImagenNuevaCommand
+        {
+            get
+            {
+                _guardarImagenNuevaCommand = new DelegateCommand(guardarImagenNuevaCommand_Executed, guardarImagenNuevaCommand_CanExecuted);
+                return _guardarImagenNuevaCommand;
+            }
+        }
+
+        public DelegateCommand cancelarImagenNuevaCommand
+        {
+            get
+            {
+                _cancelarImagenNuevaCommand = new DelegateCommand(cancelarImagenNuevaCommand_Executed, cancelarImagenNuevaCommand_CanExecuted);
+                return _cancelarImagenNuevaCommand;
             }
         }
 
@@ -293,7 +344,11 @@ namespace FootballTrainingManagerUI.ViewModels
             _txbNotifyErrorPswVisibility = "Collapsed";
             _txbNotifyErrorNewPswVisibility = "Collapsed";
             _cancelarPswVisibility = "Collapsed";
+            _gvAvataresVisibility = "Collapsed";
+            _infoVisibility = "Visible";
             _pswActual = "";
+            _listadoAvatares = rellenarListadoAvatares();
+            _lineasAdornoStroke = 4;
         }
         #endregion
         
@@ -542,75 +597,88 @@ namespace FootballTrainingManagerUI.ViewModels
 
         private async void editarFotoCommand_Executed()
         {
-            //Carpeta donde se guarda la imagen inicialmente dado que Assets es 
-            //de solo lectura y no permite crear archivos en ella directamente
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            //Instanciamos selector de archivosm, personalizando las caracteristicas
-            FileOpenPicker picker = new FileOpenPicker();
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".png");
-
-            //Obtenemos la foto
-            StorageFile foto = await picker.PickSingleFileAsync();
-
-            //Si no es nula y su tipo es correcto
-            if (foto != null && (foto.ContentType!= "image/jpeg" || foto.ContentType != "image/png" || foto.ContentType != "image/jpg")) {
-                try
-                {
-                    //Obtenemos softwareBitmap
-                    SoftwareBitmap softwareBitmap;
-
-                    IRandomAccessStream stream = await foto.OpenAsync(FileAccessMode.Read);
-
-                    //Creamos el decodificador del stream
-                    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
-
-                    //Obtenemos la representación SoftwareBitmap del archivo
-                    softwareBitmap = await decoder.GetSoftwareBitmapAsync();
-
-                    //Reemplazamos por si falla al estar en uso
-                    manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
-                    NotifyPropertyChanged("manager");
-
-                    //Guardamos en el almacén de datos local de la aplicación
-                    StorageFile fileSave = await storageFolder.CreateFileAsync(foto.Name, CreationCollisionOption.ReplaceExisting);
-                    BitmapEncoder encoder = await BitmapEncoder.CreateAsync(Windows.Graphics.Imaging.BitmapEncoder.JpegEncoderId, await fileSave.OpenAsync(FileAccessMode.ReadWrite));
-                    encoder.SetSoftwareBitmap(softwareBitmap);
-                    await encoder.FlushAsync();
-
-                    //Movemos a Assets
-                    StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
-                    StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Assets");
-
-                    await fileSave.MoveAsync(assetsFolder, $"perfil{manager.id}.jpg", NameCollisionOption.ReplaceExisting);
-
-                    //Establecemos la foto perfil
-                    _manager.fotoPerfil = $"ms-appx:///Assets/perfil{manager.id}.jpg";
-                    App.oAppManager.fotoPerfil = $"ms-appx:///Assets/perfil{manager.id}.jpg";
-                    NotifyPropertyChanged("manager");
-
-                    //Actualizar API
-                    try {
-                        clsManejadoraManager manejadora = new clsManejadoraManager();
-                        bool ok = await manejadora.actualizarManagerDAL(_manager);
-                    } catch (Exception e) {
-                        //TODO
-                    }
-                }
-                catch(Exception ex) {
-                    //Error habitual -> HRESULT E_FAIL has been returned from a call to a COM component
-                    //Establecemos foto perfil por defecto
-                    manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
-                    App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
-                    NotifyPropertyChanged("manager");
-                }
-            }
+            _infoVisibility = "Collapsed";
+            NotifyPropertyChanged("infoVisibility");
+            _gvAvataresVisibility = "Visible";
+            NotifyPropertyChanged("gvAvataresVisibility");
+            _lineasAdornoStroke = 0;
+            NotifyPropertyChanged("lineasAdornoStroke");
+            _guardarImagenNuevaCommand.RaiseCanExecuteChanged();
+            _cancelarImagenNuevaCommand.RaiseCanExecuteChanged();
         }
 
-        private async void cancelarFotoCommand_Executed()
+        //private async void editarFotoCommand_Executed()
+        //{
+        //    //Carpeta donde se guarda la imagen inicialmente dado que Assets es 
+        //    //de solo lectura y no permite crear archivos en ella directamente
+        //    StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+        //    //Instanciamos selector de archivosm, personalizando las caracteristicas
+        //    FileOpenPicker picker = new FileOpenPicker();
+        //    picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+        //    picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
+        //    picker.FileTypeFilter.Add(".jpg");
+        //    picker.FileTypeFilter.Add(".jpeg");
+        //    picker.FileTypeFilter.Add(".png");
+
+        //    //Obtenemos la foto
+        //    StorageFile foto = await picker.PickSingleFileAsync();
+
+        //    //Si no es nula y su tipo es correcto
+        //    if (foto != null && (foto.ContentType!= "image/jpeg" || foto.ContentType != "image/png" || foto.ContentType != "image/jpg")) {
+        //        try
+        //        {
+        //            //Obtenemos softwareBitmap
+        //            SoftwareBitmap softwareBitmap;
+
+        //            IRandomAccessStream stream = await foto.OpenAsync(FileAccessMode.Read);
+
+        //            //Creamos el decodificador del stream
+        //            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+
+        //            //Obtenemos la representación SoftwareBitmap del archivo
+        //            softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+
+        //            //Reemplazamos por si falla al estar en uso
+        //            manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+        //            NotifyPropertyChanged("manager");
+
+        //            //Guardamos en el almacén de datos local de la aplicación
+        //            StorageFile fileSave = await storageFolder.CreateFileAsync(foto.Name, CreationCollisionOption.ReplaceExisting);
+        //            BitmapEncoder encoder = await BitmapEncoder.CreateAsync(Windows.Graphics.Imaging.BitmapEncoder.JpegEncoderId, await fileSave.OpenAsync(FileAccessMode.ReadWrite));
+        //            encoder.SetSoftwareBitmap(softwareBitmap);
+        //            await encoder.FlushAsync();
+
+        //            //Movemos a Assets
+        //            StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+        //            StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Assets");
+
+        //            await fileSave.MoveAsync(assetsFolder, $"perfil{manager.id}.jpg", NameCollisionOption.ReplaceExisting);
+
+        //            //Establecemos la foto perfil
+        //            _manager.fotoPerfil = $"ms-appx:///Assets/perfil{manager.id}.jpg";
+        //            App.oAppManager.fotoPerfil = $"ms-appx:///Assets/perfil{manager.id}.jpg";
+        //            NotifyPropertyChanged("manager");
+
+        //            //Actualizar API
+        //            try {
+        //                clsManejadoraManager manejadora = new clsManejadoraManager();
+        //                bool ok = await manejadora.actualizarManagerDAL(_manager);
+        //            } catch (Exception e) {
+        //                //TODO
+        //            }
+
+        //        }
+        //        catch(Exception ex) {
+        //            //Error habitual -> HRESULT E_FAIL has been returned from a call to a COM component
+        //            //Establecemos foto perfil por defecto
+        //            manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+        //            App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+        //            NotifyPropertyChanged("manager");
+        //        }
+        //    }
+        //}
+
+        private async void quitarFotoCommand_Executed()
         {
             //Si la foto de perfil es distinta a la foto por defecto
             if (!_manager.fotoPerfil.Equals("ms-appx:///Assets/avatar.png"))
@@ -620,16 +688,69 @@ namespace FootballTrainingManagerUI.ViewModels
                 App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
                 NotifyPropertyChanged("manager");
                 //Se actualiza la API
-                try
-                {
+                try {
                     clsManejadoraManager manejadora = new clsManejadoraManager();
                     bool ok = await manejadora.actualizarManagerDAL(_manager);
-                }
-                catch (Exception e)
-                {
-                    //TODO
+                } catch (Exception e) {
+                    
                 }
             }
+        }
+
+        private bool guardarImagenNuevaCommand_CanExecuted()
+        {
+            bool ret = false;
+
+            if (_gvAvataresVisibility.Equals("Visible"))
+                ret = true;
+
+            return ret;
+        }
+
+        private async void guardarImagenNuevaCommand_Executed()
+        {
+            //Establecemos la foto perfil
+            _manager.fotoPerfil = _imagenPerfil;
+            App.oAppManager.fotoPerfil = _imagenPerfil;
+            NotifyPropertyChanged("manager");
+
+            //Actualizar API
+            try
+            {
+                clsManejadoraManager manejadora = new clsManejadoraManager();
+                bool ok = await manejadora.actualizarManagerDAL(_manager);
+            }
+            catch (Exception e)
+            {
+                manager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                App.oAppManager.fotoPerfil = "ms-appx:///Assets/avatar.png";
+                NotifyPropertyChanged("manager");
+            }
+            //Para volver a cambiar la visibilidad entre (Galeria/Informacion)
+            cancelarImagenNuevaCommand_Executed();
+        }
+
+        private bool cancelarImagenNuevaCommand_CanExecuted()
+        {
+            bool ret = false;
+
+            if (_gvAvataresVisibility.Equals("Visible") && String.IsNullOrEmpty(_imagenPerfil))
+                ret = true;
+
+            return ret;
+        }
+
+        private async void cancelarImagenNuevaCommand_Executed()
+        {
+            _infoVisibility = "Visible";
+            NotifyPropertyChanged("infoVisibility");
+            _gvAvataresVisibility = "Collapsed";
+            NotifyPropertyChanged("gvAvataresVisibility");
+            _lineasAdornoStroke = 4;
+            NotifyPropertyChanged("lineasAdornoStroke");
+            _guardarImagenNuevaCommand.RaiseCanExecuteChanged();
+            _cancelarImagenNuevaCommand.RaiseCanExecuteChanged();
+            _imagenPerfil = "";
         }
 
         #endregion
@@ -665,6 +786,55 @@ namespace FootballTrainingManagerUI.ViewModels
 
             return bitmapImage;
 
+        }
+
+        private List<String> rellenarListadoAvatares()
+        {
+            List<String> avatares = new List<string>();
+            avatares.Add("ms-appx:///Assets/Avatares/man1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man3.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man4.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man5.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man6.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man7.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man8.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man9.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man10.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man11.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man12.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man13.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man14.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man15.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man16.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man17.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man18.png");
+            avatares.Add("ms-appx:///Assets/Avatares/man19.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman3.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman4.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman5.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman6.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman7.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman8.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman9.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman10.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman11.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman12.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman13.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman14.png");
+            avatares.Add("ms-appx:///Assets/Avatares/woman15.png");
+            avatares.Add("ms-appx:///Assets/Avatares/guardiola.png");
+            avatares.Add("ms-appx:///Assets/Avatares/klopp1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/klopp2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/mourinho1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/mourinho2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/robot1.png");
+            avatares.Add("ms-appx:///Assets/Avatares/robot2.png");
+            avatares.Add("ms-appx:///Assets/Avatares/superman.png");
+
+            return avatares;
         }
         #endregion
 

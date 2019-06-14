@@ -59,7 +59,7 @@ namespace FootballTrainingManagerUI.Views
                 {   
                     txbNotifyUser.Text = strRegConfirmOk;
                     txbNotifyUser.Foreground = new SolidColorBrush(Windows.UI.Colors.Green);
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(2000);
                     this.Frame.Navigate(typeof(Login));
                 }
                 else
