@@ -240,6 +240,8 @@ namespace FootballTrainingManagerUI.ViewModels
                     NotifyPropertyChanged("stkBtnNotaSeleccionadaVisibility");
                     _notaEditableVisibility = "Collapsed";
                     NotifyPropertyChanged("notaEditableVisibility");
+                    _notaVisibility = "Collapsed";
+                    NotifyPropertyChanged("notaVisibility");
                     _esInsertar = false;
                 }
                 else
@@ -274,6 +276,8 @@ namespace FootballTrainingManagerUI.ViewModels
                     NotifyPropertyChanged("stkBtnNotaSeleccionadaVisibility");
                     _notaEditableVisibility = "Collapsed";
                     NotifyPropertyChanged("notaEditableVisibility");
+                    _notaVisibility = "Collapsed";
+                    NotifyPropertyChanged("notaVisibility");
                 }
                 else
                 {
@@ -357,6 +361,8 @@ namespace FootballTrainingManagerUI.ViewModels
                 NotifyPropertyChanged("stkBtnNotaSeleccionadaVisibility");
                 _notaEditableVisibility = "Collapsed";
                 NotifyPropertyChanged("notaEditableVisibility");
+                _notaVisibility = "Collapsed";
+                NotifyPropertyChanged("notaVisibility");
             }
             else
             {
